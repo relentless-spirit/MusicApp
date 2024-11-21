@@ -1,8 +1,11 @@
 import express, { Express, Request, Response } from "express";
 import indexRoute from "./routes/index.route.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT;
 app.set("views", `/views`);
 app.set("view engine", "pug");
 
