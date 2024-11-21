@@ -1,1 +1,283 @@
-h1 Hello world
+extends ../layouts/default.pug
+block main
+ .container.container-flex
+  main
+    article.article-featured.flex-space
+      .article-image
+        a(href="playlist.html")
+          img(src="src/divide_cover.png")
+      .article-image
+        a(href="playlist.html")
+          img(src="src/queen_cover.jpeg")
+      .article-image
+        a(href="playlist.html")
+          img(src="src/maroon5_cover.png")
+      p.article-info
+      p.article-body
+    article.latest-release
+      h2.latest-release-title Latest Release
+      .latest-release-body.flex-space
+        .latest-release-col
+          .latest-release-entry.flex-space
+            .latest-release-image
+              img(src="src/bad_guy.jpg")
+            .latest-release-info
+              p
+                b Bad Guy
+              p.latest-release-sub MAR 29, 2019
+            .latest-release-options
+              i.fa.fa-sort-desc(aria-hidden="true")
+              p.latest-release-sub 3:14
+          .latest-release-entry.flex-space
+            .latest-release-image
+              img(src="src/bad_guy.jpg")
+            .latest-release-info
+              p
+                b Bad Guy
+              p.latest-release-sub MAR 29, 2019
+            .latest-release-options
+              i.fa.fa-sort-desc(aria-hidden="true")
+              p.latest-release-sub 3:14
+        .latest-release-col.display-none
+          .latest-release-entry.flex-space
+            .latest-release-image
+              img(src="src/bad_guy.jpg")
+            .latest-release-info
+              p
+                b Bad Guy
+              p.latest-release-sub MAR 29, 2019
+            .latest-release-options
+              i.fa.fa-sort-desc(aria-hidden="true")
+              p.latest-release-sub 3:14
+          .latest-release-entry.flex-space
+            .latest-release-image
+              img(src="src/bad_guy.jpg")
+            .latest-release-info
+              p
+                b Bad Guy
+              p.latest-release-sub MAR 29, 2019
+            .latest-release-options
+              i.fa.fa-sort-desc(aria-hidden="true")
+              p.latest-release-sub 3:14
+    article.popular-artists
+      h2.popular-artists-title Popular Artists
+      .artist-container.flex-space
+        .popular-artist-entry
+          img(src="src/billie_eilish_artist.png")
+          p Billie Eilish
+        .popular-artist-entry
+          img(src="src/eminem_artist.jpeg")
+          p Eminem
+        .popular-artist-entry
+          img(src="src/prateek_artist.jpg")
+          p Prateek
+        .popular-artist-entry
+          img(src="src/ritviz_artist.jpg")
+          p Ritviz
+        .popular-artist-entry.display-none
+          img(src="src/marshmello_artist.jpg")
+          p Marshmello
+        .popular-artist-entry.display-none
+          img(src="src/drake_artist.jpg")
+          p Drake
+    article.stations.flex-space
+      .stations-entry
+        img(src="src/stations_logo.jpg")
+      .stations-entry
+        img(src="src/love.jpg")
+        .stations-centered Love
+      .stations-entry
+        img(src="src/retro.jpg")
+        .stations-centered Retro
+      .stations-entry
+        img(src="src/chill.png")
+        .stations-centered Chill
+      .stations-entry
+        img(src="src/workout.jpg")
+        .stations-centered Workout
+      .stations-entry.display-none
+        img(src="src/rock.jpg")
+        .stations-centered Rock
+      .stations-entry.display-none
+        img(src="src/pop.jpg")
+        .stations-centered Pop
+    article.middle-featured.article-featured.flex-space
+      .article-image
+        img(src="src/party.jpg")
+        .stations-centered.mid-featured-font Party
+      .article-image
+        img(src="src/electronic.jpg")
+        .mid-featured-font.stations-centered Electronic
+      .article-image
+        img(src="src/road_trip.jpg")
+        .mid-featured-font.stations-centered Road Trip
+      p.article-info
+      p.article-body
+    article.latest-language
+      h2.latest-language-title Latest English
+      .song-container.flex-space
+        .language-song-entry
+          .language-image
+            img(src="src/song_pic1.jpg")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry
+          .language-image
+            img(src="src/maroon5_cover.png")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry
+          .language-image
+            img(src="src/bad_guy.jpg")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry.display-none
+          .language-image
+            img(src="src/song_pic1.jpg")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry.display-none
+          .language-image
+            img(src="src/maroon5_cover.png")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry.display-none
+          .language-image
+            img(src="src/bad_guy.jpg")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+    article.latest-language
+      h2.latest-language-title Latest Hindi
+      .song-container.flex-space
+        .language-song-entry
+          .language-image
+            img(src="src/song_pic1.jpg")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry
+          .language-image
+            img(src="src/maroon5_cover.png")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry
+          .language-image
+            img(src="src/bad_guy.jpg")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry.display-none
+          .language-image
+            img(src="src/song_pic1.jpg")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry.display-none
+          .language-image
+            img(src="src/maroon5_cover.png")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+        .language-song-entry.display-none
+          .language-image
+            img(src="src/bad_guy.jpg")
+          p
+            b Bad Guy
+          p.language-sub.latest-release-sub MAR 29, 2019
+  aside.sidebar
+    h2.aside-title Queue
+    .queue-entry.flex-space
+      p.queue-number 01
+      .queue-entry-image
+        img(src="src/song_pic1.jpg")
+      .queue-entry-info
+        p
+          b Blinding lights
+        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
+      .like-icon
+        a(href="#")
+          i.fa.fa-heart-o(aria-hidden="true")
+    .queue-entry.flex-space
+      p.queue-number 02
+      .queue-entry-image
+        img(src="src/bad_guy.jpg")
+      .queue-entry-info
+        p
+          b Blinding lights
+        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
+      .like-icon
+        a(href="#")
+          i.fa.fa-heart-o(aria-hidden="true")
+    .queue-entry.flex-space
+      p.queue-number 03
+      .queue-entry-image
+        img(src="src/song_pic1.jpg")
+      .queue-entry-info
+        p
+          b Blinding lights
+        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
+      .like-icon
+        a(href="#")
+          i.fa.fa-heart-o(aria-hidden="true")
+    .queue-entry.flex-space
+      p.queue-number 04
+      .queue-entry-image
+        img(src="src/bad_guy.jpg")
+      .queue-entry-info
+        p
+          b Blinding lights
+        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
+      .like-icon
+        a(href="#")
+          i.fa.fa-heart-o(aria-hidden="true")
+    .queue-entry.flex-space
+      p.queue-number 05
+      .queue-entry-image
+        img(src="src/song_pic1.jpg")
+      .queue-entry-info
+        p
+          b Blinding lights
+        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
+      .like-icon
+        a(href="#")
+          i.fa.fa-heart-o(aria-hidden="true")
+    .queue-entry.flex-space
+      p.queue-number 06
+      .queue-entry-image
+        img(src="src/bad_guy.jpg")
+      .queue-entry-info
+        p
+          b Blinding lights
+        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
+      .like-icon
+        a(href="#")
+          i.fa.fa-heart-o(aria-hidden="true")
+    .queue-entry.flex-space
+      p.queue-number 07
+      .queue-entry-image
+        img(src="src/song_pic1.jpg")
+      .queue-entry-info
+        p
+          b Blinding lights
+        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
+      .like-icon
+        a(href="#")
+          i.fa.fa-heart-o(aria-hidden="true")
+    .queue-entry.flex-space
+      p.queue-number 08
+      .queue-entry-image
+        img(src="src/bad_guy.jpg")
+      .queue-entry-info
+        p
+          b Blinding lights
+        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
+      .like-icon
+        a(href="#")
+          i.fa.fa-heart-o(aria-hidden="true")

@@ -1,14 +1,19 @@
 import express, { Express, Request, Response } from "express";
 import indexRoute from "./routes/index.route.js";
-const app = express();
 
+const app: Express = express();
 const port = 3000;
-app.set("views", `/views`);
+
+app.set("views", "views");
 app.set("view engine", "pug");
 
-app.use(express.static(`/public`));
+// Serve static files
+app.use(express.static("public"));
+
+// Register routes
 indexRoute(app);
 
+// Start server
 app.listen(port, () => {
-  console.log("The server is listening " + port);
+  console.log(`Server is listening on port ${port}`);
 });
