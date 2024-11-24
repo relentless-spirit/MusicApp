@@ -33,5 +33,3 @@ To install and run the MusicApp locally, follow these steps:
 4. Start the app:
    ```bash
     npm start
-
-This version is a bit clearer and ensures the user knows exactly how to install and run the application.
