@@ -1,6 +1,5 @@
 import express, { Express, Request, Response } from "express";
 import indexRoute from "./routes/index.route.js";
-// import { callGetArtistAlbum } from "./services/spotifyAPI.service.js";
 // callGetArtistAlbum();
 const app: Express = express();
 const port = 3000;
