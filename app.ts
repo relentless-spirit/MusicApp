@@ -1,5 +1,7 @@
 import express, { Express, Request, Response } from "express";
-import indexRoute from "./routes/index.route.js";
+import routeClient from "./routes/client/index.route";
+import routeAdmin from "./routes/admin/index.route";
+import { systemConfig } from "./config/system";
 import dotenv from "dotenv";
 dotenv.config();
 // callGetArtistAlbum();
@@ -15,8 +17,11 @@ app.use(express.static("public"));
 import { connect } from "./config/database.config.js";
 connect();
 
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
+
 // Register routes
-indexRoute(app);
+routeClient(app);
+routeAdmin(app);
 
 // Start server
 app.listen(port, () => {
