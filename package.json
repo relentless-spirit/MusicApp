@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "start": "npx tsx app.ts",
-    "dev": "nodemon app.ts"
+    "start": "tsx app.ts",
+    "dev": "nodemon --exec tsx app.ts"
   },
   "type": "module",
   "author": "",
