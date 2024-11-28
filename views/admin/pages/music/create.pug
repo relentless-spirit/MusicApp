@@ -25,9 +25,9 @@ block main
           class="form-control"
           required
         )
-        //-   option(value="" disabled selected) -- Chọn chủ đề --
-        //-   each item in topics
-        //-     option(value=item.id) #{item.title}
+          option(value="" disabled selected) -- Chọn chủ đề --
+          each item in topics
+            option(value=item.id) #{item.title}
       div(class="form-group")
         label(for="singer") Ca sĩ
         select(
@@ -36,9 +36,9 @@ block main
           class="form-control"
           required
         )
-        //-   option(value="" disabled selected) -- Chọn ca sĩ --
-        //-   each item in singers
-        //-     option(value=item.id) #{item.fullName}
+          option(value="" disabled selected) -- Chọn ca sĩ --
+          each item in artists
+            option(value=item.id) #{item.fullName}
       div(
         class="form-group"
         upload-image
