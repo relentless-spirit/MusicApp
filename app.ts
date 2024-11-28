@@ -3,11 +3,13 @@ import routeClient from "./routes/client/index.route";
 import routeAdmin from "./routes/admin/index.route";
 import { systemConfig } from "./config/system";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
 dotenv.config();
 // callGetArtistAlbum();
 const app: Express = express();
 const port = 3000;
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("views", "views");
 app.set("view engine", "pug");
 
