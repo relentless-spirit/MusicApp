@@ -15,6 +15,8 @@ block main
             button.btn.btn-primary(type="submit") Tìm kiếm
 
     .table-responsive
+
+
         table.table.table-striped.table-bordered
             thead.table-primary
                 tr
@@ -39,5 +41,10 @@ block main
                             .action-container
                                 span.action-toggle 
                                 .action-buttons.hidden
-                                    button.btn.btn-warning.edit-btn(data-bs-toggle="modal", data-bs-target="#editSongModal") Sửa
-                                    button.btn.btn-danger.delete-btn(data-bs-toggle="modal", data-bs-target="#deleteSongModal") Xóa
+                                    a(href=`/${prefixAdmin}/songs/edit/${song.id}`) 
+                                        button.btn.btn-warning.edit-btn(data-bs-toggle="modal", data-bs-target="#editSongModal") Sửa
+                                    a.trigger-btn(href="#myModal", data-toggle="modal")
+                                        button.btn.btn-danger.delete-btn(data-bs-toggle="modal"
+                                        button-delete=song.id
+                                        link =`/${prefixAdmin}/songs/delete/${song.id}`) Xóa
+    include ../../partials/delete-confirm.pug

@@ -23,7 +23,6 @@ if (toggle) {
 
 // Preview ảnh
 const uploadImage = document.querySelector("[upload-image]");
-console.log(uploadImage);
 if (uploadImage) {
   const uploadImageInput = uploadImage.querySelector("[upload-image-input]");
   const uploadImagePreview = uploadImage.querySelector(
@@ -56,3 +55,39 @@ if (uploadAudio) {
   });
 }
 // Hết Nghe thử
+
+//alert message
+const notifications = document.querySelector("[alert-message]");
+if (notifications) {
+  setTimeout(() => {
+    notifications.style.display = "none";
+  }, 2500);
+}
+
+//delete song
+const buttonDelete = document.querySelectorAll("[button-delete]");
+if (buttonDelete) {
+  buttonDelete.forEach((button) => {
+    button.addEventListener("click", function () {
+      const deleteSongModal = document.getElementById("myModal");
+      const confirmDeleteButton = document.getElementById(
+        "confirmDeleteButton"
+      );
+      let songIdToDelete = button.getAttribute("button-delete");
+      let link = button.getAttribute("link");
+      confirmDeleteButton.addEventListener("click", function () {
+        fetch(link, {
+          method: "PATCH",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              location.reload();
+            } else {
+              alert("Error deleting song");
+            }
+          });
+      });
+    });
+  });
+}
