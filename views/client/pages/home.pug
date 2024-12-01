@@ -61,26 +61,13 @@ block main
               p.latest-release-sub 3:14
     article.popular-artists
       h2.popular-artists-title Popular Artists
-      .artist-container.flex-space
-        .popular-artist-entry
-          img(src="src/billie_eilish_artist.png")
-          p Billie Eilish
-        .popular-artist-entry
-          img(src="src/eminem_artist.jpeg")
-          p Eminem
-        .popular-artist-entry
-          img(src="src/prateek_artist.jpg")
-          p Prateek
-        .popular-artist-entry
-          img(src="src/ritviz_artist.jpg")
-          p Ritviz
-        .popular-artist-entry.display-none
-          img(src="src/marshmello_artist.jpg")
-          p Marshmello
-        .popular-artist-entry.display-none
-          img(src="src/drake_artist.jpg")
-          p Drake
-          
+       .artist-container.flex-space
+        each artist in artists
+          .popular-artist-entry
+            img(src=artist.coverImage)
+            p #{artist.fullName}
+     
+       
     //topic
     article.stations.flex-space
       .stations-entry
