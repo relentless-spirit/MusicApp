@@ -17,48 +17,19 @@ block main
     article.latest-release
       h2.latest-release-title Latest Release
       .latest-release-body.flex-space
-        .latest-release-col
+       .latest-release-col
+         each song in songs
           .latest-release-entry.flex-space
             .latest-release-image
-              img(src="src/bad_guy.jpg")
+              img(src=song.coverImage)
             .latest-release-info
               p
-                b Bad Guy
+                b #{song.title}
               p.latest-release-sub MAR 29, 2019
             .latest-release-options
               i.fa.fa-sort-desc(aria-hidden="true")
               p.latest-release-sub 3:14
-          .latest-release-entry.flex-space
-            .latest-release-image
-              img(src="src/bad_guy.jpg")
-            .latest-release-info
-              p
-                b Bad Guy
-              p.latest-release-sub MAR 29, 2019
-            .latest-release-options
-              i.fa.fa-sort-desc(aria-hidden="true")
-              p.latest-release-sub 3:14
-        .latest-release-col.display-none
-          .latest-release-entry.flex-space
-            .latest-release-image
-              img(src="src/bad_guy.jpg")
-            .latest-release-info
-              p
-                b Bad Guy
-              p.latest-release-sub MAR 29, 2019
-            .latest-release-options
-              i.fa.fa-sort-desc(aria-hidden="true")
-              p.latest-release-sub 3:14
-          .latest-release-entry.flex-space
-            .latest-release-image
-              img(src="src/bad_guy.jpg")
-            .latest-release-info
-              p
-                b Bad Guy
-              p.latest-release-sub MAR 29, 2019
-            .latest-release-options
-              i.fa.fa-sort-desc(aria-hidden="true")
-              p.latest-release-sub 3:14
+      
     article.popular-artists
       h2.popular-artists-title Popular Artists
        .artist-container.flex-space
