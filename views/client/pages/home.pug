@@ -21,10 +21,14 @@ block main
          each song in songs
           .latest-release-entry.flex-space
             .latest-release-image
-              img(src=song.coverImage)
+              img(src=song.coverImage song-src=song.fileUrl
+                song-name =song.title song-artist=song.artist
+                song-cover=song.coverImage)
+               
             .latest-release-info
               p
-                b #{song.title}
+                a(href="#") 
+                  b #{song.title}
               p.latest-release-sub MAR 29, 2019
             .latest-release-options
               i.fa.fa-sort-desc(aria-hidden="true")

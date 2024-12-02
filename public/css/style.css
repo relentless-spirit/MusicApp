@@ -826,10 +826,103 @@ input[type="range"]::-webkit-slider-runnable-track {
   padding: 10px;
   background: #282828;
 }
-
+/* Container styling */
 #aplayer {
   width: 100%;
-  height: auto;
-  font-weight: 700;
-  background: #282828;
+  margin: 0 auto;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: #000;
+}
+
+/* Control bar styling */
+.aplayer .aplayer-controller {
+  background-color: #222;
+  border-top: 1px solid #333;
+}
+
+/* Progress bar styling */
+.aplayer .aplayer-bar-wrap {
+  background-color: #444;
+}
+
+.aplayer .aplayer-bar {
+  background-color: #ff4500;
+}
+
+/* Button styling */
+.aplayer .aplayer-icon {
+  color: #ff4500;
+  font-size: 3em; /* Increase button size */
+}
+
+.aplayer .aplayer-icon:hover {
+  color: #ff6347;
+}
+
+/* Song info styling */
+.aplayer .aplayer-info {
+  color: #fff;
+}
+
+.aplayer .aplayer-title {
+  font-weight: bold;
+  font-size: 2em; /* Increase title size */
+}
+
+.aplayer .aplayer-author {
+  color: #bbb;
+  font-size: 1.5em; /* Increase author size */
+}
+
+/* Image styling */
+.aplayer .aplayer-pic {
+  width: 150px; /* Increase image size */
+  height: 150px; /* Increase image size */
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #aplayer {
+    max-width: 100%;
+  }
+
+  .aplayer .aplayer-pic {
+    width: 120px;
+    height: 120px;
+  }
+
+  .aplayer .aplayer-icon {
+    font-size: 2.5em;
+  }
+
+  .aplayer .aplayer-title {
+    font-size: 1.5em;
+  }
+
+  .aplayer .aplayer-author {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .aplayer .aplayer-pic {
+    width: 100px;
+    height: 100px;
+  }
+
+  .aplayer .aplayer-icon {
+    font-size: 2em;
+  }
+
+  .aplayer .aplayer-title {
+    font-size: 1.2em;
+  }
+
+  .aplayer .aplayer-author {
+    font-size: 1em;
+  }
 }
