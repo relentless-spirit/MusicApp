@@ -38,6 +38,7 @@ export const create = async (req: Request, res: Response) => {
 };
 export const createPost = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
     const {
       title,
       topicId,
