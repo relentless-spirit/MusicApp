@@ -91,3 +91,33 @@ if (buttonDelete) {
     });
   });
 }
+//Delete topic
+const deletedTopicButtons = document.querySelectorAll("[deleted-topic-button]");
+if (deletedTopicButtons.length > 0) {
+  deletedTopicButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const myDeletedTopicModal = document.getElementById('deleteTopicModal');
+      const myModal = new bootstrap.Modal(myDeletedTopicModal);
+      myModal.show();
+      const confirmDeleteButton = myDeletedTopicModal.querySelector(".modal-footer button[button-confirm]");
+      if (confirmDeleteButton)
+        confirmDeleteButton.addEventListener("click", async () => {
+          const id = button.getAttribute("id");
+          const path = button.getAttribute("data-path");
+          await fetch(
+            path,
+            {
+              method: "DELETE"
+            }
+          )
+            .then(res => res.json())
+            .then(data => {
+              if (data.code) {
+                location.reload();
+              }
+            })
+        })
+    });
+  });
+}
+//End delete topic
