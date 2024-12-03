@@ -22,7 +22,8 @@ export const home = async (req: Request, res: Response) => {
   const favoriteIds = favoriteSongs.map(item => item.song_id.toString());
   res.render("client/pages/home", {
     artists: artists, songs,
-    favoriteSongIds: favoriteIds
+    favoriteSongIds: favoriteIds,
+    playlists: playlists
   });
   res.render("client/pages/home", { artists: artists, songs, playlists });
 };
