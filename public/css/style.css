@@ -946,3 +946,97 @@ input[type="range"]::-webkit-slider-runnable-track {
   transform: scale(1.2);
   transition: transform 0.2s ease, color 0.3s ease;
 }
+/* playlist img */
+/* Container của mỗi mục bài hát */
+.playlist-next-item-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
+  height: 80px; /* Đảm bảo chiều cao đồng nhất */
+  box-sizing: border-box;
+  gap: 10px;
+}
+
+/* Thông tin bài hát */
+.playlist-next-item-entry-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Khoảng cách giữa các phần tử */
+}
+
+/* Container ảnh */
+.playlist-next-item-entry-info-image {
+  width: 60px; /* Đảm bảo ảnh luôn hình vuông */
+  height: 60px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 8px; /* Tùy chọn: Bo góc ảnh */
+  background-color: #f0f0f0; /* Màu nền thay thế nếu không có ảnh */
+}
+
+/* Ảnh bài hát */
+.playlist-next-item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cắt ảnh để vừa với container mà vẫn giữ tỷ lệ */
+  display: block;
+}
+
+/* Tên và nghệ sĩ bài hát */
+.playlist-next-item-entry-info-name p {
+  margin: 0;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Hiển thị trên 1 dòng, thêm "..." nếu quá dài */
+}
+
+.playlist-next-item-entry-info-name b {
+  font-size: 14px;
+  color: #fff; /* Tùy chọn: Thay đổi màu chữ */
+}
+
+.playlist-next-item-entry-info-name-sub {
+  font-size: 12px;
+  color: #aaa; /* Màu chữ phụ */
+}
+
+/* Các icon (yêu thích, thêm vào playlist) */
+.playlist-next-item-entry-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.playlist-next-item-entry-icons i {
+  font-size: 18px;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.playlist-next-item-entry-icons i:hover {
+  color: #007bff; /* Tùy chọn: Màu khi hover */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .playlist-next-item-entry {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto; /* Chiều cao tự động */
+  }
+
+  .playlist-next-item-entry-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .playlist-next-item-entry-icons {
+    margin-top: 10px;
+  }
+}
+
+/* end playlist img */
