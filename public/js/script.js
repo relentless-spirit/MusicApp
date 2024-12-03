@@ -43,3 +43,34 @@ if (songImage.length > 0) {
   });
 }
 //End select song to play
+
+//Favorite-Song
+const favoriteSongButtons = document.querySelectorAll("[favorite-song-button]");
+if (favoriteSongButtons.length > 0) {
+  favoriteSongButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const path = button.getAttribute("data-path");
+      try {
+        const response = await fetch(path, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "PATCH",
+        });
+        const data = await response.json();
+        if (data.code === "success") {
+          if (button) {
+            button.classList.add("filled");
+          }
+        } else if (data.code === "remove") {
+          if (button) {
+            button.classList.remove("filled");
+          }
+        }
+      } catch (error) {
+        console.error("Error adding to favorite songs:", error);
+      }
+    });
+  });
+}
+//End Favorite-Song

@@ -926,3 +926,23 @@ input[type="range"]::-webkit-slider-runnable-track {
     font-size: 1em;
   }
 }
+
+.fa-heart-o {
+  cursor: pointer;
+}
+
+.fa-heart-o:hover {
+  color: red;
+}
+
+/* Filled heart */
+.fa-heart-o.filled {
+  color: red;
+  transition: color 0.3s ease;
+}
+
+/* Optional: Add animation when toggling filled */
+.fa-heart-o.filled {
+  transform: scale(1.2);
+  transition: transform 0.2s ease, color 0.3s ease;
+}

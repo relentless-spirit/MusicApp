@@ -31,8 +31,13 @@ block main
                   b #{song.title}
               p.latest-release-sub MAR 29, 2019
             .latest-release-options
-              i.fa.fa-sort-desc(aria-hidden="true")
-              p.latest-release-sub 3:14
+              .like-icon
+                i.fa(
+                  class=`fa-heart-o${favoriteSongIds.includes(song._id.toString()) ? ' filled' : ''}`
+                  aria-hidden="true"
+                  data-path=`/favorite-songs/favorite-song/${song._id}`
+                  favorite-song-button
+                )
       
     article.popular-artists
       h2.popular-artists-title Popular Artists
