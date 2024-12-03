@@ -3,15 +3,10 @@ block main
  .container.container-flex
   main
     article.article-featured.flex-space
+     each playlist in playlists
       .article-image
-        a(href="playlist.html")
-          img(src="src/divide_cover.png")
-      .article-image
-        a(href="playlist.html")
-          img(src="src/queen_cover.jpeg")
-      .article-image
-        a(href="playlist.html")
-          img(src="src/maroon5_cover.png")
+        a(href=`/playlist/${playlist._id}`)
+          img(src=playlist.coverImage)
       p.article-info
       p.article-body
     article.latest-release
