@@ -30,9 +30,9 @@ To install and run the MusicApp locally, follow these steps:
 3. Install the dependencies:
    ```bash
    npm install
-4.1 Start the app:
+4. 1.Start the app:
    ```bash
     npm start
-4.2 Start the app by development environment:
+4. 2.Start the app by development environment:
    ```bash
     npm run dev
