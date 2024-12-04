@@ -103,3 +103,56 @@ if (playAllButton) {
   });
 }
 //end play playlist play all button //
+
+// Drop down menu for songs
+document.addEventListener("DOMContentLoaded", () => {
+  const actionToggles = document.querySelectorAll("[action-menu-toggle]");
+
+  actionToggles.forEach((toggle) => {
+    toggle.addEventListener("click", (event) => {
+      event.stopPropagation(); // Prevent triggering the document click event
+      const actionMenu = toggle.nextElementSibling;
+
+      // Close all open menus except the clicked one
+      document.querySelectorAll(".action-menu.visible").forEach((menu) => {
+        if (menu !== actionMenu) {
+          menu.classList.remove("visible");
+          menu.classList.add("hidden");
+        }
+      });
+
+      // Toggle the clicked menu
+      if (actionMenu.classList.contains("hidden")) {
+        actionMenu.classList.remove("hidden");
+        actionMenu.classList.add("visible");
+      } else {
+        actionMenu.classList.remove("visible");
+        actionMenu.classList.add("hidden");
+      }
+    });
+  });
+
+  // Close menus when clicking outside
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".action-menu.visible").forEach((menu) => {
+      menu.classList.remove("visible");
+      menu.classList.add("hidden");
+    });
+  });
+});
+//loading page
+document.addEventListener("DOMContentLoaded", () => {
+  const loading = document.getElementById("loading");
+  const spinner = document.querySelector(".spinner");
+
+  // Giả lập tải trang (nếu cần)
+  setTimeout(() => {
+    // Ngừng quay và thu nhỏ spinner
+    spinner.classList.add("stopped");
+
+    // Ẩn overlay
+    loading.classList.add("hidden");
+  }, 2000); // Tùy chỉnh thời gian tải giả lập (2 giây)
+});
+
+//end loading  page
