@@ -33,6 +33,17 @@ block main
                   data-path=`/favorite-songs/favorite-song/${song._id}`
                   favorite-song-button
                 )
+            .action-icon
+              i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
+              .action-menu.hidden
+                ul
+                  li 
+                    a(href=`/add-to-playlist/${song._id}`) Add to Playlist
+                  li 
+                    a(href=`/add-to-queue/${song._id}`) Add to Queue
+                  li 
+                    a(href=`#`) Go to the artist detail
+
       
     article.popular-artists
       h2.popular-artists-title Popular Artists
