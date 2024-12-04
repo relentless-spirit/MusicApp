@@ -74,3 +74,32 @@ if (favoriteSongButtons.length > 0) {
   });
 }
 //End Favorite-Song
+
+//playlist play all button //
+const playAllButton = document.querySelector(".playAllButton");
+if (playAllButton) {
+  playAllButton.addEventListener("click", () => {
+    const songImage = document.querySelectorAll("[song-src]");
+    const songs = [];
+    if (songImage.length > 0) {
+      songImage.forEach((song) => {
+        const songSrc = song.getAttribute("song-src");
+        const songName = song.getAttribute("song-name");
+        const songArtist = song.getAttribute("song-artist");
+        const songCover = song.getAttribute("song-cover");
+        songs.push({
+          name: songName,
+          artist: songArtist,
+          url: songSrc,
+          cover: songCover,
+        });
+      });
+    }
+    const aaplayer = new APlayer({
+      container: document.getElementById("aplayer"),
+      audio: songs,
+      autoplay: true,
+    });
+  });
+}
+//end play playlist play all button //
