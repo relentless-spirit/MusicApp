@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Ẩn overlay
     loading.classList.add("hidden");
-  }, 2000); // Tùy chỉnh thời gian tải giả lập (2 giây)
+  }, 1500); // Tùy chỉnh thời gian tải giả lập (2 giây)
 });
 
 //end loading  page

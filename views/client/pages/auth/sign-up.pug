@@ -1,0 +1,28 @@
+extends ../../layouts/auth.pug
+block main  
+ .signup-container
+      .signup-card
+        img.logo(src="/images/spotify-logo.png" alt="Spotify Logo")
+        h2 Tạo tài khoản Spotify
+        form(action="/auth/sign-up" method="POST")
+          .form-group
+            label(for="fullname") Username
+            input#fullname(type="text" name="username" placeholder="Nhập họ và tên" required)
+          .form-group
+            label(for="email") Email
+            input#email(type="email" name="email" placeholder="Nhập email" required)
+          .form-group
+            label(for="password") Mật khẩu
+            input#password(type="password" name="password" placeholder="Nhập mật khẩu" required)
+          .form-group
+            label(for="confirm-password") Xác nhận mật khẩu
+            input#confirm-password(type="password" name="rePassword" placeholder="Nhập lại mật khẩu" required)
+          button.signup-btn(type="submit") Đăng ký
+        .divider
+          span Hoặc
+        .social-signup
+          button.google-signup Đăng ký bằng Google
+          button.facebook-signup Đăng ký bằng Facebook
+      .login-link
+        p Đã có tài khoản? 
+          a(href="/auth/login") Đăng nhập ngay
