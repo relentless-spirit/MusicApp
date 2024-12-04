@@ -25,5 +25,4 @@ export const home = async (req: Request, res: Response) => {
     favoriteSongIds: favoriteIds,
     playlists: playlists
   });
-  res.render("client/pages/home", { artists: artists, songs, playlists });
 };
