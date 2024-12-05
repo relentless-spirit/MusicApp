@@ -1,5 +1,5 @@
 :root {
-  --main-bg-color: #0c1027;
+  --main-bg-color: #121212;
   --main-font-color: #ffffff;
 }
 * {
@@ -173,7 +173,7 @@ aside {
 
 /*Latest Release*/
 .latest-release-col {
-  width: 47.5%;
+  width: 60%;
 }
 
 .latest-release-entry {
@@ -1216,3 +1216,248 @@ body {
 }
 
 /* end loading page */
+/*clicking user*/
+.user-menu {
+  position: relative;
+}
+
+.user-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #282828; /* Spotify dark background */
+  color: #b3b3b3; /* Spotify light gray text */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: none; /* Hidden by default */
+  z-index: 10;
+  min-width: 180px;
+}
+
+/* Dropdown items styling */
+.dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #b3b3b3; /* Default text color */
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: #1db954; /* Spotify green on hover */
+  color: #fff; /* White text on hover */
+}
+
+/* Utility class to toggle visibility */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+/* end drop down menu user */
+/* side bar */
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Sidebar bắt đầu từ ngoài khung nhìn */
+  width: 300px;
+  height: 100%;
+  background-color: #121212; /* Spotify-style dark background */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.sidebar.visible {
+  right: 0; /* Khi sidebar mở */
+}
+
+/* Nút toggle luôn hiển thị */
+.toggle-sidebar {
+  position: fixed; /* Để nút này luôn cố định */
+  top: 50%; /* Căn giữa theo chiều dọc */
+  right: 0; /* Nằm sát lề phải */
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #007bff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1001; /* Nằm trên sidebar */
+}
+
+.toggle-icon {
+  font-size: 20px;
+}
+
+.toggle-icon.hidden {
+  display: none;
+}
+/* Sidebar Container */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Ẩn ngoài khung nhìn */
+  width: 300px;
+  height: 100%;
+  background-color: #121212; /* Spotify dark background */
+  color: #ffffff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease-in-out;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Hiển thị sidebar */
+.sidebar.visible {
+  right: 0;
+}
+
+/* Toggle Sidebar Button */
+.toggle-sidebar {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #1db954; /* Spotify green */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.toggle-icon {
+  font-size: 20px;
+}
+
+.toggle-icon.hidden {
+  display: none;
+}
+
+/* Sidebar Title */
+.aside-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px;
+  border-bottom: 1px solid #282828;
+  margin: 0;
+  text-align: center;
+}
+
+/* Sidebar Entries */
+.latest-release-entry2 {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #282828;
+  transition: background-color 0.2s;
+}
+
+.latest-release-entry2:hover {
+  background-color: #1e1e1e;
+}
+
+/* Song Image */
+.latest-release-image2 img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+/* Song Info */
+.latest-release-info2 p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.latest-release-info2 a {
+  color: #1db954;
+  text-decoration: none;
+}
+
+.latest-release-info2 a:hover {
+  text-decoration: underline;
+}
+
+.latest-release-sub2 {
+  font-size: 12px;
+  color: #b3b3b3;
+}
+
+/* Action Icons */
+.action-icon {
+  margin-left: auto;
+  position: relative;
+  cursor: pointer;
+}
+
+.action-icon i {
+  font-size: 16px;
+  color: #b3b3b3;
+}
+
+.action-menu {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  background-color: #282828;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 10;
+}
+
+.action-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.action-menu ul li {
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.action-menu ul li:hover {
+  background-color: #1db954;
+  color: #fff;
+}
+
+.action-icon:hover .action-menu {
+  display: block;
+}
+
+/* end sidebar */

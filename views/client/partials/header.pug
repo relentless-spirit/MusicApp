@@ -19,4 +19,12 @@ header
         i.fa.fa-microphone(aria-hidden="true")
     a(href="#")
       i#notif.fa.fa-bell-o(aria-hidden="true")
-    img.user-img(src="src/user.jpeg")
+    .user-menu
+      img.user-img(src=user.avatar  alt="User Profile")
+      .dropdown-menu.hidden
+        if(!user)
+          a(href="/auth/login") Login
+          a(href="/auth/sign-up") Sign Up 
+        else 
+          a(href="/user/profile") Profile
+          a(href="/auth/logout") Logout  
