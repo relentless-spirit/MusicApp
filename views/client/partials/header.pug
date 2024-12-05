@@ -1,30 +1,29 @@
-header
+header.header
   .nav-col.left-col
-    a(href="/")
-      .header-logo-div
-        i.fa.fa-headphones#header-logo(aria-hidden="true")
-    a(href="/")
-      .header-title
-        p SPOTIFY
-        p
-          b Studio
-    ul
+    a(href="/" class="header-logo")
+      i.fa.fa-headphones#header-logo(aria-hidden="true")
+    a(href="/" class="header-title")
+      span Spotify
+      b Studio
+    ul.nav-links
       li
         a(href="#") Favourites
-  .nav-col.right-col
+  .nav-col.center-col
     .search-box
       i.fa.fa-search(aria-hidden="true")
       input(type="text", placeholder="Search")
-      a(href="#")
+      a(href="#" class="mic-icon")
         i.fa.fa-microphone(aria-hidden="true")
-    a(href="#")
-      i#notif.fa.fa-bell-o(aria-hidden="true")
+  .nav-col.right-col
+    a(href="#" class="notif-icon")
+      i.fa.fa-bell-o(aria-hidden="true")
     .user-menu
-      img.user-img(src=user.avatar  alt="User Profile")
-      .dropdown-menu.hidden
-        if(!user)
-          a(href="/auth/login") Login
-          a(href="/auth/sign-up") Sign Up 
-        else 
+      if user && user.avatar
+        img.user-img(src=user.avatar alt="User Profile")
+        .dropdown-menu.hidden
           a(href="/user/profile") Profile
-          a(href="/auth/logout") Logout  
+          a(href="/auth/logout") Logout
+      else
+        .auth-buttons
+          a.login-button(href="/auth/login") Login
+          a.signup-button(href="/auth/sign-up") Sign Up

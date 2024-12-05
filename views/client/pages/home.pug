@@ -3,6 +3,7 @@ block main
  .container.container-flex
   main
     article.article-featured.flex-space
+     h2.popular-artists-title Popular Playlists
      each playlist in playlists
       .article-image
         a(href=`/playlist/${playlist._id}`)
@@ -49,106 +50,6 @@ block main
             img(src=artist.coverImage)
             p #{artist.fullName}
      
-       
-    //topic
-    article.stations.flex-space
-      //- .stations-entry
-      //-   img(src="src/stations_logo.jpg")
-      .stations-entry
-        img(src="src/love.jpg")
-        .stations-centered Love
-      
-      //topic
-
-    article.middle-featured.article-featured.flex-space
-      .article-image
-        img(src="src/party.jpg")
-        .stations-centered.mid-featured-font Party
-      .article-image
-        img(src="src/electronic.jpg")
-        .mid-featured-font.stations-centered Electronic
-      .article-image
-        img(src="src/road_trip.jpg")
-        .mid-featured-font.stations-centered Road Trip
-      p.article-info
-      p.article-body
-    article.latest-language
-      h2.latest-language-title Latest English
-      .song-container.flex-space
-        .language-song-entry
-          .language-image
-            img(src="src/song_pic1.jpg")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry
-          .language-image
-            img(src="src/maroon5_cover.png")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry
-          .language-image
-            img(src="src/bad_guy.jpg")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry.display-none
-          .language-image
-            img(src="src/song_pic1.jpg")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry.display-none
-          .language-image
-            img(src="src/maroon5_cover.png")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry.display-none
-          .language-image
-            img(src="src/bad_guy.jpg")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-    article.latest-language
-      h2.latest-language-title Latest Hindi
-      .song-container.flex-space
-        .language-song-entry
-          .language-image
-            img(src="src/song_pic1.jpg")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry
-          .language-image
-            img(src="src/maroon5_cover.png")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry
-          .language-image
-            img(src="src/bad_guy.jpg")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry.display-none
-          .language-image
-            img(src="src/song_pic1.jpg")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry.display-none
-          .language-image
-            img(src="src/maroon5_cover.png")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
-        .language-song-entry.display-none
-          .language-image
-            img(src="src/bad_guy.jpg")
-          p
-            b Bad Guy
-          p.language-sub.latest-release-sub MAR 29, 2019
+   
   include ../partials/queue.pug
  
