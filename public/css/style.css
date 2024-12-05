@@ -407,9 +407,11 @@ aside {
 
 /*Stations*/
 .stations {
-  margin-top: 2em;
+  display: flex;
+
   padding: 1em;
-  background: #101642;
+
+  margin-right: 5px;
 }
 
 .stations-entry {

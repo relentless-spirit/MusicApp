@@ -1,5 +1,44 @@
 import { Request, response, Response } from "express";
 import FavoriteSong from "../../models/favorite_song.model";
+import Song from "../../models/song.model";
+import Artist from "../../models/artist.model";
+
+export const index = async (req: Request, res: Response) => {
+    try {
+        const id = res.locals.user.id;
+        const favoriteSongs = await FavoriteSong.find({
+            user_id: id,
+            deleted: false
+        }).select("song_id");
+        const songs = [];
+        for (const favoriteSong of favoriteSongs) {
+            const song = await Song.findOne({
+                _id: favoriteSong.song_id,
+                deleted: false
+            });
+            songs.push(song);
+        }
+        for (const song of songs) {
+            const artist = await Artist.findOne({
+                _id: song?.artist,
+                deleted: false
+            }).select("fullName");
+            if (!artist) {
+                song.artist = "Không tìm thấy thông tin nghệ sĩ";
+            }
+            else {
+                song.artist = artist.fullName;
+            }
+        }
+        const favoriteSongIds = favoriteSongs.map(item => item.song_id.toString());
+        res.render("client/pages/favorite-songs/index.pug", {
+            songs: songs,
+            favoriteSongIds: favoriteSongIds
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export const addFavoriteSong = async (req: Request, res: Response) => {
     try {
@@ -22,7 +61,7 @@ export const addFavoriteSong = async (req: Request, res: Response) => {
             }
         } else {
             const record = new FavoriteSong({
-                // user_id,
+                user_id: res.locals.user.id,
                 song_id: id,
             });
             await record.save();

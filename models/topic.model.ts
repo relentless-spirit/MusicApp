@@ -9,6 +9,7 @@ const topicSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    // topic_slug: { type: String }, từ từ thêm sau
   },
   { timestamps: true }
 );

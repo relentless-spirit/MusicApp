@@ -8,9 +8,11 @@ import { generateTokenAndSetToken } from "../../helpers/JWT.helper";
 export async function login(req: Request, res: Response) {
   res.render("client/pages/auth/login.pug");
 }
+
 export async function signup(req: Request, res: Response) {
   res.render("client/pages/auth/sign-up.pug");
 }
+
 export async function loginPost(req: Request, res: Response) {
   try {
     const { username, password } = req.body;
@@ -41,6 +43,7 @@ export async function loginPost(req: Request, res: Response) {
     });
   }
 }
+
 export async function signupPost(req: Request, res: Response) {
   try {
     const { username, email, password, rePassword } = req.body;
