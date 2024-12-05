@@ -25,20 +25,17 @@ block main
                 a(href="#") 
                   b #{song.title}
               p.latest-release-sub MAR 29, 2019
-            .latest-release-options
-              .like-icon
-                i.fa(
-                  class=`fa-heart-o${favoriteSongIds.includes(song._id.toString()) ? ' filled' : ''}`
-                  aria-hidden="true"
-                  data-path=`/favorite-songs/favorite-song/${song._id}`
-                  favorite-song-button
-                )
             .action-icon
               i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
               .action-menu.hidden
                 ul
                   li 
                     a(href=`/add-to-playlist/${song._id}`) Add to Playlist
+                  li 
+                    a(href="/"
+                    data-path=`/favorite-songs/favorite-song/${song._id}`
+                    favorite-song-button
+                    ) #{favoriteSongIds.includes(song._id.toString()) ? 'Remove from your Favorited Songs' : 'Save to your Favorited Songs'}
                   li 
                     a(href=`/add-to-queue/${song._id}`) Add to Queue
                   li 
