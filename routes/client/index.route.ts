@@ -3,6 +3,7 @@ import homeRoute from "./home.route.js";
 import playlistRoute from "./playlist.route.js";
 import favoriteSongRoute from "./favoriteSong.route.js";
 import authRoute from "./auth.route.js";
+import topicRoute from "./topic.route.js";
 import { authUserInMainPage } from "../../middlewares/client/auth.middleware.js";
 const routeClient = (app: any) => {
   app.use("/auth", authRoute);
@@ -11,5 +12,6 @@ const routeClient = (app: any) => {
   app.use("/", homeRoute);
   app.use("/favorite-songs", favoriteSongRoute);
   app.use("/playlist", playlistRoute);
+  app.use("/topics", topicRoute);
 };
 export default routeClient;

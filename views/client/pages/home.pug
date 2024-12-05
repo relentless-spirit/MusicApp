@@ -31,7 +31,7 @@ block main
                   li 
                     a(href=`/add-to-playlist/${song._id}`) Add to Playlist
                   li 
-                    a(href="/"
+                    a(
                     data-path=`/favorite-songs/favorite-song/${song._id}`
                     favorite-song-button
                     ) #{favoriteSongIds.includes(song._id.toString()) ? 'Remove from your Favorited Songs' : 'Save to your Favorited Songs'}
@@ -52,11 +52,16 @@ block main
        
     //topic
     article.stations.flex-space
-      //- .stations-entry
-      //-   img(src="src/stations_logo.jpg")
+      .stations-entry
+        img(src="src/stations_logo.jpg")
       .stations-entry
         img(src="src/love.jpg")
         .stations-centered Love
+      each topic in topics 
+        .stations-entry
+          a(href=`/topics/${topic.id}`)
+            img(src=topic.imgTopic)
+            .stations-centered #{topic.title}
       
       //topic
 

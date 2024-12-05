@@ -1,0 +1,210 @@
+extends ../../layouts/default.pug
+block main
+ //  MAIN BODY 
+ .container.container-flex
+   main
+    .featured-playlist.flex-space
+      .featured-playlist-image
+        img.featured-playlist-img(src=topic.imgTopic)
+      .featured-playlist-details
+        .featured-playlist-info
+          .flex-space.featured-playlist-info-top
+            .featured-playlist-info-name
+              h2 #{topic.title}
+              p Vietnamese  Singer
+            .followers
+              p.followers 851 followers
+        .featured-playlist-writeup
+          p.
+            
+            #{topic.content}
+            
+        .featured-playlist-buttons
+          .play-all-button
+            button(class="playAllButton") Play All
+            p 247 tracks | 128 followers
+          a(href) Follow
+    .playlist-next-item.flex-space
+     each song,idx  in songs
+      .playlist-next-item-entry.flex-space
+        .playlist-next-item-entry-info.flex-space
+          p.playlist-next-item-entry-number #{idx+1}
+          .playlist-next-item-entry-info-image
+            img.playlist-next-item-img(src=song.coverImage song-src=song.fileUrl
+                song-name =song.title song-artist=song.artist
+                song-cover=song.coverImage)
+          .playlist-next-item-entry-info-name
+            p
+              b #{song.title}
+            p.playlist-next-item-entry-info-name-sub #{song.artist}
+        .action-icon
+              i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
+              .action-menu.hidden
+                ul
+                  li 
+                    a(href=`/add-to-playlist/${song._id}`) Add to Playlist
+                  li 
+                    a(
+                    data-path=`/favorite-songs/favorite-song/${song._id}`
+                    favorite-song-button
+                    ) #{favoriteSongIds.includes(song._id.toString()) ? 'Remove from your Favorited Songs' : 'Save to your Favorited Songs'}
+                  li 
+                    a(href=`/add-to-queue/${song._id}`) Add to Queue
+                  li 
+                    a(href=`#`) Go to the artist detail
+   aside.playlist-aside
+    .similar-artists
+      .similar-artists-title.flex-space
+        h2 Similar Artists
+        a.display-none-960(href)
+          p.similar-artists-sub View All
+      .similar-artists-entry.flex-space
+        .similar-artists-image
+          img(src="src/eminem_artist.jpeg")
+        .similar-artists-info
+          p.similar-artists-info-name
+            b Eminem
+          p.similar-artists-info-sub Hip Hop
+        .similar-artists-options
+          .similar-artists-options-menu
+            i.fa.fa-bars(aria-hidden="true")
+          p 4:44
+      .similar-artists-entry.flex-space
+        .similar-artists-image
+          img(src="src/drake_artist.jpg")
+        .similar-artists-info
+          p.similar-artists-info-name
+            b Eminem
+          p.similar-artists-info-sub Hip Hop
+        .similar-artists-options
+          .similar-artists-options-menu
+            i.fa.fa-bars(aria-hidden="true")
+          p 4:44
+      .similar-artists-entry.flex-space
+        .similar-artists-image
+          img(src="src/divide_cover.png")
+        .similar-artists-info
+          p.similar-artists-info-name
+            b Eminem
+          p.similar-artists-info-sub Hip Hop
+        .similar-artists-options
+          .similar-artists-options-menu
+            i.fa.fa-bars(aria-hidden="true")
+          p 4:44
+    .recently-played
+      .recently-played-title.similar-artists-title.flex-space
+        h2 Recently Played
+        a.display-none-960(href)
+          p.similar-artists-sub View All
+      .queue-entry.flex-space
+        p.queue-number 01
+        .queue-entry-image
+          img(src="src/song_pic1.jpg")
+        .queue-entry-info
+          p
+            b Blinding lights
+          p.language-sub.latest-release-sub.queue-entry-sub.
+            
+            The Weeknd
+            
+        .like-icon
+          a(href="#")
+            i.fa.fa-heart-o(aria-hidden="true")
+      .queue-entry.flex-space
+        p.queue-number 02
+        .queue-entry-image
+          img(src="src/bad_guy.jpg")
+        .queue-entry-info
+          p
+            b Blinding lights
+          p.language-sub.latest-release-sub.queue-entry-sub.
+            
+            The Weeknd
+            
+        .like-icon
+          a(href="#")
+            i.fa.fa-heart-o(aria-hidden="true")
+      .queue-entry.flex-space
+        p.queue-number 03
+        .queue-entry-image
+          img(src="src/song_pic1.jpg")
+        .queue-entry-info
+          p
+            b Blinding lights
+          p.language-sub.latest-release-sub.queue-entry-sub.
+            
+            The Weeknd
+            
+        .like-icon
+          a(href="#")
+            i.fa.fa-heart-o(aria-hidden="true")
+      .queue-entry.flex-space
+        p.queue-number 04
+        .queue-entry-image
+          img(src="src/bad_guy.jpg")
+        .queue-entry-info
+          p
+            b Blinding lights
+          p.language-sub.latest-release-sub.queue-entry-sub.
+            
+            The Weeknd
+            
+        .like-icon
+          a(href="#")
+            i.fa.fa-heart-o(aria-hidden="true")
+      .queue-entry.flex-space
+        p.queue-number 05
+        .queue-entry-image
+          img(src="src/song_pic1.jpg")
+        .queue-entry-info
+          p
+            b Blinding lights
+          p.language-sub.latest-release-sub.queue-entry-sub.
+            
+            The Weeknd
+            
+        .like-icon
+          a(href="#")
+            i.fa.fa-heart-o(aria-hidden="true")
+      .queue-entry.flex-space
+        p.queue-number 06
+        .queue-entry-image
+          img(src="src/bad_guy.jpg")
+        .queue-entry-info
+          p
+            b Blinding lights
+          p.language-sub.latest-release-sub.queue-entry-sub.
+            
+            The Weeknd
+            
+        .like-icon
+          a(href="#")
+            i.fa.fa-heart-o(aria-hidden="true")
+      .queue-entry.flex-space
+        p.queue-number 07
+        .queue-entry-image
+          img(src="src/song_pic1.jpg")
+        .queue-entry-info
+          p
+            b Blinding lights
+          p.language-sub.latest-release-sub.queue-entry-sub.
+            
+            The Weeknd
+            
+        .like-icon
+          a(href="#")
+            i.fa.fa-heart-o(aria-hidden="true")
+      .queue-entry.flex-space
+        p.queue-number 08
+        .queue-entry-image
+          img(src="src/bad_guy.jpg")
+        .queue-entry-info
+          p
+            b Blinding lights
+          p.language-sub.latest-release-sub.queue-entry-sub.
+            
+            The Weeknd
+            
+        .like-icon
+          a(href="#")
+            i.fa.fa-heart-o(aria-hidden="true")
