@@ -18,8 +18,7 @@ block main
             .latest-release-image
               img(src=song.coverImage song-src=song.fileUrl
                 song-name =song.title song-artist=song.artist
-                song-cover=song.coverImage)
-               
+                song-cover=song.coverImage)  
             .latest-release-info
               p
                 a(href="#") 
@@ -151,93 +150,5 @@ block main
           p
             b Bad Guy
           p.language-sub.latest-release-sub MAR 29, 2019
-  aside.sidebar
-    h2.aside-title Queue
-    .queue-entry.flex-space
-      p.queue-number 01
-      .queue-entry-image
-        img(src="src/song_pic1.jpg")
-      .queue-entry-info
-        p
-          b Blinding lights
-        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
-      .like-icon
-        a(href="#")
-          i.fa.fa-heart-o(aria-hidden="true")
-    .queue-entry.flex-space
-      p.queue-number 02
-      .queue-entry-image
-        img(src="src/bad_guy.jpg")
-      .queue-entry-info
-        p
-          b Blinding lights
-        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
-      .like-icon
-        a(href="#")
-          i.fa.fa-heart-o(aria-hidden="true")
-    .queue-entry.flex-space
-      p.queue-number 03
-      .queue-entry-image
-        img(src="src/song_pic1.jpg")
-      .queue-entry-info
-        p
-          b Blinding lights
-        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
-      .like-icon
-        a(href="#")
-          i.fa.fa-heart-o(aria-hidden="true")
-    .queue-entry.flex-space
-      p.queue-number 04
-      .queue-entry-image
-        img(src="src/bad_guy.jpg")
-      .queue-entry-info
-        p
-          b Blinding lights
-        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
-      .like-icon
-        a(href="#")
-          i.fa.fa-heart-o(aria-hidden="true")
-    .queue-entry.flex-space
-      p.queue-number 05
-      .queue-entry-image
-        img(src="src/song_pic1.jpg")
-      .queue-entry-info
-        p
-          b Blinding lights
-        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
-      .like-icon
-        a(href="#")
-          i.fa.fa-heart-o(aria-hidden="true")
-    .queue-entry.flex-space
-      p.queue-number 06
-      .queue-entry-image
-        img(src="src/bad_guy.jpg")
-      .queue-entry-info
-        p
-          b Blinding lights
-        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
-      .like-icon
-        a(href="#")
-          i.fa.fa-heart-o(aria-hidden="true")
-    .queue-entry.flex-space
-      p.queue-number 07
-      .queue-entry-image
-        img(src="src/song_pic1.jpg")
-      .queue-entry-info
-        p
-          b Blinding lights
-        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
-      .like-icon
-        a(href="#")
-          i.fa.fa-heart-o(aria-hidden="true")
-    .queue-entry.flex-space
-      p.queue-number 08
-      .queue-entry-image
-        img(src="src/bad_guy.jpg")
-      .queue-entry-info
-        p
-          b Blinding lights
-        p.language-sub.latest-release-sub.queue-entry-sub The Weeknd
-      .like-icon
-        a(href="#")
-          i.fa.fa-heart-o(aria-hidden="true")
+  include ../partials/queue.pug
+ 

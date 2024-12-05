@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../../models/user.model";
+import jwt from "jsonwebtoken";
 export const authSignUp = async (
   req: Request,
   res: Response,
@@ -37,4 +38,33 @@ export const authSignUp = async (
     return;
   }
   next();
+};
+export const authUserInMainPage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const token = req.cookies["jwt-token"];
+    if (token) {
+      if (process.env.JWT_SECRET) {
+        const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
+        // console.log(verifiedUser);=> decode to registered userId , iat and exp
+        //=>get userId to check in DB
+        const user = await User.findById(
+          (verifiedUser as jwt.JwtPayload).userId.toString()
+        );
+        if (!user) {
+          res.redirect("/auth/login");
+          return;
+        }
+        res.locals.user = user;
+      } else {
+        throw new Error("JWT_SECRET is not defined");
+      }
+    }
+    next();
+  } catch (error) {
+    console.log(error);
+  }
 };

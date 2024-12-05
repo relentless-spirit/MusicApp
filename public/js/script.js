@@ -156,3 +156,41 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //end loading  page
+//click menu user
+document.addEventListener("DOMContentLoaded", function () {
+  const userMenu = document.querySelector(".user-menu");
+  const dropdownMenu = document.querySelector(".dropdown-menu");
+
+  userMenu.addEventListener("click", function (e) {
+    e.stopPropagation(); // Ngăn chặn sự kiện click lan truyền lên document
+    dropdownMenu.classList.toggle("visible"); // Toggle menu
+  });
+
+  // Đóng menu nếu click bên ngoài
+  document.addEventListener("click", function () {
+    dropdownMenu.classList.remove("visible");
+  });
+});
+
+//edn click menu user
+
+//sidebar
+document.addEventListener("DOMContentLoaded", () => {
+  const sidebar = document.querySelector(".sidebar");
+  const toggleIconOpen = document.querySelector(".toggle-icon.open");
+  const toggleIconClose = document.querySelector(".toggle-icon.close");
+
+  // Xử lý toggle
+  const toggleSidebar = () => {
+    const isVisible = sidebar.classList.toggle("visible");
+    toggleIconOpen.classList.toggle("hidden", isVisible);
+    toggleIconClose.classList.toggle("hidden", !isVisible);
+  };
+
+  // Thêm sự kiện click cho nút toggle
+  document
+    .querySelector(".toggle-sidebar")
+    .addEventListener("click", toggleSidebar);
+});
+
+//end sidebar
