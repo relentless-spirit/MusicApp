@@ -60,11 +60,11 @@ if (favoriteSongButtons.length > 0) {
         const data = await response.json();
         if (data.code === "success") {
           if (button) {
-            button.classList.add("filled");
+            button.innerHTML = "Remove from your Favorited Songs";
           }
         } else if (data.code === "remove") {
           if (button) {
-            button.classList.remove("filled");
+            button.innerHTML = "Save to your Favorited Songs";
           }
         }
       } catch (error) {
