@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
           "https://lh3.googleusercontent.com/F2ywvCxiucFEM2CwP_6-3rYeoSUIhKPZO9rpMsKz8W3wDYE5SILCU7b9crM9GqwjmIy8TZtOPDqOJx1T=w60-h60-l90-rj",
       },
     ],
+    autoplay: true,
   });
   aplayer.play();
 });

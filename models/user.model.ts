@@ -10,10 +10,10 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    favorite_songs: {
-      type: Array,
-      default: [],
-    },
+    // favorite_songs: {
+    //   type: Array,
+    //   default: [],
+    // },
     deleted: {
       type: Boolean,
       default: false,

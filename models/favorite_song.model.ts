@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const favoriteSongSchema = new mongoose.Schema(
     {
-        // user_id: { type: String, required: true },
+        user_id: { type: String, required: true },
         song_id: { type: String, required: true },
         deleted: { type: Boolean, default: false },
         removed_at: { type: Date, default: null },
