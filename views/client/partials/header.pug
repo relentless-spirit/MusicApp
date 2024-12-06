@@ -21,7 +21,7 @@ header.header
       if user && user.avatar
         img.user-img(src=user.avatar alt="User Profile")
         .dropdown-menu.hidden
-          a(href="/user/profile") Profile
+          a(href=`/user/profile/${user._id}`) Profile
           a(href="/auth/logout") Logout
       else
         .auth-buttons

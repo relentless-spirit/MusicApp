@@ -1,0 +1,36 @@
+extends ../../layouts/default.pug
+
+block style
+    link(rel="stylesheet", type="text/css", href="/css/profile.css")
+
+block main
+    .profile-header
+        .profile-background
+        .profile-info
+            img.profile-avatar(src=userInfo.avatar, alt="User Avatar")
+            .profile-details
+                p.profile-type Profile
+                h1.profile-name #{userInfo.username}
+                p.profile-meta #{userInfo.playlist ? userInfo.playlist.length : 0} Playlists • #{userInfo.favorite_songs ? userInfo.favorite_songs.length : 0} Following
+
+    .profile-content
+        section.top-artists
+            h2 Top artists this month
+            p Only visible to you
+            article.popular-artists
+                .artist-container.flex-space
+                    each artist in artists
+                     .popular-artist-entry
+                        img(src=artist.coverImage)
+                        p #{artist.fullName}
+            
+            
+
+        section.top-tracks
+            h2 Top tracks this month
+            p Only visible to you
+            ol.track-list
+             each song in songs
+                    li.track-item
+                        span.track-title= song.title
+                        span.track-duration 3:45
