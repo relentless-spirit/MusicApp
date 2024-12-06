@@ -5,6 +5,23 @@ import FavoriteSong from "../../models/favorite_song.model";
 import Playlist from "../../models/playlist.model";
 import Topic from "../../models/topic.model";
 export const home = async (req: Request, res: Response) => {
+  //finding logic
+  const keyword = req.query.search as string;
+  if (keyword) {
+    const songs = await Song.find({
+      title: {
+        $regex: new RegExp(keyword, "i"),
+      },
+      deleted: false,
+      status: "active",
+    });
+    res.render("client/pages/home/find.pug", {
+      findingTitle: keyword,
+      songs,
+    });
+  }
+  //end finding logic
+
   const artists = await Artist.find({ status: "active", deleted: false });
   const songs = await Song.find({ status: "active", deleted: false });
   const playlists = await Playlist.find({ status: "active", deleted: false });
@@ -14,19 +31,20 @@ export const home = async (req: Request, res: Response) => {
       status: "active",
       deleted: false,
     });
-    song["artist"] = artist?.fullName;
+    song["artist"] = artist?.fullName || "Unknown Artist";
   }
   const favoriteSongs = await FavoriteSong.find({
     deleted: false,
   }).select("song_id");
-  const favoriteIds = favoriteSongs.map(item => item.song_id.toString());
+  const favoriteIds = favoriteSongs.map((item) => item.song_id.toString());
   const topics = await Topic.find({
-    deleted: false
-  })
+    deleted: false,
+  });
   res.render("client/pages/home", {
-    artists: artists, songs,
+    artists: artists,
+    songs,
     favoriteSongIds: favoriteIds,
     playlists: playlists,
-    topics: topics
+    topics: topics,
   });
 };

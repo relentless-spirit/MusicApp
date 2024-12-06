@@ -195,3 +195,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //end sidebar
+
+//Searching Logic
+
+const searchBox = document.querySelector(".search-box");
+if (searchBox) {
+  let currentUrl = new URL(location.href);
+  searchBox.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const inputValue = searchBox.inputValue.value;
+    if (inputValue) {
+      currentUrl.searchParams.set("search", inputValue);
+    } else {
+      currentUrl.searchParams.delete("search");
+    }
+    location.href = currentUrl.href;
+  });
+  const inputValue = currentUrl.searchParams.get("search");
+  if (inputValue) {
+    searchBox.inputValue.value = inputValue;
+  }
+}
+
+//Ending Searching Logic

@@ -111,18 +111,24 @@ a:hover {
   border-radius: 5px;
   color: #000;
 }
-
-/* Search Box */
+/* General Search Box Styling */
 .search-box {
   display: flex;
   align-items: center;
-  background-color: #121212;
+  background-color: #121212; /* Dark background for contrast */
   padding: 0.5em 1em;
   border-radius: 50px;
-  width: 60%;
+  width: 100%;
   max-width: 500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add subtle shadow */
+  transition: background-color 0.3s ease; /* Smooth background change */
 }
 
+.search-box:hover {
+  background-color: #1a1a1a; /* Slightly lighter background on hover */
+}
+
+/* Input Styling */
 .search-box input {
   border: none;
   background: transparent;
@@ -130,16 +136,56 @@ a:hover {
   padding: 0 1em;
   color: #fff;
   font-size: 0.95rem;
-  flex: 1;
+  flex: 1; /* Allow input to fill available space */
 }
 
+.search-box input::placeholder {
+  color: #aaa; /* Subtle placeholder color */
+  font-style: italic; /* Optional for style */
+}
+
+/* Icon Styling */
 .search-box i {
   color: #ccc;
+  font-size: 1.2rem; /* Make icons slightly larger */
 }
 
 .search-box a i:hover {
-  color: #1db954;
-  transition: color 0.3s ease;
+  color: #1db954; /* Spotify-like green color on hover */
+  transition: color 0.3s ease; /* Smooth color change */
+}
+
+/* Mic Icon Specific Styling */
+.search-box .mic-icon i {
+  margin-left: 0.5em; /* Add spacing between input and microphone icon */
+}
+/* Submit Button Styling */
+.search-box .submit-btn {
+  background: none; /* Transparent background for a clean look */
+  border: none; /* Remove default button borders */
+  cursor: pointer; /* Change cursor to pointer to indicate interactivity */
+  padding: 0;
+  margin-left: 0.5em; /* Add spacing between the button and input field */
+  color: #ccc; /* Default color matching the other icons */
+  display: flex; /* Align the icon within the button */
+  align-items: center; /* Center the icon vertically */
+  font-size: 1.2rem; /* Icon size consistency */
+}
+
+.search-box .submit-btn i {
+  font-size: 1.2rem; /* Adjust the size of the icon */
+  margin-left: 1rem;
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.search-box .submit-btn:hover {
+  color: #1db954; /* Spotify green color for hover effect */
+}
+
+/* Focus Outline for Accessibility */
+.search-box .submit-btn:focus {
+  outline: 2px solid #1db954; /* Add a green outline when focused */
+  outline-offset: 3px; /* Create space between the button and outline */
 }
 
 /* Notifications */
@@ -539,8 +585,6 @@ aside {
 *************************/
 
 footer {
-  background: #282828;
-  padding: 1em 0;
   margin-top: auto;
   position: fixed;
   left: 0;
@@ -1046,7 +1090,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 4px!;
   background: #282828;
 }
 /* Container styling */
@@ -1056,18 +1100,14 @@ input[type="range"]::-webkit-slider-runnable-track {
   border: 1px solid #333;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  background-color: #000;
+  background-color: #121212;
+  padding-bottom: 10px !important;
 }
 
 /* Control bar styling */
 .aplayer .aplayer-controller {
   background-color: #222;
   border-top: 1px solid #333;
-}
-
-/* Progress bar styling */
-.aplayer .aplayer-bar-wrap {
-  background-color: #444;
 }
 
 .aplayer .aplayer-bar {
@@ -1091,7 +1131,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 .aplayer .aplayer-title {
   font-weight: bold;
-  font-size: 2em; /* Increase title size */
+  font-size: 1em !important; /* Increase title size */
 }
 
 .aplayer .aplayer-author {
@@ -1101,8 +1141,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* Image styling */
 .aplayer .aplayer-pic {
-  width: 150px; /* Increase image size */
-  height: 150px; /* Increase image size */
+  width: 90px !important; /* Increase image size */
+  height: 80px !important; /* Increase image size */
   border-radius: 10px;
   margin-right: 15px;
 }
