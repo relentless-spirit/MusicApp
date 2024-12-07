@@ -22,8 +22,14 @@ block main
         .featured-playlist-buttons
           .play-all-button
             button(class="playAllButton") Play All
+            button(
+              button-follow
+              data-path=`/topics/${topic.id}`
+            ) #{followSongIds.includes(topic.id.toString()) ? 'Followed' : 'Follow'}
             p 247 tracks | 128 followers
-          a(href) Follow
+
+           
+
     .playlist-next-item.flex-space
      each song,idx  in songs
       .playlist-next-item-entry.flex-space

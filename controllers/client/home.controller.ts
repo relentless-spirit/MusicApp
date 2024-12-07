@@ -14,7 +14,7 @@ export const home = async (req: Request, res: Response) => {
       status: "active",
       deleted: false,
     });
-    song["artist"] = artist?.fullName;
+    song["artistFullName"] = artist?.fullName;
   }
   const favoriteSongs = await FavoriteSong.find({
     deleted: false,
