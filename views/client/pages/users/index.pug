@@ -11,7 +11,7 @@ block main
             .profile-details
                 p.profile-type Profile
                 h1.profile-name #{userInfo.username}
-                p.profile-meta #{userInfo.playlist ? userInfo.playlist.length : 0} Playlists • #{userInfo.favorite_songs ? userInfo.favorite_songs.length : 0} Following
+                p.profile-meta #{userInfo.playlist ? userInfo.playlist.length : 0} Playlists • #{userInfo.follow_songs ? userInfo.follow_songs.length : 0} Following
 
     .profile-content
         section.top-artists

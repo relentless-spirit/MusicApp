@@ -971,6 +971,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   text-align: center;
   text-decoration: none;
   margin-bottom: 0.2em;
+  margin-right: 10px;
 }
 .play-all-button p {
   font-size: 0.7rem;

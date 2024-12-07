@@ -18,13 +18,12 @@ export const index = async (req: Request, res: Response) => {
       _id: objectId,
       deleted: false,
       status: "active",
-    }).select("username avatar playlist favorite_songs");
+    }).select("username avatar playlist follow_songs");
     const songs = await Song.find({ deleted: false, status: "active" });
     const artists = await Artist.find({ deleted: false, status: "active" });
     if (!user) {
       return res.status(404).send("User not found");
     }
-
     res.render("client/pages/users/index.pug", {
       userInfo: user,
       songs,

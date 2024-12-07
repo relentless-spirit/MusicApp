@@ -5,6 +5,7 @@ import favoriteSongRoute from "./favoriteSong.route.js";
 import authRoute from "./auth.route.js";
 import topicRoute from "./topic.route.js";
 import userRoute from "./user.route.js";
+import artistRoute from "./artist.route.js";
 import { authUserInMainPage } from "../../middlewares/client/auth.middleware.js";
 const routeClient = (app: any) => {
   app.use("/auth", authRoute);
@@ -15,5 +16,6 @@ const routeClient = (app: any) => {
   app.use("/playlist", playlistRoute);
   app.use("/topics", topicRoute);
   app.use("/user", userRoute);
+  app.use("/artist", artistRoute);
 };
 export default routeClient;
