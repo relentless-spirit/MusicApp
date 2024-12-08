@@ -67,14 +67,18 @@ export async function signupPost(req: Request, res: Response) {
   }
 }
 
-// export async function logout(req:Request, res:Response) {
-//   try {
-//     res.clearCookie("jwt-token");
-//     res.status(201).json({ code: 201, message: "Logged out successfully" });
-//   } catch (error) {
-//     res.status(400).json({ code: 400, message: "Internal server error" });
-//   }
-// }
+export async function logout(req: Request, res: Response) {
+  try {
+    res.clearCookie("jwt-token");
+    res.locals.user = null;
+    res.status(200).json({
+      code: 200,
+      message: "Logout successfully",
+    }); // });
+  } catch (error) {
+    res.status(400).json({ code: 400, message: "Internal server error" });
+  }
+}
 // export async function forgotPost(req:Request, res:Response) {
 //   try {
 //     const existedUser = await TaiKhoan.findOne({
