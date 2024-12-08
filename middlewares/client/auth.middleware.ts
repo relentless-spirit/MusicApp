@@ -46,6 +46,7 @@ export const authUserInMainPage = async (
 ) => {
   try {
     const token = req.cookies["jwt-token"];
+    // console.log("test token ");
     if (token) {
       if (process.env.JWT_SECRET) {
         const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
@@ -63,6 +64,9 @@ export const authUserInMainPage = async (
         throw new Error("JWT_SECRET is not defined");
       }
     }
+    //  else {
+    //   res.locals.user = null;
+    // }
     next();
   } catch (error) {
     console.log(error);
