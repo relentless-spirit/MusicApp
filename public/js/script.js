@@ -202,16 +202,16 @@ if (followButton) {
     const path = followButton.getAttribute("data-path");
     await fetch(path, {
       headers: { "Content-type": "application/json" },
-      method: "PATCH"
+      method: "PATCH",
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code == "success") {
           followButton.innerHTML = "Followed";
         } else if (data.code == "remove") {
           followButton.innerHTML = "Follow";
         }
-      })
+      });
   });
 }
 //End button Follow
@@ -258,3 +258,33 @@ if (followArtistButton) {
   });
 }
 //End follow-artist
+
+document.addEventListener("DOMContentLoaded", function () {
+  const searchIcon = document.getElementById("search-icon");
+  const searchInput = document.getElementById("search-input");
+
+  if (searchIcon && searchInput) {
+    searchIcon.addEventListener("click", function () {
+      searchInput.focus();
+    });
+  }
+});
+//Ending Searching Logic
+const logoutButton = document.querySelector(".logoutButton");
+console.log(logoutButton);
+
+if (logoutButton) {
+  logoutButton.addEventListener("click", async () => {
+    const path = logoutButton.getAttribute("data-path");
+    await fetch(path, {
+      headers: { "Content-type": "application/json" },
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.code == 200) {
+          location.reload();
+        }
+      });
+  });
+}
