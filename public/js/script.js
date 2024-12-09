@@ -236,6 +236,29 @@ if (searchBox) {
     searchBox.inputValue.value = inputValue;
   }
 }
+//Ending Searching Logic
+
+//Follow-artist
+const followArtistButton = document.querySelector(".button-follow-artist");
+if (followArtistButton) {
+  followArtistButton.addEventListener("click", async () => {
+    const path = followArtistButton.getAttribute("data-path");
+    await fetch(path, {
+      headers: { "Content-type": "application/json" },
+      method: "PATCH"
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.code == "add") {
+          followArtistButton.innerHTML = "Following";
+        } else if (data.code == "remove") {
+          followArtistButton.innerHTML = "Follow";
+        }
+      })
+  });
+}
+//End follow-artist
+
 document.addEventListener("DOMContentLoaded", function () {
   const searchIcon = document.getElementById("search-icon");
   const searchInput = document.getElementById("search-input");
