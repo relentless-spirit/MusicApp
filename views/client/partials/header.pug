@@ -22,7 +22,7 @@ header.header
     a(href="#" class="notif-icon")
       i.fa.fa-bell-o(aria-hidden="true")
     .user-menu
-      if user && user.avatar
+      if user 
         img.user-img(src=user.avatar alt="User Profile")
         .dropdown-menu.hidden
           a(href=`/user/profile/${user._id}`) Profile

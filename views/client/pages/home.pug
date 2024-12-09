@@ -37,7 +37,11 @@ block main
                     favorite-song-button
                     ) #{favoriteSongIds.includes(song._id.toString()) ? 'Remove from your Favorited Songs' : 'Save to your Favorited Songs'}
                   li 
-                    a(href=`/add-to-queue/${song._id}`) Add to Queue
+                    a(path=`queue/add-to-queue/${song._id}` queue-button
+                    src-img-data=song.coverImage song-src-data=song.fileUrl
+                    song-name-data =song.title song-artist-data=song.artistFullName
+                    song-cover-data=song.coverImage
+                    ) Add to Queue
                   li 
                     a(href=`/artist/${song.artist}`) Go to the artist detail
 
