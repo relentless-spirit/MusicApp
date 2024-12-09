@@ -1,49 +1,22 @@
-//Aplayer
-document.addEventListener("DOMContentLoaded", function () {
-  const aplayer = new APlayer({
-    container: document.getElementById("aplayer"),
-    audio: [
-      {
-        name: "Qua Từng Khung Hình",
-        artist: "Hustlang Robber & Ngắn",
-        url: "../songs/QUA TỪNG KHUNG HÌNH (Feat. Robber, Ngắn) - RAP VIỆT (youtube).mp3",
-        cover:
-          "https://lh3.googleusercontent.com/F2ywvCxiucFEM2CwP_6-3rYeoSUIhKPZO9rpMsKz8W3wDYE5SILCU7b9crM9GqwjmIy8TZtOPDqOJx1T=w60-h60-l90-rj",
-      },
-    ],
-    autoplay: true,
-  });
-  aplayer.play();
-});
+// //Aplayer
+// document.addEventListener("DOMContentLoaded", function () {
+//   const aplayer = new APlayer({
+//     container: document.getElementById("aplayer"),
+//     audio: [
+//       {
+//         name: "Qua Từng Khung Hình",
+//         artist: "Hustlang Robber & Ngắn",
+//         url: "../songs/QUA TỪNG KHUNG HÌNH (Feat. Robber, Ngắn) - RAP VIỆT (youtube).mp3",
+//         cover:
+//           "https://lh3.googleusercontent.com/F2ywvCxiucFEM2CwP_6-3rYeoSUIhKPZO9rpMsKz8W3wDYE5SILCU7b9crM9GqwjmIy8TZtOPDqOJx1T=w60-h60-l90-rj",
+//       },
+//     ],
+//     autoplay: true,
+//   });
+//   aplayer.play();
+// });
 
-//End aplayer
-
-//Select song to play
-const songImage = document.querySelectorAll("[song-src]");
-if (songImage.length > 0) {
-  songImage.forEach((song) => {
-    song.addEventListener("click", () => {
-      const songSrc = song.getAttribute("song-src");
-      const songName = song.getAttribute("song-name");
-      const songArtist = song.getAttribute("song-artist");
-      const songCover = song.getAttribute("song-cover");
-
-      const aplayer = new APlayer({
-        container: document.getElementById("aplayer"),
-        audio: [
-          {
-            name: songName,
-            artist: songArtist,
-            url: songSrc,
-            cover: songCover,
-          },
-        ],
-      });
-      aplayer.play();
-    });
-  });
-}
-//End select song to play
+// //End aplayer
 
 //Favorite-Song
 const favoriteSongButtons = document.querySelectorAll("[favorite-song-button]");
@@ -76,6 +49,8 @@ if (favoriteSongButtons.length > 0) {
 }
 //End Favorite-Song
 
+//get current audio aplayer
+
 //playlist play all button //
 const playAllButton = document.querySelector(".playAllButton");
 if (playAllButton) {
@@ -96,7 +71,7 @@ if (playAllButton) {
         });
       });
     }
-    const aaplayer = new APlayer({
+    const aplayer = new APlayer({
       container: document.getElementById("aplayer"),
       audio: songs,
       autoplay: true,
@@ -248,7 +223,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 //Ending Searching Logic
 const logoutButton = document.querySelector(".logoutButton");
-console.log(logoutButton);
 
 if (logoutButton) {
   logoutButton.addEventListener("click", async () => {
@@ -265,3 +239,201 @@ if (logoutButton) {
       });
   });
 }
+
+// ------------------------------------------------------------------------------------------------//
+//Add to queue logic
+const saveToLocalStorage = (queueArr) => {
+  const queueFromMapToArray = Array.from(queueArr.entries());
+  localStorage.setItem("queueArray", JSON.stringify(queueFromMapToArray));
+};
+const getFromLocalStorage = () => {
+  const queueArray = localStorage.getItem("queueArray");
+  if (queueArray) {
+    const parsedArray = JSON.parse(queueArray);
+    if (Array.isArray(parsedArray)) {
+      return new Map(parsedArray.map((item) => [item[0], item[1]]));
+    }
+  }
+  return new Map();
+};
+
+const addToQueueButton = document.querySelectorAll("[queue-button]");
+const queueList = document.querySelector(".queue-list");
+const queueArray = getFromLocalStorage() || new Map();
+if (addToQueueButton) {
+  addToQueueButton.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const img = button.getAttribute("src-img-data");
+      const fileUrl = button.getAttribute("song-src-data");
+      const songName = button.getAttribute("song-name-data");
+      const songArtist = button.getAttribute("song-artist-data");
+      queueArray.set(fileUrl, {
+        img,
+        fileUrl,
+        songName,
+        songArtist,
+      });
+      if (queueArray.has(fileUrl)) {
+        const existingItem = queueArray.get(fileUrl);
+        queueArray.delete(fileUrl);
+        queueArray.set(fileUrl, existingItem);
+
+        // Remove existing HTML element with the same fileUrl
+        const existingElements = queueList.querySelectorAll(
+          `[song-src="${fileUrl}"]`
+        );
+        existingElements.forEach((element) => {
+          element.parentElement.parentElement.remove();
+        });
+      }
+      saveToLocalStorage(queueArray);
+      const newDiv = document.createElement("div");
+      newDiv.classList.add("latest-release-entry2", "flex-space");
+
+      const imgDiv = `
+        <div class="latest-release-image2">
+          <img src="${img}"  song-src="${fileUrl}"
+                        song-name="${songName}"
+                        song-artist="${songArtist}"
+                        song-cover="${img}">
+        </div>
+      `;
+
+      const infoDiv = `
+        <div class="latest-release-info2">
+          <p>
+            <a href="#">
+              <b>${songName}</b>
+            </a>
+          </p>
+          <p class="latest-release-sub2">MAR 29, 2019</p>
+        </div>
+      `;
+
+      const actionDiv = `
+        <div class="action-icon">
+          <i class="fa fa-ellipsis-h action-menu-toggle" aria-hidden="true"></i>
+          <div class="action-menu hidden">
+            <ul>
+              <li>
+                <a href="/add-to-playlist/12345">Add to Playlist</a>
+              </li>
+              <li>
+                <a data-path="/favorite-songs/favorite-song/12345" favorite-song-button>Save to your Favorite Songs</a>
+              </li>
+              <li>
+                <a href="/add-to-queue/12345">Add to Queue</a>
+              </li>
+              <li>
+                <a href="#">Go to the artist detail</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      `;
+
+      newDiv.innerHTML = imgDiv + infoDiv + actionDiv;
+      if (queueList) {
+        queueList.appendChild(newDiv);
+      }
+    });
+  });
+}
+const setQueueFromLocalStorage = () => {
+  const queueArray = getFromLocalStorage();
+  if (queueArray) {
+    queueArray.forEach((item) => {
+      const newDiv = document.createElement("div");
+      newDiv.classList.add("latest-release-entry2", "flex-space");
+
+      const imgDiv = `
+        <div class="latest-release-image2">
+          <img src="${item.img}"  song-src="${item.fileUrl}"
+                        song-name="${item.songName}"
+                        song-artist="${item.songArtist}"
+                        song-cover="${item.img}">
+        </div>
+      `;
+
+      const infoDiv = `
+        <div class="latest-release-info2">
+          <p>
+            <a href="#">
+              <b>${item.songName}</b>
+            </a>
+          </p>
+          <p class="latest-release-sub2">MAR 29, 2019</p>
+        </div>
+      `;
+
+      const actionDiv = `
+        <div class="action-icon">
+          <i class="fa fa-ellipsis-h action-menu-toggle" aria-hidden="true"></i>
+          <div class="action-menu hidden">
+            <ul>
+              <li>
+                <a href="/add-to-playlist/12345">Add to Playlist</a>
+              </li>
+              <li>
+                <a data-path="/favorite-songs/favorite-song/12345" favorite-song-button>Save to your Favorite Songs</a>
+              </li>
+              <li>
+                <a href="/add-to-queue/12345">Add to Queue</a>
+              </li>
+              <li>
+                <a href="#">Go to the artist detail</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      `;
+
+      newDiv.innerHTML = imgDiv + infoDiv + actionDiv;
+      if (queueList) {
+        queueList.appendChild(newDiv);
+      }
+    });
+  }
+};
+
+setQueueFromLocalStorage();
+//End Add to queue logic
+
+// ------------------------------------------------------------------------------------------------//
+//Select song to play
+const songImage = document.querySelectorAll("[song-src]");
+if (songImage.length > 0) {
+  songImage.forEach((song) => {
+    song.addEventListener("click", () => {
+      const songSrc = song.getAttribute("song-src");
+      const songName = song.getAttribute("song-name");
+      const songArtist = song.getAttribute("song-artist");
+      const songCover = song.getAttribute("song-cover");
+
+      const aplayer = new APlayer({
+        container: document.getElementById("aplayer"),
+        audio: [
+          {
+            name: songName,
+            artist: songArtist,
+            url: songSrc,
+            cover: songCover,
+          },
+        ],
+      });
+      aplayer.play();
+      const queueArray = getFromLocalStorage();
+      const songs = [];
+      queueArray.forEach((item) => {
+        songs.push({
+          name: item.songName,
+          artist: item.songArtist,
+          url: item.fileUrl,
+          cover: item.img,
+        });
+      });
+      aplayer.list.add(songs);
+    });
+  });
+}
+//End select song to play
