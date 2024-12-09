@@ -15,17 +15,16 @@ block main
 
     .profile-content
         section.top-artists
-            h2 Top artists this month
-            p Only visible to you
-            article.popular-artists
+            h2 Following 
                 .artist-container.flex-space
                     each artist in artists
-                     .popular-artist-entry
-                        img(src=artist.coverImage)
-                        p #{artist.fullName}
-            
-            
+                        .popular-artist-entry
+                            a(href=`/artist/${artist.id}`)
+                                img(src=artist.coverImage)
+                                p= artist.fullName
+                                p Artist
 
+                    
         section.top-tracks
             h2 Top tracks this month
             p Only visible to you

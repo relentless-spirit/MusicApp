@@ -18,9 +18,15 @@ export const index = async (req: Request, res: Response) => {
       _id: objectId,
       deleted: false,
       status: "active",
-    }).select("username avatar playlist follow_songs");
+    }).select("username avatar playlist follow_songs follow_artists");
     const songs = await Song.find({ deleted: false, status: "active" });
-    const artists = await Artist.find({ deleted: false, status: "active" });
+    const artists = await Artist.find({
+      _id: {
+        $in: user?.follow_artists
+      },
+      deleted: false,
+      status: "active"
+    });
     if (!user) {
       return res.status(404).send("User not found");
     }
