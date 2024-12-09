@@ -192,10 +192,9 @@ if (followButton) {
 //End button Follow
 
 //Searching Logic
-
 const searchBox = document.querySelector(".search-box");
 if (searchBox) {
-  let currentUrl = new URL(location.href);
+  let currentUrl = new URL(location.origin);
   searchBox.addEventListener("submit", (event) => {
     event.preventDefault();
     const inputValue = searchBox.inputValue.value;

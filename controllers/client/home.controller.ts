@@ -7,6 +7,7 @@ import Topic from "../../models/topic.model";
 export const home = async (req: Request, res: Response) => {
   //finding logic
   const keyword = req.query.search as string;
+  const userID = res.locals.user?.id || null;
   if (keyword) {
     const songs = await Song.find({
       title: {
@@ -15,9 +16,15 @@ export const home = async (req: Request, res: Response) => {
       deleted: false,
       status: "active",
     });
+    const favoriteSongs = await FavoriteSong.find({
+      user_id: userID,
+      deleted: false,
+    }).select("song_id");
+    const favoriteSongIds = favoriteSongs.map((item) => item.song_id.toString());
     res.render("client/pages/home/find.pug", {
       findingTitle: keyword,
       songs,
+      favoriteSongIds: favoriteSongIds,
     });
   }
   //end finding logic
@@ -34,6 +41,7 @@ export const home = async (req: Request, res: Response) => {
     song["artistFullName"] = artist?.fullName || "Unknown Artist";
   }
   const favoriteSongs = await FavoriteSong.find({
+    user_id: userID,
     deleted: false,
   }).select("song_id");
   const favoriteIds = favoriteSongs.map((item) => item.song_id.toString());
