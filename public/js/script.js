@@ -1,5 +1,3 @@
-//get current audio aplayer
-
 //playlist play all button //
 const playAllButton = document.querySelector(".playAllButton");
 if (playAllButton) {
@@ -296,34 +294,7 @@ setQueueFromLocalStorage();
 //End Add to queue logic
 
 // ------------------------------------------------------------------------------------------------//
-//Select song to play
-const songImage = document.querySelectorAll("[song-src]");
-if (songImage.length > 0) {
-  songImage.forEach((song) => {
-    song.addEventListener("click", () => {
-      const songSrc = song.getAttribute("song-src");
-      const songName = song.getAttribute("song-name");
-      const songArtist = song.getAttribute("song-artist");
-      const songCover = song.getAttribute("song-cover");
 
-      const aplayer = new APlayer({
-        container: document.getElementById("aplayer"),
-        listFolded: true,
-
-        audio: [
-          {
-            name: songName,
-            artist: songArtist,
-            url: songSrc,
-            cover: songCover,
-          },
-        ],
-      });
-      aplayer.play();
-    });
-  });
-}
-//End select song to play
 // ----------------------------------------------------------------------------------------------//
 // Drop down menu for songs
 
@@ -428,15 +399,43 @@ const playNextSong = () => {
     queueArray.delete(nextSong.fileUrl); //curent is a map => deleted the key
     saveToLocalStorage(queueArray); //MVC
     setQueueFromLocalStorage(); //MVC
+  } else {
+    aplayer.pause();
   }
 };
+// Select song to play
+const songImage = document.querySelectorAll("[song-src]");
+if (songImage.length > 0) {
+  songImage.forEach((song) => {
+    song.addEventListener("click", () => {
+      const songSrc = song.getAttribute("song-src");
+      const songName = song.getAttribute("song-name");
+      const songArtist = song.getAttribute("song-artist");
+      const songCover = song.getAttribute("song-cover");
 
+      aplayer.list.add([
+        {
+          name: songName,
+          artist: songArtist,
+          url: songSrc,
+          cover: songCover,
+        },
+      ]);
+      aplayer.list.switch(aplayer.list.audios.length - 1);
+      aplayer.play();
+    });
+  });
+}
 // Event listener for when a song ends
-aplayer.on("ended", playNextSong);
+aplayer.on("ended", () => {
+  aplayer.list.remove(aplayer.list.index);
+  playNextSong();
+});
 
 // Initialize the queue and play the first song if available
 setQueueFromLocalStorage();
 if (queueArray.size > 0) {
   playNextSong();
 }
+
 //END LOGIC APLAYER
