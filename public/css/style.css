@@ -451,7 +451,6 @@ aside {
   color: gray; /* Màu chữ xám nhạt */
 }
 
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .popular-artist-entry {
@@ -1779,7 +1778,6 @@ body {
   color: white;
 }
 
-
 .verified-artist {
   font-size: 12px; /* Smaller text size */
   color: white; /* Optional: lighter color */
@@ -1788,3 +1786,88 @@ body {
 /* suggestion finding  */
 
 /* ending suggestion finding */
+
+/* Suggestions Dropdown Styling */
+/* Suggestions Dropdown Styling - Spotify Inspired */
+.suggestions {
+  position: absolute;
+  background-color: #282828; /* Spotify's dark background color */
+  border: none; /* No border for a clean look */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+  width: 100%; /* Matches the width of the search input */
+  max-height: 400px; /* Larger height for visibility */
+  overflow-y: auto; /* Scrollable if content overflows */
+  top: calc(100% + 10px); /* Slight gap below the search bar */
+  z-index: 1000;
+  padding: 5px 0; /* Space inside the dropdown */
+  animation: fadeIn 0.3s ease-in-out; /* Smooth appearance animation */
+}
+
+/* Individual Suggestion Items */
+.suggestion-item {
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Center content vertically */
+  padding: 10px 15px; /* Comfortable padding */
+  font-size: 14px; /* Readable text size */
+  color: #fff; /* White text for contrast */
+  transition: background-color 0.2s ease; /* Smooth hover effect */
+  cursor: pointer;
+}
+
+/* Add an icon or thumbnail next to each suggestion (optional) */
+.suggestion-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px; /* Slightly rounded image */
+  margin-right: 10px; /* Space between image and text */
+}
+
+/* Text styling */
+.suggestion-item span {
+  flex: 1; /* Take up remaining space */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis for long text */
+}
+
+/* Hover Effect */
+.suggestion-item:hover {
+  background-color: #1db954; /* Spotify's green hover effect */
+}
+
+/* Hidden State */
+.hidden {
+  display: none;
+}
+
+/* Scrollbar Styling */
+.suggestions::-webkit-scrollbar {
+  width: 8px;
+}
+
+.suggestions::-webkit-scrollbar-track {
+  background: #404040; /* Darker track to blend in */
+  border-radius: 8px;
+}
+
+.suggestions::-webkit-scrollbar-thumb {
+  background: #1db954; /* Spotify green scrollbar */
+  border-radius: 8px;
+}
+
+.suggestions::-webkit-scrollbar-thumb:hover {
+  background: #1ed760; /* Brighter green on hover */
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

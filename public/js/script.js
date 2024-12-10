@@ -120,7 +120,45 @@ if (searchBox) {
   if (inputValue) {
     searchBox.inputValue.value = inputValue;
   }
+  //suggestion searching/ using debounce
+  const searchInput = searchBox.inputValue;
+  const suggestionsDiv = document.getElementById("suggestions");
+  let timeout = null;
+  searchInput.addEventListener("input", () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      fetch(`/autocomplete?q=${searchInput.value}`)
+        .then((res) => res.json())
+        .then((data) => {
+          suggestionsDiv.innerHTML = "";
+          if (data.length > 0) {
+            data.forEach((item) => {
+              const suggestionItem = document.createElement("div");
+              suggestionItem.classList.add("suggestion-item");
+              suggestionItem.textContent = item.title;
+              suggestionItem.addEventListener("click", () => {
+                searchInput.value = item.title;
+                suggestionsDiv.classList.add("hidden");
+              });
+              suggestionsDiv.appendChild(suggestionItem);
+            });
+            suggestionsDiv.classList.remove("hidden");
+          } else {
+            suggestionsDiv.classList.add("hidden");
+          }
+        });
+    }, 300);
+  });
 }
+// Hide suggestions when clicking outside
+document.addEventListener("click", (event) => {
+  if (
+    !searchInput.contains(event.target) &&
+    !suggestionsDiv.contains(event.target)
+  ) {
+    suggestionsDiv.classList.add("hidden");
+  }
+});
 //Ending Searching Logic
 
 //Follow-artist
