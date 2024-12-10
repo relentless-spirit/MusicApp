@@ -41,6 +41,7 @@ block main
                     src-img-data=song.coverImage song-src-data=song.fileUrl
                     song-name-data =song.title song-artist-data=song.artistFullName
                     song-cover-data=song.coverImage
+                    song-id =song._id artist-id= song.artist
                     ) Add to Queue
                   li 
                     a(href=`/artist/${song.artist}`) Go to the artist detail
