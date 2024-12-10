@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    follow_artists: {
+      type: Array,
+      default: [],
+    },
     deleted: {
       type: Boolean,
       default: false,

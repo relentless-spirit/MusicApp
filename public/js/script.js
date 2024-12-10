@@ -1,54 +1,3 @@
-// //Aplayer
-// document.addEventListener("DOMContentLoaded", function () {
-//   const aplayer = new APlayer({
-//     container: document.getElementById("aplayer"),
-//     audio: [
-//       {
-//         name: "Qua Từng Khung Hình",
-//         artist: "Hustlang Robber & Ngắn",
-//         url: "../songs/QUA TỪNG KHUNG HÌNH (Feat. Robber, Ngắn) - RAP VIỆT (youtube).mp3",
-//         cover:
-//           "https://lh3.googleusercontent.com/F2ywvCxiucFEM2CwP_6-3rYeoSUIhKPZO9rpMsKz8W3wDYE5SILCU7b9crM9GqwjmIy8TZtOPDqOJx1T=w60-h60-l90-rj",
-//       },
-//     ],
-//     autoplay: true,
-//   });
-//   aplayer.play();
-// });
-
-// //End aplayer
-
-//Favorite-Song
-const favoriteSongButtons = document.querySelectorAll("[favorite-song-button]");
-if (favoriteSongButtons.length > 0) {
-  favoriteSongButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const path = button.getAttribute("data-path");
-      try {
-        const response = await fetch(path, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "PATCH",
-        });
-        const data = await response.json();
-        if (data.code === "success") {
-          if (button) {
-            button.innerHTML = "Remove from your Favorited Songs";
-          }
-        } else if (data.code === "remove") {
-          if (button) {
-            button.innerHTML = "Save to your Favorited Songs";
-          }
-        }
-      } catch (error) {
-        console.error("Error adding to favorite songs:", error);
-      }
-    });
-  });
-}
-//End Favorite-Song
-
 //get current audio aplayer
 
 //playlist play all button //
@@ -80,42 +29,6 @@ if (playAllButton) {
 }
 //end play playlist play all button //
 
-// Drop down menu for songs
-document.addEventListener("DOMContentLoaded", () => {
-  const actionToggles = document.querySelectorAll("[action-menu-toggle]");
-
-  actionToggles.forEach((toggle) => {
-    toggle.addEventListener("click", (event) => {
-      event.stopPropagation(); // Prevent triggering the document click event
-      const actionMenu = toggle.nextElementSibling;
-
-      // Close all open menus except the clicked one
-      document.querySelectorAll(".action-menu.visible").forEach((menu) => {
-        if (menu !== actionMenu) {
-          menu.classList.remove("visible");
-          menu.classList.add("hidden");
-        }
-      });
-
-      // Toggle the clicked menu
-      if (actionMenu.classList.contains("hidden")) {
-        actionMenu.classList.remove("hidden");
-        actionMenu.classList.add("visible");
-      } else {
-        actionMenu.classList.remove("visible");
-        actionMenu.classList.add("hidden");
-      }
-    });
-  });
-
-  // Close menus when clicking outside
-  document.addEventListener("click", () => {
-    document.querySelectorAll(".action-menu.visible").forEach((menu) => {
-      menu.classList.remove("visible");
-      menu.classList.add("hidden");
-    });
-  });
-});
 //loading page
 document.addEventListener("DOMContentLoaded", () => {
   const loading = document.getElementById("loading");
@@ -192,10 +105,9 @@ if (followButton) {
 //End button Follow
 
 //Searching Logic
-
 const searchBox = document.querySelector(".search-box");
 if (searchBox) {
-  let currentUrl = new URL(location.href);
+  let currentUrl = new URL(location.origin);
   searchBox.addEventListener("submit", (event) => {
     event.preventDefault();
     const inputValue = searchBox.inputValue.value;
@@ -211,6 +123,29 @@ if (searchBox) {
     searchBox.inputValue.value = inputValue;
   }
 }
+//Ending Searching Logic
+
+//Follow-artist
+const followArtistButton = document.querySelector(".button-follow-artist");
+if (followArtistButton) {
+  followArtistButton.addEventListener("click", async () => {
+    const path = followArtistButton.getAttribute("data-path");
+    await fetch(path, {
+      headers: { "Content-type": "application/json" },
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.code == "add") {
+          followArtistButton.innerHTML = "Following";
+        } else if (data.code == "remove") {
+          followArtistButton.innerHTML = "Follow";
+        }
+      });
+  });
+}
+//End follow-artist
+
 document.addEventListener("DOMContentLoaded", function () {
   const searchIcon = document.getElementById("search-icon");
   const searchInput = document.getElementById("search-input");
@@ -246,6 +181,7 @@ const saveToLocalStorage = (queueArr) => {
   const queueFromMapToArray = Array.from(queueArr.entries());
   localStorage.setItem("queueArray", JSON.stringify(queueFromMapToArray));
 };
+
 const getFromLocalStorage = () => {
   const queueArray = localStorage.getItem("queueArray");
   if (queueArray) {
@@ -257,146 +193,106 @@ const getFromLocalStorage = () => {
   return new Map();
 };
 
-const addToQueueButton = document.querySelectorAll("[queue-button]");
 const queueList = document.querySelector(".queue-list");
 const queueArray = getFromLocalStorage() || new Map();
+
+// Function to render a song in the queue
+const renderSong = (item) => {
+  const newDiv = document.createElement("div");
+  newDiv.classList.add("latest-release-entry2", "flex-space");
+
+  const imgDiv = `
+    <div class="latest-release-image2">
+      <img src="${item.img}"  song-src="${item.fileUrl}"
+                    song-name="${item.songName}"
+                    song-artist="${item.songArtist}"
+                    song-cover="${item.img}">
+    </div>
+  `;
+
+  const infoDiv = `
+    <div class="latest-release-info2">
+      <p>
+        <a href="#">
+          <b>${item.songName}</b>
+        </a>
+      </p>
+      <p class="latest-release-sub2">MAR 29, 2019</p>
+    </div>
+  `;
+
+  const actionDiv = `
+    <div class="action-icon">
+      <i class="fa fa-ellipsis-h " action-menu-toggle="action-menu-toggle" aria-hidden="true" ></i>
+      <div class="action-menu hidden">
+        <ul>
+          <li>
+            <a href="/add-to-playlist/${item.songId}">Add to Playlist</a>
+          </li>
+          <li>
+            <a data-path="/favorite-songs/favorite-song/${item.songId}" favorite-song-button>Save to your Favorite Songs</a>
+          </li>
+          <li>
+            <a href="/add-to-queue/12345">Remove</a>
+          </li>
+          <li>
+            <a href="/artist/${item.artistId}">Go to the artist detail</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  `;
+
+  newDiv.innerHTML = imgDiv + infoDiv + actionDiv;
+  return newDiv;
+};
+
+// Load queue from localStorage
+const setQueueFromLocalStorage = () => {
+  const queueArray = getFromLocalStorage();
+  if (queueArray) {
+    queueList.innerHTML = ""; // Clear the list before rendering
+    queueArray.forEach((item) => {
+      const songElement = renderSong(item);
+      queueList.appendChild(songElement);
+    });
+  }
+};
+
+// Add to queue logic
+const addToQueueButton = document.querySelectorAll("[queue-button]");
 if (addToQueueButton) {
   addToQueueButton.forEach((button) => {
-    button.addEventListener("click", async () => {
+    button.addEventListener("click", () => {
       const img = button.getAttribute("src-img-data");
       const fileUrl = button.getAttribute("song-src-data");
       const songName = button.getAttribute("song-name-data");
       const songArtist = button.getAttribute("song-artist-data");
+      const songId = button.getAttribute("song-id");
+      const artistId = button.getAttribute("artist-id");
+
+      // Add song to queue
       queueArray.set(fileUrl, {
         img,
         fileUrl,
         songName,
         songArtist,
+        songId,
+        artistId,
       });
-      if (queueArray.has(fileUrl)) {
-        const existingItem = queueArray.get(fileUrl);
-        queueArray.delete(fileUrl);
-        queueArray.set(fileUrl, existingItem);
 
-        // Remove existing HTML element with the same fileUrl
-        const existingElements = queueList.querySelectorAll(
-          `[song-src="${fileUrl}"]`
-        );
-        existingElements.forEach((element) => {
-          element.parentElement.parentElement.remove();
-        });
-      }
+      // Save to localStorage
       saveToLocalStorage(queueArray);
-      const newDiv = document.createElement("div");
-      newDiv.classList.add("latest-release-entry2", "flex-space");
 
-      const imgDiv = `
-        <div class="latest-release-image2">
-          <img src="${img}"  song-src="${fileUrl}"
-                        song-name="${songName}"
-                        song-artist="${songArtist}"
-                        song-cover="${img}">
-        </div>
-      `;
-
-      const infoDiv = `
-        <div class="latest-release-info2">
-          <p>
-            <a href="#">
-              <b>${songName}</b>
-            </a>
-          </p>
-          <p class="latest-release-sub2">MAR 29, 2019</p>
-        </div>
-      `;
-
-      const actionDiv = `
-        <div class="action-icon">
-          <i class="fa fa-ellipsis-h action-menu-toggle" aria-hidden="true"></i>
-          <div class="action-menu hidden">
-            <ul>
-              <li>
-                <a href="/add-to-playlist/12345">Add to Playlist</a>
-              </li>
-              <li>
-                <a data-path="/favorite-songs/favorite-song/12345" favorite-song-button>Save to your Favorite Songs</a>
-              </li>
-              <li>
-                <a href="/add-to-queue/12345">Add to Queue</a>
-              </li>
-              <li>
-                <a href="#">Go to the artist detail</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      `;
-
-      newDiv.innerHTML = imgDiv + infoDiv + actionDiv;
-      if (queueList) {
-        queueList.appendChild(newDiv);
-      }
+      // Re-render queue
+      setQueueFromLocalStorage();
     });
   });
 }
-const setQueueFromLocalStorage = () => {
-  const queueArray = getFromLocalStorage();
-  if (queueArray) {
-    queueArray.forEach((item) => {
-      const newDiv = document.createElement("div");
-      newDiv.classList.add("latest-release-entry2", "flex-space");
 
-      const imgDiv = `
-        <div class="latest-release-image2">
-          <img src="${item.img}"  song-src="${item.fileUrl}"
-                        song-name="${item.songName}"
-                        song-artist="${item.songArtist}"
-                        song-cover="${item.img}">
-        </div>
-      `;
-
-      const infoDiv = `
-        <div class="latest-release-info2">
-          <p>
-            <a href="#">
-              <b>${item.songName}</b>
-            </a>
-          </p>
-          <p class="latest-release-sub2">MAR 29, 2019</p>
-        </div>
-      `;
-
-      const actionDiv = `
-        <div class="action-icon">
-          <i class="fa fa-ellipsis-h action-menu-toggle" aria-hidden="true"></i>
-          <div class="action-menu hidden">
-            <ul>
-              <li>
-                <a href="/add-to-playlist/12345">Add to Playlist</a>
-              </li>
-              <li>
-                <a data-path="/favorite-songs/favorite-song/12345" favorite-song-button>Save to your Favorite Songs</a>
-              </li>
-              <li>
-                <a href="/add-to-queue/12345">Add to Queue</a>
-              </li>
-              <li>
-                <a href="#">Go to the artist detail</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      `;
-
-      newDiv.innerHTML = imgDiv + infoDiv + actionDiv;
-      if (queueList) {
-        queueList.appendChild(newDiv);
-      }
-    });
-  }
-};
-
+// Initialize the queue from localStorage
 setQueueFromLocalStorage();
+
 //End Add to queue logic
 
 // ------------------------------------------------------------------------------------------------//
@@ -412,6 +308,8 @@ if (songImage.length > 0) {
 
       const aplayer = new APlayer({
         container: document.getElementById("aplayer"),
+        listFolded: true,
+
         audio: [
           {
             name: songName,
@@ -422,51 +320,123 @@ if (songImage.length > 0) {
         ],
       });
       aplayer.play();
-      const queueArray = getFromLocalStorage();
-      const songs = [];
-      queueArray.forEach((item) => {
-        songs.push({
-          name: item.songName,
-          artist: item.songArtist,
-          url: item.fileUrl,
-          cover: item.img,
-        });
-      });
-      aplayer.list.add(songs);
     });
   });
 }
 //End select song to play
-// Remove song from queue after it ends
-document.addEventListener("DOMContentLoaded", function () {
-  const aplayerContainer = document.getElementById("aplayer");
-  if (aplayerContainer) {
-    const aplayer = new APlayer({
-      container: aplayerContainer,
-      audio: [],
-    });
+// ----------------------------------------------------------------------------------------------//
+// Drop down menu for songs
 
-    aplayer.on("ended", function () {
-      const currentAudio = aplayer.list.audios[aplayer.list.index];
-      if (currentAudio) {
-        const queueArray = getFromLocalStorage();
-        queueArray.delete(currentAudio.url);
-        saveToLocalStorage(queueArray);
+const actionToggles = document.querySelectorAll("[action-menu-toggle]");
+actionToggles.forEach((toggle) => {
+  toggle.addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent triggering the document click event
+    const actionMenu = toggle.nextElementSibling;
 
-        // Remove the song from the queue list in the UI
-        const queueList = document.querySelector(".queue-list");
-        if (queueList) {
-          const songElements = queueList.querySelectorAll(
-            `[song-src="${currentAudio.url}"]`
-          );
-          songElements.forEach((element) => {
-            element.parentElement.parentElement.remove();
-          });
-        }
-
-        // Remove the song from the APlayer list
-        aplayer.list.remove(aplayer.list.index);
+    // Close all open menus except the clicked one
+    document.querySelectorAll(".action-menu.visible").forEach((menu) => {
+      if (menu !== actionMenu) {
+        menu.classList.remove("visible");
+        menu.classList.add("hidden");
       }
     });
-  }
+
+    // Toggle the clicked menu
+    if (actionMenu.classList.contains("hidden")) {
+      actionMenu.classList.remove("hidden");
+      actionMenu.classList.add("visible");
+    } else {
+      actionMenu.classList.remove("visible");
+      actionMenu.classList.add("hidden");
+    }
+  });
 });
+
+// Close menus when clicking outside
+document.addEventListener("click", () => {
+  document.querySelectorAll(".action-menu.visible").forEach((menu) => {
+    menu.classList.remove("visible");
+    menu.classList.add("hidden");
+  });
+});
+//Favorite-Song
+const favoriteSongButtons = document.querySelectorAll("[favorite-song-button]");
+if (favoriteSongButtons.length > 0) {
+  favoriteSongButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const path = button.getAttribute("data-path");
+      try {
+        const response = await fetch(path, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "PATCH",
+        });
+        const data = await response.json();
+        if (data.code === "success") {
+          if (button) {
+            button.innerHTML = "Remove from your Favorited Songs";
+          }
+        } else if (data.code === "remove") {
+          if (button) {
+            button.innerHTML = "Save to your Favorited Songs";
+          }
+        }
+      } catch (error) {
+        console.error("Error adding to favorite songs:", error);
+      }
+    });
+  });
+}
+//End Favorite-Song
+
+//LOGIC APLAYER
+const aplayer = new APlayer({
+  container: document.getElementById("aplayer"),
+  audio: [],
+  autoplay: true,
+  listFolded: true,
+  listMaxHeight: 90,
+});
+
+// Function to get the current audio information
+const getCurrentAudio = () => {
+  const currentAudio = aplayer.audio[aplayer.list.index];
+  return {
+    name: currentAudio.name,
+    artist: currentAudio.artist,
+    url: currentAudio.url,
+    cover: currentAudio.cover,
+  };
+};
+// Function to play the next song in the queue
+const playNextSong = () => {
+  if (queueArray.size > 0) {
+    const nextSong = queueArray.values().next().value;
+    aplayer.list.add([
+      {
+        name: nextSong.songName,
+        artist: nextSong.songArtist,
+        url: nextSong.fileUrl,
+        cover: nextSong.img,
+      },
+    ]);
+    aplayer.list.switch(aplayer.list.audios.length - 1);
+    aplayer.play();
+
+    // Remove the song from the queue
+    queueArray.delete(nextSong.fileUrl); //curent is a map => deleted the key
+    saveToLocalStorage(queueArray); //MVC
+    setQueueFromLocalStorage(); //MVC
+  }
+};
+
+// Event listener for when a song ends
+aplayer.on("ended", playNextSong);
+
+// Initialize the queue and play the first song if available
+setQueueFromLocalStorage();
+if (queueArray.size > 0) {
+  playNextSong();
+}
+//END LOGIC APLAYER

@@ -16,21 +16,49 @@ block main
     .profile-content
         section.top-artists
             h2 Top artists this month
-            p Only visible to you
-            article.popular-artists
+                p Only visible to you
                 .artist-container.flex-space
                     each artist in artists
-                     .popular-artist-entry
-                        img(src=artist.coverImage)
-                        p #{artist.fullName}
-            
-            
+                        .popular-artist-entry
+                            a(href=`/artist/${artist.id}`)
+                                img(src=artist.coverImage)
+                                p= artist.fullName
+                                p Artist
 
         section.top-tracks
             h2 Top tracks this month
-            p Only visible to you
-            ol.track-list
-             each song in songs
-                    li.track-item
-                        span.track-title= song.title
-                        span.track-duration 3:45
+                p Only visible to you
+
+                .playlist-next-item.flex-space
+                each song,idx  in songs 
+                    .playlist-next-item-entry.flex-space
+                        .playlist-next-item-entry-info.flex-space
+                        p.playlist-next-item-entry-number #{idx+1}
+                        .playlist-next-item-entry-info-image
+                            img.playlist-next-item-img(src=song.coverImage song-src=song.fileUrl
+                                song-name =song.title song-artist=song.artist
+                                song-cover=song.coverImage)
+                        .playlist-next-item-entry-info-name
+                            p
+                            b #{song.title}
+                            p.playlist-next-item-entry-info-name-sub #{song.artist}
+                        .action-icon
+                            i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
+                            .action-menu.hidden
+                                ul
+                                    li 
+                                        a(href=`/add-to-playlist/${song._id}`) Add to Playlist
+                                    li 
+                                        a(href=`/add-to-queue/${song._id}`) Add to Queue
+                                    li 
+                                        a(href=`#`) Go to the artist detail
+
+        section.top-artists
+            h2 Following 
+                .artist-container.flex-space
+                    each artist in artists
+                        .popular-artist-entry
+                            a(href=`/artist/${artist.id}`)
+                                img(src=artist.coverImage)
+                                p= artist.fullName
+                                p Artist

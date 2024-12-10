@@ -13,7 +13,7 @@ block main
           .latest-release-entry.flex-space
             .latest-release-image
               img(src=song.coverImage song-src=song.fileUrl
-                song-name =song.title song-artist=song.artist
+                song-name =song.title song-artist=song.artistFullName 
                 song-cover=song.coverImage)  
             .latest-release-info
               p
@@ -26,11 +26,15 @@ block main
                 ul
                   li 
                     a(href=`/add-to-playlist/${song._id}`) Add to Playlist
-                  
+                  li
+                    a(
+                    data-path=`/favorite-songs/favorite-song/${song._id}`
+                    favorite-song-button
+                    ) #{favoriteSongIds.includes(song._id.toString()) ? 'Remove from your Favorited Songs' : 'Save to your Favorited Songs'}
                   li 
                     a(href=`/add-to-queue/${song._id}`) Add to Queue
                   li 
-                    a(href=`#`) Go to the artist detail
+                    a(href=`/artist/${song.artist}`) Go to the artist detail
     else 
      h2.latest-release-title No songs found
   include ../../partials/queue.pug

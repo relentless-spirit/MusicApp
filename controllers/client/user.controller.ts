@@ -18,11 +18,29 @@ export const index = async (req: Request, res: Response) => {
       _id: objectId,
       deleted: false,
       status: "active",
-    }).select("username avatar playlist follow_songs");
+    }).select("username avatar playlist follow_songs follow_artists");
     const songs = await Song.find({ deleted: false, status: "active" });
-    const artists = await Artist.find({ deleted: false, status: "active" });
+    const artists = await Artist.find({
+      _id: {
+        $in: user?.follow_artists
+      },
+      deleted: false,
+      status: "active"
+    });
     if (!user) {
       return res.status(404).send("User not found");
+    }
+    for (const song of songs) {
+      const artist = await Artist.findOne({
+        _id: song?.artist,
+        deleted: false
+      }).select("fullName");
+      if (!artist) {
+        song.artist = "Không tìm thấy thông tin nghệ sĩ";
+      }
+      else {
+        song.artist = artist.fullName;
+      }
     }
     res.render("client/pages/users/index.pug", {
       userInfo: user,
