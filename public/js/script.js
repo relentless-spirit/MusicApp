@@ -437,3 +437,36 @@ if (songImage.length > 0) {
   });
 }
 //End select song to play
+// Remove song from queue after it ends
+document.addEventListener("DOMContentLoaded", function () {
+  const aplayerContainer = document.getElementById("aplayer");
+  if (aplayerContainer) {
+    const aplayer = new APlayer({
+      container: aplayerContainer,
+      audio: [],
+    });
+
+    aplayer.on("ended", function () {
+      const currentAudio = aplayer.list.audios[aplayer.list.index];
+      if (currentAudio) {
+        const queueArray = getFromLocalStorage();
+        queueArray.delete(currentAudio.url);
+        saveToLocalStorage(queueArray);
+
+        // Remove the song from the queue list in the UI
+        const queueList = document.querySelector(".queue-list");
+        if (queueList) {
+          const songElements = queueList.querySelectorAll(
+            `[song-src="${currentAudio.url}"]`
+          );
+          songElements.forEach((element) => {
+            element.parentElement.parentElement.remove();
+          });
+        }
+
+        // Remove the song from the APlayer list
+        aplayer.list.remove(aplayer.list.index);
+      }
+    });
+  }
+});
