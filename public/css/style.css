@@ -1813,13 +1813,13 @@ body {
 
 /* ending suggestion finding */
 
-
 .dropdown-menu-playlist {
   display: none; /* Hide by default */
   position: absolute;
   background-color: #282828;
   border-radius: 5px;
   z-index: 1000;
+  left: 100px;
 }
 
 .dropdown-menu-playlist.show {
@@ -1862,4 +1862,3 @@ body {
   transition: background-color 0.2s ease; /* Smooth hover effect */
   cursor: pointer;
 }
-
