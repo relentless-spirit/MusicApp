@@ -38,14 +38,16 @@ export const home = async (req: Request, res: Response) => {
   const playlists = await Playlist.find({ status: "active", deleted: false });
   const individualPlaylists = await Playlist.find({
     user_id: userID,
-    deleted: false
+    deleted: false,
   });
   for (const playlist of individualPlaylists) {
     const user = await User.findOne({
       _id: playlist.user_id,
-      deleted: false
+      deleted: false,
     });
-    playlist["username"] = user.username;
+    if (user) {
+      (playlist as any)["username"] = user.username;
+    }
   }
   for (const song of songs) {
     const artist = await Artist.findOne({
@@ -70,7 +72,7 @@ export const home = async (req: Request, res: Response) => {
     playlists: playlists,
     topics: topics,
     individualPlaylists: individualPlaylists,
-    user: res.locals.user
+    user: res.locals.user,
   });
 };
 export const autocomplete = async (req: Request, res: Response) => {

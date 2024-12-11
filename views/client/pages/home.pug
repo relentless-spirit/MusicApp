@@ -13,7 +13,9 @@ block main
         p.article-body
     
     article.article-featured
-      h2.popular-artists-title #{user.username}'s Playlists
+      if user && user.username
+        h2.popular-artists-title #{user.username}'s Playlists
+  
       .article-featured.flex-space
         each playlist in individualPlaylists
           .article-image.flex-space
