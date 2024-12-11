@@ -335,7 +335,23 @@ aside {
 }
 
 .article-image {
-  width: 30%;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.article-featured.flex-space {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5em;
+  padding: 1em;
+}
+
+.article-info {
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /*Latest Release*/
@@ -439,16 +455,26 @@ aside {
 }
 
 .popular-artist-entry p:first-of-type {
-  text-align: center; /* Căn giữa tên nghệ sĩ */
+  text-align: left; /* Căn giữa tên nghệ sĩ */
   font-weight: bold; /* Làm nổi bật tên nghệ sĩ */
 }
 
 .popular-artist-entry p:last-of-type {
   text-align: left; /* Căn trái với hình */
   align-self: flex-start; /* Căn p này sang trái của container */
-  padding-left: 10px; /* Khoảng cách từ bên trái hình */
   font-size: 14px; /* Làm chữ nhỏ hơn */
   color: gray; /* Màu chữ xám nhạt */
+}
+
+.popular-artist-entry {
+  transition: background-color 0.3s ease; /* Tạo hiệu ứng mượt */
+  padding: 10px; /* Khoảng cách bên trong */
+  border-radius: 5px; /* Bo góc */
+}
+
+.popular-artist-entry:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Màu xám nhạt khi hover */
+  cursor: pointer; /* Thay đổi con trỏ chuột thành hình tay */
 }
 
 
@@ -1788,3 +1814,24 @@ body {
 /* suggestion finding  */
 
 /* ending suggestion finding */
+
+.dropdown-menu {
+  display: none; /* Hide by default */
+  position: absolute;
+  background-color: #282828;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block; /* Show when the 'show' class is added */
+}
+
+.dropdown-menu {
+  list-style: none;
+  padding: 10px;
+}
+
+.dropdown-menu li {
+  margin: 5px 0;
+}
