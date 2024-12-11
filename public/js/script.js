@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const attachEventListeners = (container) => {
+    if (container === null) return;
     container.addEventListener("click", (event) => {
       // Xử lý sự kiện cho action-menu-toggle
       const actionToggle = event.target.closest("[action-menu-toggle]");
