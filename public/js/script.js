@@ -533,3 +533,99 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+//Ending Searching Logic
+const logoutButton = document.querySelector(".logoutButton");
+console.log(logoutButton);
+
+if (logoutButton) {
+  logoutButton.addEventListener("click", async () => {
+    const path = logoutButton.getAttribute("data-path");
+    await fetch(path, {
+      headers: { "Content-type": "application/json" },
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.code == 200) {
+          location.reload();
+        }
+      });
+  });
+}
+
+//Show dropdown playlist
+const addToPlaylistButtons = document.querySelectorAll("[add-to-playlist-button]");
+if (addToPlaylistButtons.length > 0) {
+  addToPlaylistButtons.forEach((button) => {
+    button.addEventListener("mouseover", (event) => {
+      const id = button.getAttribute("data-id");
+      const addPlaylistDropdown = document.querySelector(`.dropdown-menu[data-id="${id}"]`);
+      if (addPlaylistDropdown) {
+        addPlaylistDropdown.classList.add("show");
+        addPlaylistDropdown.addEventListener("mouseleave", (event) => {
+          addPlaylistDropdown.classList.remove("show");
+        }, { once: true });
+      }
+      event.stopPropagation();
+    });
+  });
+}
+//End show dropdown playlist
+
+//Create new playlist
+const createPlaylistButtons = document.querySelectorAll("[create-playlist]");
+if (createPlaylistButtons.length > 0) {
+  createPlaylistButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const id = button.getAttribute("data-song");
+      const title = button.getAttribute("data-title");
+      const coverImage = button.getAttribute("data-coverImage");
+      const path = button.getAttribute("data-path");
+      const data = {
+        title: title,
+        songs: id,
+        coverImage: coverImage
+      };
+      await fetch(
+        path, {
+        headers: {
+          "Content-type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      })
+      // .then(res => res.json())
+      // .then(data => {
+      //   if (data.code == "success") {
+
+      //   }
+      // })
+    });
+  });
+}
+//End create new playlist
+
+//Add playlist
+const addPlaylistButtons = document.querySelectorAll("[add-playlist]");
+if (addPlaylistButtons.length > 0) {
+  addPlaylistButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const song = button.getAttribute("data-song");
+      const playlist = button.getAttribute("data-playlist");
+      const path = button.getAttribute("data-path");
+      const data = {
+        song: song,
+        playlist: playlist
+      };
+      await fetch(path, {
+        headers: {
+          "Content-type": "application/json"
+        },
+        method: "PATCH",
+        body: JSON.stringify(data),
+      });
+    })
+  });
+}
+//End add playlist

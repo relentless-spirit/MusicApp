@@ -11,7 +11,7 @@ block main
             .profile-details
                 p.profile-type Profile
                 h1.profile-name #{userInfo.username}
-                p.profile-meta #{userInfo.playlist ? userInfo.playlist.length : 0} Playlists • #{userInfo.follow_songs ? userInfo.follow_songs.length : 0} Following
+                p.profile-meta #{userInfo.playlist ? userInfo.playlist.length : 0} Playlists • #{userInfo.follow_artists ? userInfo.follow_artists.length : 0} Following
 
     .profile-content
         section.top-artists
@@ -22,7 +22,7 @@ block main
                         .popular-artist-entry
                             a(href=`/artist/${artist.id}`)
                                 img(src=artist.coverImage)
-                                p= artist.fullName
+                                p #{artist.fullName}
                                 p Artist
 
         section.top-tracks
