@@ -4,6 +4,8 @@ import Song from "../../models/song.model";
 import FavoriteSong from "../../models/favorite_song.model";
 import Playlist from "../../models/playlist.model";
 import Topic from "../../models/topic.model";
+import User from "../../models/user.model";
+
 export const home = async (req: Request, res: Response) => {
   //finding logic
   const keyword = req.query.search as string;
@@ -20,7 +22,9 @@ export const home = async (req: Request, res: Response) => {
       user_id: userID,
       deleted: false,
     }).select("song_id");
-    const favoriteSongIds = favoriteSongs.map((item) => item.song_id.toString());
+    const favoriteSongIds = favoriteSongs.map((item) =>
+      item.song_id.toString()
+    );
     res.render("client/pages/home/find.pug", {
       findingTitle: keyword,
       songs,
@@ -32,6 +36,19 @@ export const home = async (req: Request, res: Response) => {
   const artists = await Artist.find({ status: "active", deleted: false });
   const songs = await Song.find({ status: "active", deleted: false });
   const playlists = await Playlist.find({ status: "active", deleted: false });
+  const individualPlaylists = await Playlist.find({
+    user_id: userID,
+    deleted: false,
+  });
+  for (const playlist of individualPlaylists) {
+    const user = await User.findOne({
+      _id: playlist.user_id,
+      deleted: false,
+    });
+    if (user) {
+      (playlist as any)["username"] = user.username;
+    }
+  }
   for (const song of songs) {
     const artist = await Artist.findOne({
       _id: song.artist,
@@ -54,5 +71,21 @@ export const home = async (req: Request, res: Response) => {
     favoriteSongIds: favoriteIds,
     playlists: playlists,
     topics: topics,
+    individualPlaylists: individualPlaylists,
+    user: res.locals.user,
   });
+};
+export const autocomplete = async (req: Request, res: Response) => {
+  const keyword = req.query.q;
+  const result = await Song.find({
+    title: {
+      $regex: keyword,
+      $options: "i",
+    },
+    status: "active",
+    deleted: false,
+  })
+    .select("title")
+    .limit(10);
+  res.json(result);
 };

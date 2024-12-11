@@ -2,19 +2,32 @@ extends ../layouts/default.pug
 block main
  .container.container-flex
   main
-    article.article-featured.flex-space
+    article.article-featured
      h2.popular-artists-title Popular Playlists
-     each playlist in playlists
-      .article-image
-        a(href=`/playlist/${playlist._id}`)
-          img(src=playlist.coverImage)
-      p.article-info
-      p.article-body
+     .article-featured.flex-space
+      each playlist in playlists
+        .article-image
+          a(href=`/playlist/${playlist._id}`)
+            img(src=playlist.coverImage)
+        p.article-info
+        p.article-body
+    
+    article.article-featured
+      if user && user.username
+        h2.popular-artists-title #{user.username}'s Playlists
+  
+      .article-featured.flex-space
+        each playlist in individualPlaylists
+          .article-image.flex-space
+            a(href=`/playlist/${playlist._id}`)
+              img(src=playlist.coverImage)
+              p.article-info Playlist • #{playlist.username}
+
     article.latest-release
       h2.latest-release-title Latest Release
       .latest-release-body.flex-space
        .latest-release-col
-         each song in songs
+         each song, index in songs
           .latest-release-entry.flex-space
             .latest-release-image
               img(src=song.coverImage song-src=song.fileUrl
@@ -27,14 +40,38 @@ block main
               p.latest-release-sub MAR 29, 2019
             .action-icon
               i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
+              // Menu action
               .action-menu.hidden
                 ul
-                  li 
-                    a(href=`/add-to-playlist/${song._id}`) Add to Playlist
-                  li 
+                  li
                     a(
-                    data-path=`/favorite-songs/favorite-song/${song._id}`
-                    favorite-song-button
+                      data-id=`${index + 1}`
+                      add-to-playlist-button
+                      data-song-id=`${song._id}`
+                    ) Add to Playlist
+                    .dropdown-menu-playlist-container
+                      .dropdown-menu-playlist(data-id=index + 1)
+                        ul
+                          li
+                            a(
+                              data-title=`${song.title}`
+                              data-song=`${song.id}`
+                              data-coverImage=`${song.coverImage}`
+                              data-path=`/playlist/create-playlist`
+                              create-playlist 
+                            ) New Playlist
+                          each individualPlaylist in individualPlaylists 
+                            li
+                              a(
+                                data-song=`${song.id}`
+                                data-playlist=`${individualPlaylist.id}`
+                                data-path=`/playlist/add-playlist`
+                                add-playlist
+                              ) #{individualPlaylist.title}
+                  li
+                    a(
+                      data-path=`/favorite-songs/favorite-song/${song._id}`
+                      favorite-song-button
                     ) #{favoriteSongIds.includes(song._id.toString()) ? 'Remove from your Favorited Songs' : 'Save to your Favorited Songs'}
                   li 
                     a(path=`queue/add-to-queue/${song._id}` queue-button
@@ -46,7 +83,8 @@ block main
                   li 
                     a(href=`/artist/${song.artist}`) Go to the artist detail
 
-      
+
+
     article.popular-artists
       h2.popular-artists-title Popular Artists
        .artist-container.flex-space

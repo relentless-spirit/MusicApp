@@ -9,21 +9,21 @@ header.header
       li
         a(href="/favorite-songs") Favourites
   .nav-col.center-col
-   form(action="/search" method="get" class="search-box")
+   form(action="/search" method="get" class="search-box" autocomplete="off")
     .search-box
       i.fa.fa-search(aria-hidden="true")
-      input(type="text",name="inputValue" ,placeholder="Search")
+      input(type="text",name="inputValue" ,placeholder="Search" )
       a(href="#" class="mic-icon")
         i.fa.fa-microphone(aria-hidden="true")
       button(type="submit" class="submit-btn")
         i.fa.fa-search(aria-hidden="true")
-    ul.search-suggestions.hidden#suggestions
+    .suggestions.hidden#suggestions
   .nav-col.right-col
     a(href="#" class="notif-icon")
       i.fa.fa-bell-o(aria-hidden="true")
     .user-menu
       if user 
-        img.user-img(src=user.avatar alt="User Profile")
+        img.user-img(src=user.avatar alt="User Profile" user-id =  user._id)
         .dropdown-menu.hidden
           a(href=`/user/profile/${user._id}`) Profile
           a(href="/" class="logoutButton" data-path = `/auth/logout`) Logout

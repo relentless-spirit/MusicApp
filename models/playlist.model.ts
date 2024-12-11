@@ -3,13 +3,14 @@ import mongoose from "mongoose";
 const playlistSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String, default: "" },
     songs: [
       {
         type: String,
         default: [],
       },
     ],
+    user_id: { type: String, default: null },
     coverImage: { type: String, required: true },
     createdBy: {
       type: String,
@@ -17,7 +18,7 @@ const playlistSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "active",
+      default: "public",
     },
     deleted: {
       type: Boolean,

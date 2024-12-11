@@ -335,7 +335,23 @@ aside {
 }
 
 .article-image {
-  width: 30%;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.article-featured.flex-space {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5em;
+  padding: 1em;
+}
+
+.article-info {
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /*Latest Release*/
@@ -439,18 +455,27 @@ aside {
 }
 
 .popular-artist-entry p:first-of-type {
-  text-align: center; /* Căn giữa tên nghệ sĩ */
+  text-align: left; /* Căn giữa tên nghệ sĩ */
   font-weight: bold; /* Làm nổi bật tên nghệ sĩ */
 }
 
 .popular-artist-entry p:last-of-type {
   text-align: left; /* Căn trái với hình */
   align-self: flex-start; /* Căn p này sang trái của container */
-  padding-left: 10px; /* Khoảng cách từ bên trái hình */
   font-size: 14px; /* Làm chữ nhỏ hơn */
   color: gray; /* Màu chữ xám nhạt */
 }
 
+.popular-artist-entry {
+  transition: background-color 0.3s ease; /* Tạo hiệu ứng mượt */
+  padding: 10px; /* Khoảng cách bên trong */
+  border-radius: 5px; /* Bo góc */
+}
+
+.popular-artist-entry:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Màu xám nhạt khi hover */
+  cursor: pointer; /* Thay đổi con trỏ chuột thành hình tay */
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -1779,7 +1804,6 @@ body {
   color: white;
 }
 
-
 .verified-artist {
   font-size: 12px; /* Smaller text size */
   color: white; /* Optional: lighter color */
@@ -1788,3 +1812,53 @@ body {
 /* suggestion finding  */
 
 /* ending suggestion finding */
+
+.dropdown-menu-playlist {
+  display: none; /* Hide by default */
+  position: absolute;
+  background-color: #282828;
+  border-radius: 5px;
+  z-index: 1000;
+  left: 100px;
+}
+
+.dropdown-menu-playlist.show {
+  display: block; /* Show when the 'show' class is added */
+}
+
+.dropdown-menu-playlist {
+  list-style: none;
+  padding: 10px;
+}
+
+.dropdown-menu-playlist li {
+  margin: 5px 0;
+}
+
+/* Suggestions Dropdown Styling */
+/* Suggestions Dropdown Styling - Spotify Inspired */
+.suggestions {
+  position: absolute;
+  background-color: #282828; /* Spotify's dark background color */
+  border: none; /* No border for a clean look */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+  width: 100%; /* Matches the width of the search input */
+  max-height: 400px; /* Larger height for visibility */
+  overflow-y: auto; /* Scrollable if content overflows */
+  top: calc(100% + 10px); /* Slight gap below the search bar */
+  z-index: 1000;
+  padding: 5px 0; /* Space inside the dropdown */
+  animation: fadeIn 0.3s ease-in-out; /* Smooth appearance animation */
+}
+
+/* Individual Suggestion Items */
+.suggestion-item {
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Center content vertically */
+  padding: 10px 15px; /* Comfortable padding */
+  font-size: 14px; /* Readable text size */
+  color: #fff; /* White text for contrast */
+  transition: background-color 0.2s ease; /* Smooth hover effect */
+  cursor: pointer;
+}
