@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
-import { home } from "../../controllers/client/home.controller";
-router.get("/", home);
+import * as controller from "../../controllers/client/home.controller";
+router.get("/", controller.home);
+router.get("/autocomplete", controller.autocomplete);
 
 export default router;

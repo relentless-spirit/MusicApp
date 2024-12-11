@@ -22,7 +22,9 @@ export const home = async (req: Request, res: Response) => {
       user_id: userID,
       deleted: false,
     }).select("song_id");
-    const favoriteSongIds = favoriteSongs.map((item) => item.song_id.toString());
+    const favoriteSongIds = favoriteSongs.map((item) =>
+      item.song_id.toString()
+    );
     res.render("client/pages/home/find.pug", {
       findingTitle: keyword,
       songs,
@@ -70,4 +72,18 @@ export const home = async (req: Request, res: Response) => {
     individualPlaylists: individualPlaylists,
     user: res.locals.user
   });
+};
+export const autocomplete = async (req: Request, res: Response) => {
+  const keyword = req.query.q;
+  const result = await Song.find({
+    title: {
+      $regex: keyword,
+      $options: "i",
+    },
+    status: "active",
+    deleted: false,
+  })
+    .select("title")
+    .limit(10);
+  res.json(result);
 };

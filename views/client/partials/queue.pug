@@ -1,35 +1,7 @@
-aside.sidebar   
+aside.sidebar  
     .toggle-sidebar
         span.toggle-icon.open &lt;
         span.toggle-icon.close.hidden &gt;
     h2.aside-title Queue
-
-    .latest-release-entry2.flex-space
-                .latest-release-image2
-                    img(
-                        src="src/song_pic1.jpg"
-                        song-src="src/song_file1.mp3"
-                        song-name="Blinding Lights"
-                        song-artist="The Weeknd"
-                        song-cover="src/song_pic1.jpg"
-                    )
-                .latest-release-info2
-                    p
-                        a(href="#") 
-                            b Blinding Lights
-                    p.latest-release-sub2 MAR 29, 2019
-                .action-icon
-                    i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
-                    .action-menu.hidden
-                        ul
-                            li
-                                a(href="/add-to-playlist/12345") Add to Playlist
-                            li
-                                a(
-                                    data-path="/favorite-songs/favorite-song/12345"
-                                    favorite-song-button
-                                ) Save to your Favorite Songs
-                            li
-                                a(href="/add-to-queue/12345") Add to Queue
-                            li
-                                a(href="#") Go to the artist detail
+    .queue-list
+     

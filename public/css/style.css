@@ -477,7 +477,6 @@ aside {
   cursor: pointer; /* Thay đổi con trỏ chuột thành hình tay */
 }
 
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .popular-artist-entry {
@@ -1805,7 +1804,6 @@ body {
   color: white;
 }
 
-
 .verified-artist {
   font-size: 12px; /* Smaller text size */
   color: white; /* Optional: lighter color */
@@ -1814,6 +1812,7 @@ body {
 /* suggestion finding  */
 
 /* ending suggestion finding */
+
 
 .dropdown-menu {
   display: none; /* Hide by default */
@@ -1835,3 +1834,32 @@ body {
 .dropdown-menu li {
   margin: 5px 0;
 }
+
+/* Suggestions Dropdown Styling */
+/* Suggestions Dropdown Styling - Spotify Inspired */
+.suggestions {
+  position: absolute;
+  background-color: #282828; /* Spotify's dark background color */
+  border: none; /* No border for a clean look */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+  width: 100%; /* Matches the width of the search input */
+  max-height: 400px; /* Larger height for visibility */
+  overflow-y: auto; /* Scrollable if content overflows */
+  top: calc(100% + 10px); /* Slight gap below the search bar */
+  z-index: 1000;
+  padding: 5px 0; /* Space inside the dropdown */
+  animation: fadeIn 0.3s ease-in-out; /* Smooth appearance animation */
+}
+
+/* Individual Suggestion Items */
+.suggestion-item {
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Center content vertically */
+  padding: 10px 15px; /* Comfortable padding */
+  font-size: 14px; /* Readable text size */
+  color: #fff; /* White text for contrast */
+  transition: background-color 0.2s ease; /* Smooth hover effect */
+  cursor: pointer;
+}
+
