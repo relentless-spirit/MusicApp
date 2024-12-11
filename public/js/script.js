@@ -560,7 +560,7 @@ if (addToPlaylistButtons.length > 0) {
   addToPlaylistButtons.forEach((button) => {
     button.addEventListener("mouseover", (event) => {
       const id = button.getAttribute("data-id");
-      const addPlaylistDropdown = document.querySelector(`.dropdown-menu[data-id="${id}"]`);
+      const addPlaylistDropdown = document.querySelector(`.dropdown-menu-playlist[data-id="${id}"]`);
       if (addPlaylistDropdown) {
         addPlaylistDropdown.classList.add("show");
         addPlaylistDropdown.addEventListener("mouseleave", (event) => {

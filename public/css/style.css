@@ -1814,7 +1814,7 @@ body {
 /* ending suggestion finding */
 
 
-.dropdown-menu {
+.dropdown-menu-playlist {
   display: none; /* Hide by default */
   position: absolute;
   background-color: #282828;
@@ -1822,16 +1822,16 @@ body {
   z-index: 1000;
 }
 
-.dropdown-menu.show {
+.dropdown-menu-playlist.show {
   display: block; /* Show when the 'show' class is added */
 }
 
-.dropdown-menu {
+.dropdown-menu-playlist {
   list-style: none;
   padding: 10px;
 }
 
-.dropdown-menu li {
+.dropdown-menu-playlist li {
   margin: 5px 0;
 }
 
