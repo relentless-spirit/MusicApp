@@ -1,4 +1,4 @@
-//playlist play all button //
+//playlist play all button //--------------------------------------------------------------------------
 const playAllButton = document.querySelector(".playAllButton");
 if (playAllButton) {
   playAllButton.addEventListener("click", () => {
@@ -25,9 +25,9 @@ if (playAllButton) {
     });
   });
 }
-//end play playlist play all button //
+//end play playlist play all button //----------------------------------------------------------------
 
-//loading page
+//loading page----------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   const loading = document.getElementById("loading");
   const spinner = document.querySelector(".spinner");
@@ -41,9 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loading.classList.add("hidden");
   }, 1500); // Tùy chỉnh thời gian tải giả lập (2 giây)
 });
+//end loading  page----------------------------------------------------------------
 
-//end loading  page
-//click menu user
+//click menu user----------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
   const userMenu = document.querySelector(".user-menu");
   const dropdownMenu = document.querySelector(".dropdown-menu");
@@ -58,10 +58,9 @@ document.addEventListener("DOMContentLoaded", function () {
     dropdownMenu.classList.remove("visible");
   });
 });
+//end click menu user----------------------------------------------------------------
 
-//edn click menu user
-
-//sidebar
+//sidebar----------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.querySelector(".sidebar");
   const toggleIconOpen = document.querySelector(".toggle-icon.open");
@@ -79,9 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelector(".toggle-sidebar")
     .addEventListener("click", toggleSidebar);
 });
-//end sidebar
+//end sidebar----------------------------------------------------------------
 
-//Button Follow
+//Button Follow----------------------------------------------------------------
 const followButton = document.querySelector("[button-follow]");
 if (followButton) {
   followButton.addEventListener("click", async () => {
@@ -100,9 +99,9 @@ if (followButton) {
       });
   });
 }
-//End button Follow
+//End button Follow----------------------------------------------------------------
 
-//Searching Logic
+//Searching Logic----------------------------------------------------------------
 const searchBox = document.querySelector(".search-box");
 if (searchBox) {
   let currentUrl = new URL(location.origin);
@@ -149,19 +148,21 @@ if (searchBox) {
         });
     }, 300);
   });
-}
-// Hide suggestions when clicking outside
-document.addEventListener("click", (event) => {
-  if (
-    !searchInput.contains(event.target) &&
-    !suggestionsDiv.contains(event.target)
-  ) {
-    suggestionsDiv.classList.add("hidden");
-  }
-});
-//Ending Searching Logic
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchIcon = document.getElementById("search-icon");
+    const searchInput = document.getElementById("search-input");
 
-//Follow-artist
+    if (searchIcon && searchInput) {
+      searchIcon.addEventListener("click", function () {
+        searchInput.focus();
+      });
+    }
+  });
+  //Ending Searching Logic
+}
+//Ending Searching Logic----------------------------------------------------------------
+
+//Follow-artist----------------------------------------------------------------
 const followArtistButton = document.querySelector(".button-follow-artist");
 if (followArtistButton) {
   followArtistButton.addEventListener("click", async () => {
@@ -180,21 +181,10 @@ if (followArtistButton) {
       });
   });
 }
-//End follow-artist
+//End follow-artist----------------------------------------------------------------
 
-document.addEventListener("DOMContentLoaded", function () {
-  const searchIcon = document.getElementById("search-icon");
-  const searchInput = document.getElementById("search-input");
-
-  if (searchIcon && searchInput) {
-    searchIcon.addEventListener("click", function () {
-      searchInput.focus();
-    });
-  }
-});
-//Ending Searching Logic
+//Logout----------------------------------------------------------------
 const logoutButton = document.querySelector(".logoutButton");
-
 if (logoutButton) {
   logoutButton.addEventListener("click", async () => {
     const path = logoutButton.getAttribute("data-path");
@@ -210,9 +200,10 @@ if (logoutButton) {
       });
   });
 }
+//end Logout---------------------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------------------------------//
-//Add to queue logic
+//-----------------------------------------------------------------------------------------------
+//Add to queue logic ----------------------------------------------------------------------------
 const saveToLocalStorage = (queueArr) => {
   const queueFromMapToArray = Array.from(queueArr.entries());
   localStorage.setItem("queueArray", JSON.stringify(queueFromMapToArray));
@@ -280,7 +271,52 @@ const renderSong = (item) => {
   `;
 
   newDiv.innerHTML = imgDiv + infoDiv + actionDiv;
+  // Attach event listeners to the new elements
+  attachEventListeners(newDiv);
   return newDiv;
+};
+// Function to attach event listeners to elements
+const attachEventListeners = (element) => {
+  const songImage = element.querySelector("[song-src]");
+  if (songImage) {
+    songImage.addEventListener("click", () => {
+      const songSrc = songImage.getAttribute("song-src");
+      const songName = songImage.getAttribute("song-name");
+      const songArtist = songImage.getAttribute("song-artist");
+      const songCover = songImage.getAttribute("song-cover");
+
+      aplayer.list.add([
+        {
+          name: songName,
+          artist: songArtist,
+          url: songSrc,
+          cover: songCover,
+        },
+      ]);
+      aplayer.list.switch(aplayer.list.audios.length - 1);
+      aplayer.play();
+    });
+  }
+
+  const actionToggle = element.querySelector("[action-menu-toggle]");
+  if (actionToggle) {
+    actionToggle.addEventListener("click", (event) => {
+      event.stopPropagation(); // Prevent triggering the document click event
+      const actionMenu = actionToggle.nextElementSibling;
+
+      // Close all open menus except the clicked one
+      document.querySelectorAll(".action-menu.visible").forEach((menu) => {
+        if (menu !== actionMenu) {
+          menu.classList.remove("visible");
+          menu.classList.add("hidden");
+        }
+      });
+
+      // Toggle the visibility of the clicked menu
+      actionMenu.classList.toggle("visible");
+      actionMenu.classList.toggle("hidden");
+    });
+  }
 };
 
 // Load queue from localStorage
@@ -329,77 +365,10 @@ if (addToQueueButton) {
 // Initialize the queue from localStorage
 setQueueFromLocalStorage();
 
-//End Add to queue logic
+//End Add to queue logic-----------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------------------------------//
-
-// ----------------------------------------------------------------------------------------------//
-// Drop down menu for songs
-
-const actionToggles = document.querySelectorAll("[action-menu-toggle]");
-actionToggles.forEach((toggle) => {
-  toggle.addEventListener("click", (event) => {
-    event.stopPropagation(); // Prevent triggering the document click event
-    const actionMenu = toggle.nextElementSibling;
-
-    // Close all open menus except the clicked one
-    document.querySelectorAll(".action-menu.visible").forEach((menu) => {
-      if (menu !== actionMenu) {
-        menu.classList.remove("visible");
-        menu.classList.add("hidden");
-      }
-    });
-
-    // Toggle the clicked menu
-    if (actionMenu.classList.contains("hidden")) {
-      actionMenu.classList.remove("hidden");
-      actionMenu.classList.add("visible");
-    } else {
-      actionMenu.classList.remove("visible");
-      actionMenu.classList.add("hidden");
-    }
-  });
-});
-
-// Close menus when clicking outside
-document.addEventListener("click", () => {
-  document.querySelectorAll(".action-menu.visible").forEach((menu) => {
-    menu.classList.remove("visible");
-    menu.classList.add("hidden");
-  });
-});
-//Favorite-Song
-const favoriteSongButtons = document.querySelectorAll("[favorite-song-button]");
-if (favoriteSongButtons.length > 0) {
-  favoriteSongButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const path = button.getAttribute("data-path");
-      try {
-        const response = await fetch(path, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "PATCH",
-        });
-        const data = await response.json();
-        if (data.code === "success") {
-          if (button) {
-            button.innerHTML = "Remove from your Favorited Songs";
-          }
-        } else if (data.code === "remove") {
-          if (button) {
-            button.innerHTML = "Save to your Favorited Songs";
-          }
-        }
-      } catch (error) {
-        console.error("Error adding to favorite songs:", error);
-      }
-    });
-  });
-}
-//End Favorite-Song
-
-//LOGIC APLAYER
+//LOGIC APLAYER//-----------------------------------------------------------------------------------------------
 const aplayer = new APlayer({
   container: document.getElementById("aplayer"),
   audio: [],
@@ -470,10 +439,74 @@ aplayer.on("ended", () => {
   playNextSong();
 });
 
-// Initialize the queue and play the first song if available
-setQueueFromLocalStorage();
 if (queueArray.size > 0) {
   playNextSong();
 }
 
-//END LOGIC APLAYER
+//END LOGIC APLAYER//-----------------------------------------------------------------------------------------------
+
+// Drop down menu for songs----------------------------------------------------------------------
+const actionToggles = document.querySelectorAll("[action-menu-toggle]");
+
+actionToggles.forEach((toggle) => {
+  toggle.addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent triggering the document click event
+    const actionMenu = toggle.nextElementSibling;
+
+    // Close all open menus except the clicked one
+    document.querySelectorAll(".action-menu.visible").forEach((menu) => {
+      if (menu !== actionMenu) {
+        menu.classList.remove("visible");
+        menu.classList.add("hidden");
+      }
+    });
+
+    // Toggle the clicked menu
+    if (actionMenu.classList.contains("hidden")) {
+      actionMenu.classList.remove("hidden");
+      actionMenu.classList.add("visible");
+    } else {
+      actionMenu.classList.remove("visible");
+      actionMenu.classList.add("hidden");
+    }
+  });
+});
+
+// Close menus when clicking outside
+document.addEventListener("click", () => {
+  document.querySelectorAll(".action-menu.visible").forEach((menu) => {
+    menu.classList.remove("visible");
+    menu.classList.add("hidden");
+  });
+});
+
+//Favorite-Song//-----------------------------------------------------------------------------------------------
+const favoriteSongButtons = document.querySelectorAll("[favorite-song-button]");
+if (favoriteSongButtons.length > 0) {
+  favoriteSongButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const path = button.getAttribute("data-path");
+      try {
+        const response = await fetch(path, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "PATCH",
+        });
+        const data = await response.json();
+        if (data.code === "success") {
+          if (button) {
+            button.innerHTML = "Remove from your Favorited Songs";
+          }
+        } else if (data.code === "remove") {
+          if (button) {
+            button.innerHTML = "Save to your Favorited Songs";
+          }
+        }
+      } catch (error) {
+        console.error("Error adding to favorite songs:", error);
+      }
+    });
+  });
+}
+//End Favorite-Song//-----------------------------------------------------------------------------------------------
