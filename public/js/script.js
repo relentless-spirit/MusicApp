@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const setQueueFromStorage = () => {
     const queueArray = getFromStorage();
-    if (queueArray) {
+    if (queueArray && queueList) {
       queueList.innerHTML = "";
       queueArray.forEach((item) => {
         const songElement = renderSong(item);
