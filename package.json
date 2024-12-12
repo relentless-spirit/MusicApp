@@ -26,6 +26,8 @@
     "mongoose": "^8.8.3",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.7",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "pug": "^3.0.3",
     "spotify-web-api-node": "^5.0.2",
     "streamifier": "^0.1.1"
@@ -40,6 +42,8 @@
     "@types/method-override": "^3.0.0",
     "@types/multer": "^1.4.12",
     "@types/node": "^20.6.0",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.16",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",

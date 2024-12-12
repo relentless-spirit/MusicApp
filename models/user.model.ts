@@ -1,10 +1,22 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
+
+interface IUser extends Document {
+  username: string;
+  email: string;
+  password?: string;
+  avatar?: string;
+  playlist?: string[];
+  follow_songs?: string[];
+  follow_artists?: string[];
+  deleted: boolean;
+  status: string;
+}
 
 const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String },
     avatar: { type: String, default: "" },
     playlist: {
       type: Array,
@@ -32,6 +44,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const User = mongoose.model("User", userSchema, "users");
+const User = mongoose.model<IUser>("User", userSchema, "users");
 
 export default User;
