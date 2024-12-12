@@ -48,8 +48,7 @@ export const home = async (req: Request, res: Response) => {
         _id: playlist.user_id,
         deleted: false
       });
-      // playlist["username"] = user.username;
-      console.log(user);
+      playlist["username"] = user.username;
     }
   }
   for (const song of songs) {
@@ -75,7 +74,7 @@ export const home = async (req: Request, res: Response) => {
     playlists: playlists,
     topics: topics,
     individualPlaylists: individualPlaylists,
-    user: res.locals.user
+    user: res.locals.user,
   });
 };
 export const autocomplete = async (req: Request, res: Response) => {

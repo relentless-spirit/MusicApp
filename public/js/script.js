@@ -109,10 +109,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const attachEventListeners = (element) => {
-    const songImage = element.querySelector("[song-src]");
-    if (songImage) {
-      songImage.addEventListener("click", () => {
+  const attachEventListeners = (container) => {
+    if (container === null) return;
+    container.addEventListener("click", (event) => {
+      // Xử lý sự kiện cho action-menu-toggle
+      const actionToggle = event.target.closest("[action-menu-toggle]");
+      if (actionToggle) {
+        event.stopPropagation();
+        const actionMenu = actionToggle.nextElementSibling;
+
+        document.querySelectorAll(".action-menu.visible").forEach((menu) => {
+          if (menu !== actionMenu) {
+            menu.classList.remove("visible");
+            menu.classList.add("hidden");
+          }
+        });
+
+        actionMenu.classList.toggle("visible");
+        actionMenu.classList.toggle("hidden");
+      }
+
+      // Xử lý sự kiện cho song-src
+      const songImage = event.target.closest("[song-src]");
+      if (songImage) {
         const songSrc = songImage.getAttribute("song-src");
         const songName = songImage.getAttribute("song-name");
         const songArtist = songImage.getAttribute("song-artist");
@@ -128,42 +147,21 @@ document.addEventListener("DOMContentLoaded", () => {
         ]);
         aplayer.list.switch(aplayer.list.audios.length - 1);
         aplayer.play();
-      });
-    }
-
-    const actionToggle = element.querySelector("[action-menu-toggle]");
-    if (actionToggle) {
-      actionToggle.addEventListener("click", (event) => {
-        event.stopPropagation();
-        const actionMenu = actionToggle.nextElementSibling;
-
-        document.querySelectorAll(".action-menu.visible").forEach((menu) => {
-          if (menu !== actionMenu) {
-            menu.classList.remove("visible");
-            menu.classList.add("hidden");
-          }
-        });
-
-        actionMenu.classList.toggle("visible");
-        actionMenu.classList.toggle("hidden");
-      });
-    }
+      }
+    });
   };
 
   const renderSong = (item) => {
     const newDiv = document.createElement("div");
     newDiv.classList.add("latest-release-entry2", "flex-space");
 
-    const imgDiv = `
+    newDiv.innerHTML = `
       <div class="latest-release-image2">
         <img src="${item.img}" song-src="${item.fileUrl}"
               song-name="${item.songName}"
               song-artist="${item.songArtist}"
               song-cover="${item.img}">
       </div>
-    `;
-
-    const infoDiv = `
       <div class="latest-release-info2">
         <p>
           <a href="#">
@@ -172,32 +170,18 @@ document.addEventListener("DOMContentLoaded", () => {
         </p>
         <p class="latest-release-sub2">MAR 29, 2019</p>
       </div>
-    `;
-
-    const actionDiv = `
       <div class="action-icon">
-        <i class="fa fa-ellipsis-h " action-menu-toggle="action-menu-toggle" aria-hidden="true" ></i>
+        <i class="fa fa-ellipsis-h" action-menu-toggle aria-hidden="true"></i>
         <div class="action-menu hidden">
           <ul>
-            <li>
-              <a href="/add-to-playlist/${item.songId}">Add to Playlist</a>
-            </li>
-            <li>
-              <a data-path="/favorite-songs/favorite-song/${item.songId}" favorite-song-button>Save to your Favorite Songs</a>
-            </li>
-            <li>
-              <a href="/add-to-queue/12345">Remove</a>
-            </li>
-            <li>
-              <a href="/artist/${item.artistId}">Go to the artist detail</a>
-            </li>
+            <li><a href="/add-to-playlist/${item.songId}">Add to Playlist</a></li>
+            <li><a data-path="/favorite-songs/favorite-song/${item.songId}" favorite-song-button>Save to your Favorite Songs</a></li>
+            <li><a href="/add-to-queue/12345">Remove</a></li>
+            <li><a href="/artist/${item.artistId}">Go to the artist detail</a></li>
           </ul>
         </div>
       </div>
     `;
-
-    newDiv.innerHTML = imgDiv + infoDiv + actionDiv;
-    attachEventListeners(newDiv);
     return newDiv;
   };
 
@@ -208,9 +192,9 @@ document.addEventListener("DOMContentLoaded", () => {
       queueArray.forEach((item) => {
         const songElement = renderSong(item);
         queueList.appendChild(songElement);
-        attachEventListeners(songElement);
       });
     }
+    attachEventListeners(queueList); // Đảm bảo sự kiện được thiết lập
   };
 
   // Initialize the queue from storage
@@ -532,42 +516,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
   }
-});
 
-//Ending Searching Logic
-const logoutButton = document.querySelector(".logoutButton");
-console.log(logoutButton);
-
-if (logoutButton) {
-  logoutButton.addEventListener("click", async () => {
-    const path = logoutButton.getAttribute("data-path");
-    await fetch(path, {
-      headers: { "Content-type": "application/json" },
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.code == 200) {
-          location.reload();
+  //Show dropdown playlist
+  const addToPlaylistButtons = document.querySelectorAll(
+    "[add-to-playlist-button]"
+  );
+  if (addToPlaylistButtons.length > 0) {
+    addToPlaylistButtons.forEach((button) => {
+      button.addEventListener("mouseover", (event) => {
+        const id = button.getAttribute("data-id");
+        const addPlaylistDropdown = document.querySelector(
+          `.dropdown-menu-playlist[data-id="${id}"]`
+        );
+        if (addPlaylistDropdown) {
+          addPlaylistDropdown.classList.add("show");
+          addPlaylistDropdown.addEventListener(
+            "mouseleave",
+            (event) => {
+              addPlaylistDropdown.classList.remove("show");
+            },
+            { once: true }
+          );
         }
+        event.stopPropagation();
       });
-  });
-}
-
-//Show dropdown playlist
-const addToPlaylistButtons = document.querySelectorAll("[add-to-playlist-button]");
-if (addToPlaylistButtons.length > 0) {
-  addToPlaylistButtons.forEach((button) => {
-    button.addEventListener("mouseover", (event) => {
-      const id = button.getAttribute("data-id");
-      const addPlaylistDropdown = document.querySelector(`.dropdown-menu-playlist[data-id="${id}"]`);
-      if (addPlaylistDropdown) {
-        addPlaylistDropdown.classList.add("show");
-        addPlaylistDropdown.addEventListener("mouseleave", (event) => {
-          addPlaylistDropdown.classList.remove("show");
-        }, { once: true });
-      }
-      event.stopPropagation();
     });
   });
 }
@@ -602,30 +574,30 @@ if (createPlaylistButtons.length > 0) {
           }
         })
     });
-  });
-}
-//End create new playlist
+  }
+  //End create new playlist
 
-//Add playlist
-const addPlaylistButtons = document.querySelectorAll("[add-playlist]");
-if (addPlaylistButtons.length > 0) {
-  addPlaylistButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const song = button.getAttribute("data-song");
-      const playlist = button.getAttribute("data-playlist");
-      const path = button.getAttribute("data-path");
-      const data = {
-        song: song,
-        playlist: playlist
-      };
-      await fetch(path, {
-        headers: {
-          "Content-type": "application/json"
-        },
-        method: "PATCH",
-        body: JSON.stringify(data),
+  //Add playlist
+  const addPlaylistButtons = document.querySelectorAll("[add-playlist]");
+  if (addPlaylistButtons.length > 0) {
+    addPlaylistButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const song = button.getAttribute("data-song");
+        const playlist = button.getAttribute("data-playlist");
+        const path = button.getAttribute("data-path");
+        const data = {
+          song: song,
+          playlist: playlist,
+        };
+        await fetch(path, {
+          headers: {
+            "Content-type": "application/json",
+          },
+          method: "PATCH",
+          body: JSON.stringify(data),
+        });
       });
-    })
-  });
-}
-//End add playlist
+    });
+  }
+  //End add playlist
+});
