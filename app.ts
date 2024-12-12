@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", "views");
 app.set("view engine", "pug");
-
 app.use(cookieParser("CODE"));
 app.use(
   session({
