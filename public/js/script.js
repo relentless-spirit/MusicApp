@@ -541,37 +541,38 @@ document.addEventListener("DOMContentLoaded", () => {
         event.stopPropagation();
       });
     });
-  }
-  //End show dropdown playlist
+  });
+}
+//End show dropdown playlist
 
-  //Create new playlist
-  const createPlaylistButtons = document.querySelectorAll("[create-playlist]");
-  if (createPlaylistButtons.length > 0) {
-    createPlaylistButtons.forEach((button) => {
-      button.addEventListener("click", async () => {
-        const id = button.getAttribute("data-song");
-        const title = button.getAttribute("data-title");
-        const coverImage = button.getAttribute("data-coverImage");
-        const path = button.getAttribute("data-path");
-        const data = {
-          title: title,
-          songs: id,
-          coverImage: coverImage,
-        };
-        await fetch(path, {
-          headers: {
-            "Content-type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify(data),
-        });
-        // .then(res => res.json())
-        // .then(data => {
-        //   if (data.code == "success") {
-
-        //   }
-        // })
-      });
+//Create new playlist
+const createPlaylistButtons = document.querySelectorAll("[create-playlist]");
+if (createPlaylistButtons.length > 0) {
+  createPlaylistButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const id = button.getAttribute("data-song");
+      const title = button.getAttribute("data-title");
+      const coverImage = button.getAttribute("data-coverImage");
+      const path = button.getAttribute("data-path");
+      const data = {
+        title: title,
+        songs: id,
+        coverImage: coverImage
+      };
+      await fetch(
+        path, {
+        headers: {
+          "Content-type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.code == "unsuccess") {
+            location.href = `${location.origin}/auth/login`;
+          }
+        })
     });
   }
   //End create new playlist
