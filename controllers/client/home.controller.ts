@@ -38,7 +38,7 @@ export const home = async (req: Request, res: Response) => {
   const playlists = await Playlist.find({ status: "active", deleted: false });
 
   let individualPlaylists = null;
-  if (userID) {
+  if (res.locals.user) {
     individualPlaylists = await Playlist.find({
       user_id: userID,
       deleted: false
@@ -49,6 +49,7 @@ export const home = async (req: Request, res: Response) => {
         deleted: false
       });
       playlist["username"] = user.username;
+      // console.log(individualPlaylists);
     }
   }
   for (const song of songs) {
