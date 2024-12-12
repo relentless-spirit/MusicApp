@@ -595,12 +595,12 @@ if (createPlaylistButtons.length > 0) {
         method: "POST",
         body: JSON.stringify(data),
       })
-      // .then(res => res.json())
-      // .then(data => {
-      //   if (data.code == "success") {
-
-      //   }
-      // })
+        .then(res => res.json())
+        .then(data => {
+          if (data.code == "unsuccess") {
+            location.href = `${location.origin}/auth/login`;
+          }
+        })
     });
   });
 }

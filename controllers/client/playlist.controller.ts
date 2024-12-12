@@ -32,13 +32,19 @@ export const index = async (req: Request, res: Response) => {
 
 export const createPlaylist = (req: Request, res: Response) => {
   try {
-    req.body.user_id = res.locals.user.id;
-    const record = new Playlist(req.body);
-    record.save();
-    res.json({
-      code: "success",
-      playlist: record,
-    });
+    if (res.locals.user) {
+      req.body.user_id = res.locals.user.id;
+      const record = new Playlist(req.body);
+      record.save();
+      res.json({
+        code: "success",
+        playlist: record,
+      });
+    } else {
+      res.json({
+        code: "unsuccess"
+      });
+    }
   } catch (error) {
     console.log(error);
   }

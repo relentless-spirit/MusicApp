@@ -11,15 +11,16 @@ block main
             img(src=playlist.coverImage)
         p.article-info
         p.article-body
-    
-    article.article-featured
-      h2.popular-artists-title #{user.username}'s Playlists
-      .article-featured.flex-space
-        each playlist in individualPlaylists
-          .article-image.flex-space
-            a(href=`/playlist/${playlist._id}`)
-              img(src=playlist.coverImage)
-              p.article-info Playlist • #{playlist.username}
+        
+    if user
+      article.article-featured
+        h2.popular-artists-title #{user.username}'s Playlists
+        .article-featured.flex-space
+          each playlist in individualPlaylists
+            .article-image.flex-space
+              a(href=`/playlist/${playlist._id}`)
+                img(src=playlist.coverImage)
+                p.article-info Playlist • #{playlist.username}
 
     article.latest-release
       h2.latest-release-title Latest Release
@@ -58,14 +59,15 @@ block main
                               data-path=`/playlist/create-playlist`
                               create-playlist 
                             ) New Playlist
-                          each individualPlaylist in individualPlaylists 
-                            li
-                              a(
-                                data-song=`${song.id}`
-                                data-playlist=`${individualPlaylist.id}`
-                                data-path=`/playlist/add-playlist`
-                                add-playlist
-                              ) #{individualPlaylist.title}
+                          if individualPlaylists
+                            each individualPlaylist in individualPlaylists 
+                              li
+                                a(
+                                  data-song=`${song.id}`
+                                  data-playlist=`${individualPlaylist.id}`
+                                  data-path=`/playlist/add-playlist`
+                                  add-playlist
+                                ) #{individualPlaylist.title}
                   li
                     a(
                       data-path=`/favorite-songs/favorite-song/${song._id}`

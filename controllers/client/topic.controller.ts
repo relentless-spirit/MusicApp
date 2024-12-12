@@ -30,21 +30,25 @@ export const index = async (req: Request, res: Response) => {
                 song.artist = "Không tìm thấy thông tin nghệ sĩ";
             }
             else {
-                song.artist = artist.fullName;
+                song["artistFullName"] = artist.fullName;
             }
         }
+        let favoriteSongIds = null;
+        let followSongIds = null;
+        if (res.locals.user) {
+            const favoriteSongs = await FavoriteSong.find({
+                user_id: res.locals.user.id,
+                deleted: false
+            }).select("song_id");
+            favoriteSongIds = favoriteSongs.map(item => item.song_id.toString());
 
-        const favoriteSongs = await FavoriteSong.find({
-            user_id: res.locals.user.id,
-            deleted: false
-        }).select("song_id");
-        const favoriteSongIds = favoriteSongs.map(item => item.song_id.toString());
+            const user = await User.findOne({
+                _id: res.locals.user.id,
+                deleted: false
+            }).select("follow_songs");
+            const followSongIds = user?.follow_songs.map(item => item.toString());
+        }
 
-        const user = await User.findOne({
-            _id: res.locals.user.id,
-            deleted: false
-        }).select("follow_songs");
-        const followSongIds = user?.follow_songs.map(item => item.toString());
         res.render("client/pages/topics/index.pug", {
             topic: topic,
             songs: songs,

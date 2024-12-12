@@ -9,13 +9,17 @@ export const index = async (req: Request, res: Response) => {
             _id: id,
             deleted: false
         });
-        const followArtists = await User.findOne({
-            _id: res.locals.user.id,
-            deleted: false
-        }).select("follow_artists");
+        let followArtistsIds = null
+        if (res.locals.user) {
+            const followArtists = await User.findOne({
+                _id: res.locals.user.id,
+                deleted: false
+            }).select("follow_artists");
+            followArtistsIds = followArtists.map((item) => item.follow_artists.toString());
+        }
         res.render("client/pages/artists/index.pug", {
             artist: artist,
-            followArtistsIds: followArtists?.follow_artists
+            followArtistsIds: followArtistsIds
         });
     } catch (error) {
         console.log(error);
