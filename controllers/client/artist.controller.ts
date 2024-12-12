@@ -15,7 +15,9 @@ export const index = async (req: Request, res: Response) => {
                 _id: res.locals.user.id,
                 deleted: false
             }).select("follow_artists");
-            followArtistsIds = followArtists.map((item) => item.follow_artists.toString());
+            if (followArtists && followArtists.follow_artists) {
+                followArtistsIds = followArtists.follow_artists.map((item) => item.toString());
+            }
         }
         res.render("client/pages/artists/index.pug", {
             artist: artist,
