@@ -5,19 +5,24 @@ import FavoriteSong from "../../models/favorite_song.model";
 import Playlist from "../../models/playlist.model";
 import Topic from "../../models/topic.model";
 import User from "../../models/user.model";
-
+import Fuse from "fuse.js";
 export const home = async (req: Request, res: Response) => {
   //finding logic
   const keyword = req.query.search as string;
   const userID = res.locals.user?.id || null;
   if (keyword) {
     const songs = await Song.find({
-      title: {
-        $regex: new RegExp(keyword, "i"),
-      },
+      // title: {
+      //   $regex: new RegExp(keyword, "i"),
+      // },
       deleted: false,
       status: "active",
+    }).select("_id title artist fileUrl coverImage");
+    const fuse = new Fuse(songs, {
+      keys: ["title"],
     });
+    const result = fuse.search(keyword);
+
     const favoriteSongs = await FavoriteSong.find({
       user_id: userID,
       deleted: false,
@@ -25,10 +30,30 @@ export const home = async (req: Request, res: Response) => {
     const favoriteSongIds = favoriteSongs.map((item) =>
       item.song_id.toString()
     );
+    //individual playlists
+    let individualPlaylists = null;
+    if (res.locals.user) {
+      individualPlaylists = await Playlist.find({
+        user_id: userID,
+        deleted: false,
+      });
+      for (const playlist of individualPlaylists) {
+        const user = await User.findOne({
+          _id: playlist.user_id,
+          deleted: false,
+        });
+        if (user) {
+          (playlist as any)["username"] = user.username;
+        }
+        // console.log(individualPlaylists);
+      }
+    }
+    //render
     res.render("client/pages/home/find.pug", {
       findingTitle: keyword,
-      songs,
+      songs: result,
       favoriteSongIds: favoriteSongIds,
+      individualPlaylists: individualPlaylists,
     });
   }
   //end finding logic
@@ -36,19 +61,21 @@ export const home = async (req: Request, res: Response) => {
   const artists = await Artist.find({ status: "active", deleted: false });
   const songs = await Song.find({ status: "active", deleted: false });
   const playlists = await Playlist.find({ status: "active", deleted: false });
-
+  //individual playlists
   let individualPlaylists = null;
   if (res.locals.user) {
     individualPlaylists = await Playlist.find({
       user_id: userID,
-      deleted: false
+      deleted: false,
     });
     for (const playlist of individualPlaylists) {
       const user = await User.findOne({
         _id: playlist.user_id,
-        deleted: false
+        deleted: false,
       });
-      playlist["username"] = user.username;
+      if (user) {
+        (playlist as any)["username"] = user.username;
+      }
       // console.log(individualPlaylists);
     }
   }
@@ -58,7 +85,7 @@ export const home = async (req: Request, res: Response) => {
       status: "active",
       deleted: false,
     });
-    song["artistFullName"] = artist?.fullName || "Unknown Artist";
+    (song as any)["artistFullName"] = artist?.fullName || "Unknown Artist";
   }
   const favoriteSongs = await FavoriteSong.find({
     user_id: userID,
