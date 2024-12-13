@@ -50,7 +50,6 @@ export const authUserInMainPage = async (
     // console.log("test token ");
     if (token) {
       if (process.env.JWT_SECRET) {
-        console.log(token);
         const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
         // console.log(verifiedUser);=> decode to registered userId , iat and exp
         //=>get userId to check in DB

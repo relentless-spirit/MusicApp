@@ -23,7 +23,7 @@ header.header
       i.fa.fa-bell-o(aria-hidden="true")
     .user-menu
       if user 
-        img.user-img(src=user.avatar alt="User Profile" user-id =  user._id)
+        img.user-img(src=`${user.avatar}?sz=50` alt="User Profile" user-id =  user._id)
         .dropdown-menu.hidden
           a(href=`/user/profile/${user._id}`) Profile
           a(href="/" class="logoutButton" data-path = `/auth/logout`) Logout
