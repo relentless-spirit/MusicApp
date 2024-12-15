@@ -1,7 +1,8 @@
 export const search = () => {
   const searchBox = document.querySelector(".search-box");
-  let currentUrl = new URL(location.href); // Use location.href to include search parameters
-
+  let currentUrl1 = new URL(location.href);
+  let currentUrl = new URL(currentUrl1.origin); // Use location.href to include search parameters
+  // console.log(currentUrl.origin);
   if (searchBox) {
     const searchInput = searchBox.querySelector("input[name='inputValue']"); // Ensure correct input selector
     const suggestionsDiv = document.getElementById("suggestions");
