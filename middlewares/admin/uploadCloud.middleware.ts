@@ -7,10 +7,10 @@ export const uploadSingle = (
   res: Response,
   next: NextFunction
 ) => {
-  if (req["file"]) {
+  if (req.file) {
     async function upload(req: Request) {
-      let result = await streamUpload(req["file"].buffer);
-      req.body[req["file"].fieldname] = result["url"];
+      const result = await streamUpload(req.file!.buffer);
+      req.body[req.file!.fieldname] = (result as { url: string }).url;
       next();
     }
 
@@ -25,16 +25,20 @@ export const uploadFields = async (
   res: Response,
   next: NextFunction
 ) => {
-  for (const key in req["files"]) {
-    req.body[key] = [];
+  if (req.files) {
+    for (const key in req.files) {
+      req.body[key] = [];
 
-    const array = req["files"][key];
-    for (const item of array) {
-      try {
-        const result = await streamUpload(item.buffer);
-        req.body[key].push(result["url"]);
-      } catch (error) {
-        console.log(error);
+      const array = (
+        req.files as { [fieldname: string]: Express.Multer.File[] }
+      )[key];
+      for (const item of array) {
+        try {
+          const result = await streamUpload(item.buffer);
+          req.body[key].push((result as { url: string }).url);
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
   }

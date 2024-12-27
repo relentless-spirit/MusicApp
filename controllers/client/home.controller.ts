@@ -20,7 +20,9 @@ export const home = async (req: Request, res: Response) => {
       user_id: userID,
       deleted: false,
     }).select("song_id");
-    const favoriteSongIds = favoriteSongs.map((item) => item.song_id.toString());
+    const favoriteSongIds = favoriteSongs.map((item) =>
+      item.song_id.toString()
+    );
     res.render("client/pages/home/find.pug", {
       findingTitle: keyword,
       songs,
@@ -32,13 +34,18 @@ export const home = async (req: Request, res: Response) => {
   const artists = await Artist.find({ status: "active", deleted: false });
   const songs = await Song.find({ status: "active", deleted: false });
   const playlists = await Playlist.find({ status: "active", deleted: false });
+  interface SongWithArtist extends Document {
+    artistFullName?: string;
+  }
+
   for (const song of songs) {
     const artist = await Artist.findOne({
       _id: song.artist,
       status: "active",
       deleted: false,
     });
-    song["artistFullName"] = artist?.fullName || "Unknown Artist";
+    (song as unknown as SongWithArtist).artistFullName =
+      artist?.fullName || "Unknown Artist";
   }
   const favoriteSongs = await FavoriteSong.find({
     user_id: userID,

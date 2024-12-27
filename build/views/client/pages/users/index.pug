@@ -1,0 +1,64 @@
+extends ../../layouts/default.pug
+
+block style
+    link(rel="stylesheet", type="text/css", href="/css/profile.css")
+
+block main
+    .profile-header
+        .profile-background
+        .profile-info
+            img.profile-avatar(src=userInfo.avatar, alt="User Avatar")
+            .profile-details
+                p.profile-type Profile
+                h1.profile-name #{userInfo.username}
+                p.profile-meta #{userInfo.playlist ? userInfo.playlist.length : 0} Playlists • #{userInfo.follow_songs ? userInfo.follow_songs.length : 0} Following
+
+    .profile-content
+        section.top-artists
+            h2 Top artists this month
+                p Only visible to you
+                .artist-container.flex-space
+                    each artist in artists
+                        .popular-artist-entry
+                            a(href=`/artist/${artist.id}`)
+                                img(src=artist.coverImage)
+                                p= artist.fullName
+                                p Artist
+
+        section.top-tracks
+            h2 Top tracks this month
+                p Only visible to you
+
+                .playlist-next-item.flex-space
+                each song,idx  in songs 
+                    .playlist-next-item-entry.flex-space
+                        .playlist-next-item-entry-info.flex-space
+                        p.playlist-next-item-entry-number #{idx+1}
+                        .playlist-next-item-entry-info-image
+                            img.playlist-next-item-img(src=song.coverImage song-src=song.fileUrl
+                                song-name =song.title song-artist=song.artist
+                                song-cover=song.coverImage)
+                        .playlist-next-item-entry-info-name
+                            p
+                            b #{song.title}
+                            p.playlist-next-item-entry-info-name-sub #{song.artist}
+                        .action-icon
+                            i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
+                            .action-menu.hidden
+                                ul
+                                    li 
+                                        a(href=`/add-to-playlist/${song._id}`) Add to Playlist
+                                    li 
+                                        a(href=`/add-to-queue/${song._id}`) Add to Queue
+                                    li 
+                                        a(href=`#`) Go to the artist detail
+
+        section.top-artists
+            h2 Following 
+                .artist-container.flex-space
+                    each artist in artists
+                        .popular-artist-entry
+                            a(href=`/artist/${artist.id}`)
+                                img(src=artist.coverImage)
+                                p= artist.fullName
+                                p Artist

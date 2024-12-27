@@ -21,7 +21,7 @@ export const index = async (req: Request, res: Response) => {
       status: "active",
       deleted: false,
     });
-    song["artist"] = artist?.fullName;
+    song["artist"] = artist?.fullName || "Unknown Artist";
   }
 
   res.render("client/pages/playlist/detail.pug", {

@@ -1,0 +1,41 @@
+extends ../../layouts/default.pug
+block main
+ .container.container-flex
+  main
+    h1.page-title Result: 
+     i "#{findingTitle}"
+    if(songs.length > 0)
+     article.latest-release
+     
+      .latest-release-body.flex-space
+       .latest-release-col
+         each song in songs
+          .latest-release-entry.flex-space
+            .latest-release-image
+              img(src=song.coverImage song-src=song.fileUrl
+                song-name =song.title song-artist=song.artistFullName 
+                song-cover=song.coverImage)  
+            .latest-release-info
+              p
+                a(href="#") 
+                  b #{song.title}
+              p.latest-release-sub MAR 29, 2019
+            .action-icon
+              i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
+              .action-menu.hidden
+                ul
+                  li 
+                    a(href=`/add-to-playlist/${song._id}`) Add to Playlist
+                  li
+                    a(
+                    data-path=`/favorite-songs/favorite-song/${song._id}`
+                    favorite-song-button
+                    ) #{favoriteSongIds.includes(song._id.toString()) ? 'Remove from your Favorited Songs' : 'Save to your Favorited Songs'}
+                  li 
+                    a(href=`/add-to-queue/${song._id}`) Add to Queue
+                  li 
+                    a(href=`/artist/${song.artist}`) Go to the artist detail
+    else 
+     h2.latest-release-title No songs found
+  include ../../partials/queue.pug
+ 

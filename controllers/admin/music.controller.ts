@@ -13,12 +13,12 @@ export const index = async (req: Request, res: Response) => {
       deleted: false,
       status: "active",
     });
-    song["artist"] = artist?.fullName;
+    song["artist"] = artist?.fullName || "Unknown Artist";
     // console.log(song.topic);
     const topic = await Topic.findOne({
       _id: song.topic[0],
     });
-    song["topic"] = topic.title;
+    song["topicTitle"] = topic ? topic.title : "Unknown Topic";
   }
   res.render("admin/pages/music/index", {
     pageTitle: "Music page",
@@ -116,6 +116,6 @@ export const deletePatch = async (req: Request, res: Response) => {
     res.json({ success: true });
   } catch (error) {
     req.flash("error", "Delete song failed");
-    res.json({ sucess: false, error: error.message });
+    res.json({ success: false, error: (error as any).message });
   }
 };

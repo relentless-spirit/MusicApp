@@ -1,0 +1,14 @@
+
+#myModal.modal.fade
+  .modal-dialog.modal-confirm
+    .modal-content
+      .modal-header
+        .icon-box
+          i.material-icons 
+        h4.modal-title Are you sure?
+        button.close(type="button", data-dismiss="modal", aria-hidden="true") ×
+      .modal-body
+        p Do you really want to delete these records? This process cannot be undone.
+      .modal-footer
+        button.btn.btn-info(type="button", data-dismiss="modal") Cancel
+        button#confirmDeleteButton.btn.btn-danger(type="button" ) Delete

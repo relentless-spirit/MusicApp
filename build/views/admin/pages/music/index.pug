@@ -1,0 +1,50 @@
+extends ../../layouts/default.pug
+
+block main
+    .d-flex.justify-content-end.mb-3
+       
+        a(
+            href=`/${prefixAdmin}/songs/create`
+            class="btn btn-success"
+            ) + Thêm mới Thêm Bài Hát
+
+    //- Search and Filter Form
+    .d-flex.justify-content-between.mb-3.search-form
+        form.d-flex.align-items-center
+            input.form-control.me-2(type="text", placeholder="Tìm kiếm bài hát...", name="search")
+            button.btn.btn-primary(type="submit") Tìm kiếm
+
+    .table-responsive
+
+
+        table.table.table-striped.table-bordered
+            thead.table-primary
+                tr
+                    th Số thứ tự
+                    th Hình Ảnh
+                    th Tiêu Đề
+                    th Ca Sĩ
+                    th Album
+                    th Thể Loại
+                    th Hành Động
+            tbody 
+                each song, idx in songs
+                    tr
+                        td #{idx + 1}
+                        td 
+                            img(src=song.coverImage, alt=`${song.title}`, width="100")
+                        td #{song.title}
+                        td #{song.artist}
+                        td #{song.album}
+                        td #{song.topic}          
+                        td 
+                            .action-container
+                                span.action-toggle 
+                                .action-buttons.hidden
+                                    a(href=`/${prefixAdmin}/songs/edit/${song.id}`) 
+                                        button.btn.btn-warning.edit-btn(data-bs-toggle="modal", data-bs-target="#editSongModal") Sửa
+                                    a.trigger-btn(href="#myModal", data-toggle="modal")
+                                        button.btn.btn-danger.delete-btn(data-bs-toggle="modal"
+                                        button-delete=song.id
+                                        link =`/${prefixAdmin}/songs/delete/${song.id}`) Xóa
+    include ../../partials/delete-confirm.pug

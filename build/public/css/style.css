@@ -1,0 +1,1790 @@
+:root {
+  --main-bg-color: #121212;
+  --main-font-color: #ffffff;
+}
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+body {
+  background: var(--main-bg-color);
+  color: var(--main-font-color);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-width: 270px;
+  display: flex;
+  flex-direction: column;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+  margin-left: 30px;
+}
+/*************************
+		NAV BAR
+*************************/
+/* General Styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
+  width: 100%;
+  background: #000; /* Spotify-like black */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+a:hover {
+  color: #1db954; /* Spotify Green */
+  transition: color 0.3s ease;
+}
+
+/* Navigation Columns */
+.nav-col {
+  display: flex;
+  align-items: center;
+}
+
+.left-col {
+  flex: 1; /* Chiếm khoảng trống phía bên trái */
+}
+
+.center-col {
+  flex: 2; /* Trung tâm có kích thước lớn hơn */
+  display: flex;
+  justify-content: center;
+}
+
+.right-col {
+  flex: 1;
+  display: flex;
+
+  align-items: center;
+  gap: 1em;
+}
+
+/* Logo and Title */
+#header-logo {
+  font-size: 2.5rem;
+  color: #1db954; /* Spotify Green */
+  margin-right: 0.5em;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.header-title b {
+  color: #1db954;
+}
+
+.nav-col ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5em;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-col ul li a {
+  font-size: 0.95rem;
+  padding: 0.5em;
+  transition: background-color 0.3s ease;
+}
+
+.nav-col ul li a:hover {
+  background-color: #1db954; /* Spotify Green */
+  border-radius: 5px;
+  color: #000;
+}
+/* General Search Box Styling */
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #121212; /* Dark background for contrast */
+  padding: 0.5em 1em;
+  border-radius: 50px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add subtle shadow */
+  transition: background-color 0.3s ease; /* Smooth background change */
+}
+
+.search-box:hover {
+  background-color: #1a1a1a; /* Slightly lighter background on hover */
+}
+
+/* Input Styling */
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 0 1em;
+  color: #fff;
+  font-size: 0.95rem;
+  flex: 1; /* Allow input to fill available space */
+}
+
+.search-box input::placeholder {
+  color: #aaa; /* Subtle placeholder color */
+  font-style: italic; /* Optional for style */
+}
+
+/* Icon Styling */
+.search-box i {
+  color: #ccc;
+  font-size: 1.2rem; /* Make icons slightly larger */
+}
+
+.search-box a i:hover {
+  color: #1db954; /* Spotify-like green color on hover */
+  transition: color 0.3s ease; /* Smooth color change */
+}
+
+/* Mic Icon Specific Styling */
+.search-box .mic-icon i {
+  margin-left: 0.5em; /* Add spacing between input and microphone icon */
+}
+/* Submit Button Styling */
+.search-box .submit-btn {
+  background: none; /* Transparent background for a clean look */
+  border: none; /* Remove default button borders */
+  cursor: pointer; /* Change cursor to pointer to indicate interactivity */
+  padding: 0;
+  margin-left: 0.5em; /* Add spacing between the button and input field */
+  color: #ccc; /* Default color matching the other icons */
+  display: flex; /* Align the icon within the button */
+  align-items: center; /* Center the icon vertically */
+  font-size: 1.2rem; /* Icon size consistency */
+}
+
+.search-box .submit-btn i {
+  font-size: 1.2rem; /* Adjust the size of the icon */
+  margin-left: 1rem;
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.search-box .submit-btn:hover {
+  color: #1db954; /* Spotify green color for hover effect */
+}
+
+/* Focus Outline for Accessibility */
+.search-box .submit-btn:focus {
+  outline: 2px solid #1db954; /* Add a green outline when focused */
+  outline-offset: 3px; /* Create space between the button and outline */
+}
+
+/* Notifications */
+#notif {
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+#notif:hover {
+  color: #1db954;
+  transition: color 0.3s ease;
+}
+
+/* User Menu */
+.user-menu {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.user-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #1db954;
+  cursor: pointer;
+}
+
+.auth-buttons {
+  display: flex; /* Sử dụng Flexbox */
+  flex-wrap: wrap; /* Để các nút xuống dòng nếu không đủ chỗ */
+  justify-content: center; /* Căn giữa các nút */
+  gap: 1em; /* Khoảng cách giữa các nút */
+}
+
+.auth-buttons a {
+  font-size: 0.95rem;
+  padding: 0.5em 1.5em; /* Tăng padding cho nút dễ nhấn */
+  border-radius: 50px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.auth-buttons a.login-button {
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+}
+
+.auth-buttons a.signup-button {
+  background-color: #1db954; /* Spotify Green */
+  color: #000;
+}
+
+.auth-buttons a:hover {
+  background-color: #333; /* Hiệu ứng hover */
+  color: #fff;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .auth-buttons {
+    flex-direction: column; /* Đặt các nút theo cột trên màn hình nhỏ */
+    gap: 0.5em; /* Giảm khoảng cách giữa các nút */
+  }
+}
+
+.auth-buttons a.signup-button {
+  background-color: #1db954;
+  color: #000;
+}
+
+.auth-buttons a:hover {
+  background-color: #333;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .header-title,
+  ul {
+    display: none;
+  }
+  .left-col {
+    flex: 0.5;
+  }
+  .center-col {
+    flex: 2;
+  }
+  .right-col {
+    flex: 1.5;
+  }
+  .search-box {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header {
+    padding: 1em;
+  }
+  #header-logo {
+    font-size: 2rem;
+  }
+  .search-box {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .user-img {
+    width: 35px;
+    height: 35px;
+  }
+  #notif {
+    font-size: 1rem;
+  }
+}
+
+/*************************
+		BODY
+*************************/
+
+/*Featured*/
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* .container-flex,
+.flex-space {
+  display: flex;
+  justify-content: space-between;
+} */
+
+.container-flex {
+  margin-bottom: 6em;
+}
+
+main {
+  width: 100%;
+}
+
+aside {
+  width: 20%;
+}
+
+.article-image {
+  width: 30%;
+}
+
+/*Latest Release*/
+.latest-release-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns with equal width */
+  gap: 1.5em; /* Spacing between items */
+  padding: 1em; /* Optional padding around the grid */
+}
+
+.latest-release-entry {
+  margin-bottom: 0.8em;
+}
+.latest-release-entry:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+/* Song image */
+.latest-release-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+/* Song info */
+.latest-release-info {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.latest-release-info a {
+  text-decoration: none;
+  font-weight: bold;
+}
+.latest-release-sub {
+  font-size: 0.75rem;
+  color: #9c9da7;
+  margin-top: 5px;
+}
+
+/* Action menu icon and hover effect */
+.action-icon {
+  margin-top: 10px;
+}
+
+.action-icon i {
+  color: #fff;
+  cursor: pointer;
+}
+
+.latest-release-image img {
+  width: 100%;
+  height: auto;
+  max-height: 180px; /* Limit the height for consistency */
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.latest-release-info {
+  text-align: center;
+  color: #fff;
+}
+.latest-release-info p {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.latest-release-options p {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+.latest-release-sub {
+  font-weight: 1;
+  font-size: 0.75rem;
+  color: #9c9da7;
+}
+/*ENDING Latest Release*/
+
+.popular-artist-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Căn giữa nội dung theo chiều ngang */
+  text-align: center;
+}
+
+.popular-artist-entry a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.popular-artist-entry img {
+  width: 100px; /* Đặt kích thước hình ảnh */
+  height: 100px;
+  border-radius: 50%; /* Bo tròn nếu là hình tròn */
+}
+
+.popular-artist-entry p {
+  margin: 5px 0;
+}
+
+.popular-artist-entry p:first-of-type {
+  text-align: center; /* Căn giữa tên nghệ sĩ */
+  font-weight: bold; /* Làm nổi bật tên nghệ sĩ */
+}
+
+.popular-artist-entry p:last-of-type {
+  text-align: left; /* Căn trái với hình */
+  align-self: flex-start; /* Căn p này sang trái của container */
+  padding-left: 10px; /* Khoảng cách từ bên trái hình */
+  font-size: 14px; /* Làm chữ nhỏ hơn */
+  color: gray; /* Màu chữ xám nhạt */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .popular-artist-entry {
+    width: 48%;
+  }
+}
+
+@media (max-width: 480px) {
+  .popular-artist-entry {
+    width: 100%;
+  }
+}
+
+/*Stations*/
+.stations {
+  display: flex;
+
+  padding: 1em;
+
+  margin-right: 5px;
+}
+
+.stations-entry {
+  position: relative;
+  width: 13.5%;
+}
+
+.stations-entry img {
+  border-radius: 50%;
+}
+
+.stations-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.73rem;
+}
+
+.mid-featured-font {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.article-image {
+  position: relative;
+}
+
+.middle-featured {
+  margin-top: 2em;
+}
+
+/*Language Song*/
+
+.language-song-entry {
+  width: 16%;
+}
+
+.language-song-entry p {
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+.language-sub {
+  font-size: 0.7rem;
+  margin-top: 0;
+}
+
+/*Aside Section*/
+
+.queue-entry {
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.queue-number {
+  width: 10%;
+}
+.queue-entry-image {
+  width: 20%;
+}
+
+.queue-entry-info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.like-icon {
+  width: 5%;
+}
+
+.queue-entry-info p {
+  font-size: 0.8rem;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+@media screen and (max-width: 840px) {
+  .queue-entry-info p,
+  .queue-entry-sub,
+  .queue-number {
+    font-size: 0.6rem;
+  }
+}
+@media screen and (max-width: 650px) {
+  .container-flex {
+    flex-direction: column;
+    margin-bottom: 0px;
+  }
+  main,
+  aside {
+    width: 100%;
+  }
+  aside {
+    margin-bottom: 6em;
+  }
+  .queue-entry-info p,
+  .queue-entry-sub,
+  .queue-number {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 520px) {
+  .display-none {
+    display: none;
+  }
+  .latest-release-col {
+    width: 100%;
+  }
+  .popular-artist-entry {
+    width: 23%;
+  }
+
+  .stations-entry {
+    width: 18%;
+  }
+
+  .language-song-entry {
+    width: 32%;
+  }
+}
+
+/*************************
+		FOOTER
+*************************/
+
+footer {
+  margin-top: auto;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: #b3b3b3;
+}
+
+footer a {
+  color: #b3b3b3;
+}
+
+.footer-container {
+  align-items: center;
+}
+
+/*Music Info*/
+
+.music-info {
+  width: 20%;
+}
+
+.music-info-image {
+  width: 20%;
+}
+
+.music-info-name {
+  width: 50%;
+}
+
+.music-info p {
+  margin: 0;
+}
+.music-info-song-name {
+  color: white;
+  font-size: 0.9rem;
+}
+.music-info-sub {
+  font-size: 0.7rem;
+  color: #9c9da7;
+}
+
+.music-info-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.music-info-icon {
+  float: left;
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/*Music Player*/
+
+.music-player {
+  flex-direction: column;
+  width: 50%;
+}
+
+.music-player-controls {
+  align-items: center;
+}
+.play-pause {
+  font-size: 1.5rem;
+}
+
+.music-bar {
+  align-items: center;
+}
+
+.music-bar p {
+  margin: 0;
+  font-size: 0.8rem;
+  width: 10%;
+}
+
+.song-bar {
+  width: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.song-bar input {
+  width: 100%;
+}
+
+/*Music Options*/
+.music-options {
+  width: 20%;
+  align-items: center;
+}
+
+.volume-bar {
+  display: flex;
+  width: 40%;
+  align-items: center;
+}
+
+.volume-bar input {
+  width: 100%;
+}
+
+/*Styling the music and volume bar*/
+input[type="range"] {
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  transform: translate(-25%, -25%);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 0.3em;
+  cursor: pointer;
+  background: #404040;
+  border-radius: 50px;
+}
+
+@media screen and (max-width: 900px) {
+  .music-info-song-name {
+    font-size: 0.8rem;
+  }
+  .music-info-sub {
+    font-size: 0.6rem;
+  }
+}
+@media screen and (max-width: 800px) {
+  .display-none-footer {
+    display: none;
+  }
+  .music-info-image {
+    width: 30%;
+  }
+  .music-info-name {
+    width: 60%;
+  }
+  .music-info-song-name {
+    font-size: 0.8rem;
+  }
+  .music-info-sub {
+    font-size: 0.6rem;
+  }
+
+  .volume-bar {
+    width: 85%;
+  }
+}
+@media screen and (max-width: 520px) {
+  .music-info-name {
+    width: 95%;
+  }
+  .music-info-sub {
+    font-size: 0.6rem;
+    white-space: nowrap;
+  }
+  .display-none-520 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .display-none-365 {
+    display: none;
+  }
+  .music-player {
+    width: 65%;
+  }
+}
+
+/*************************
+		PLAYLIST PAGE
+*************************/
+
+.playlist-aside {
+  width: 20%;
+}
+
+.similar-artists,
+.recently-played {
+  width: 100%;
+}
+
+.similar-artists-title {
+  align-items: center;
+}
+
+.similar-artists-title h2 {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  padding: 0;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  width: 70%;
+}
+.similar-artists-sub {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  padding: 0;
+  font-size: 0.7rem;
+  color: #9c9da7;
+  white-space: nowrap;
+  width: 25%;
+}
+
+.similar-artists-entry {
+  width: 100%;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.similar-artists-image {
+  width: 30%;
+}
+
+.similar-artists-info {
+  width: 40%;
+}
+.similar-artists-info p {
+  margin: 0;
+  padding: 0;
+}
+.similar-artists-info-sub {
+  color: #9c9da7;
+  font-size: 0.7rem;
+}
+
+.similar-artists-options {
+  width: 20%;
+  color: #9c9da7;
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.similar-artists-options-menu {
+  margin-bottom: 0.2em;
+}
+
+.similar-artists-options p {
+  margin: 0;
+}
+
+/*Recently Played*/
+.recently-played-title h2 {
+  font-size: 1.08rem;
+}
+
+/*MAIN*/
+.featured-playlist {
+  display: flex;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.featured-playlist-image {
+  width: 45%;
+}
+.featured-playlist-image::after {
+  display: block;
+  position: relative;
+  background-image: linear-gradient(to bottom, transparent 0%, #141b41 150%);
+  margin-top: -150px;
+  height: 150px;
+  width: 100%;
+  content: "";
+}
+.featured-playlist-details {
+  width: 100%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* Title inside the featured playlist details */
+
+.featured-playlist-details p {
+  font-size: 1rem;
+  line-height: 1.6; /* Tăng khoảng cách dòng để dễ đọc */
+  color: #ccc; /* Màu chữ phụ nhẹ nhàng hơn */
+}
+
+/* Button or link styles */
+.featured-playlist-details a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #1db954; /* Màu xanh Spotify */
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  align-self: start; /* Đưa nút về bên trái */
+}
+
+.featured-playlist-details a:hover {
+  background-color: #14833b; /* Màu xanh đậm hơn khi hover */
+  transform: translateY(-2px); /* Hiệu ứng nổi nhẹ */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .featured-playlist-details {
+    padding: 15px;
+    margin-left: 3%; /* Thu hẹp lề trên màn hình nhỏ */
+  }
+
+  .featured-playlist-details h2 {
+    font-size: 1.2rem; /* Giảm kích thước font */
+  }
+
+  .featured-playlist-details p {
+    font-size: 0.9rem; /* Giảm kích thước font cho văn bản */
+  }
+
+  .featured-playlist-details a {
+    font-size: 0.9rem; /* Nút nhỏ hơn */
+    padding: 8px 15px;
+  }
+}
+
+.featured-playlist-info-name h2 {
+  margin: 0;
+  padding: 0;
+}
+.featured-playlist-info-top {
+  align-items: center;
+}
+.featured-playlist p {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #9c9da7;
+}
+.followers p {
+  font-size: 0.6rem;
+}
+.featured-playlist-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.play-all-button {
+  margin-right: 1em;
+}
+.play-all-button button {
+  background-image: linear-gradient(to right, #4327b4, #be46dd);
+  color: white;
+  border: none;
+  padding: 0.5em 3em;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 0.2em;
+  margin-right: 10px;
+}
+.play-all-button p {
+  font-size: 0.7rem;
+}
+
+/*Playlist next item*/
+.playlist-next-item {
+  flex-direction: column;
+}
+
+.playlist-next-item-entry {
+  width: 100%;
+
+  padding: 0.5em 0;
+  margin: 0.5em 0;
+}
+.playlist-next-item-entry p {
+  padding: 0;
+  margin: 0;
+}
+.playlist-next-item-entry-info {
+  align-items: center;
+  justify-content: space-around;
+}
+.playlist-next-item-entry-info-image {
+  width: 30%;
+}
+
+.playlist-next-item-entry-icons {
+  align-items: center;
+  width: 20%;
+  justify-content: space-around;
+}
+.playlist-next-item-entry-icons a {
+  color: #9c9da7;
+}
+
+.playlist-next-item-entry-number,
+.playlist-next-item-entry-info-name-sub {
+  font-size: 0.8rem;
+  color: #9c9da7;
+}
+
+@media screen and (max-width: 960px) and (min-width: 650px) {
+  .display-none-960 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .similar-artists-info-name {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 750px) and (min-width: 651px) {
+  .featured-playlist-writeup p {
+    font-size: 0.6rem;
+  }
+  .playlist-next-item-entry-info {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .playlist-aside {
+    width: 100%;
+  }
+
+  .similar-artists-title h2 {
+    font-size: 1.5rem;
+  }
+  .similar-artists-sub {
+    font-size: 1rem;
+  }
+
+  .similar-artists-info-name {
+    font-size: 1.3rem;
+  }
+  .similar-artists-info-sub {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 550px) {
+  .featured-playlist {
+    flex-direction: column;
+    align-items: center;
+  }
+  .featured-playlist-image {
+    width: 100%;
+  }
+  .featured-playlist-details {
+    width: 95%;
+  }
+  .featured-playlist-info-top {
+    margin-top: 0.5em;
+  }
+  .featured-playlist-writeup {
+    margin-top: 0.5em;
+  }
+  .featured-playlist-buttons {
+    margin: 0.5em 0;
+  }
+  .playlist-next-item-entry-info {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .similar-artists-title h2 {
+    font-size: 1.4rem;
+  }
+  .playlist-next-item-entry-info {
+    width: 70%;
+  }
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px!;
+  background: #282828;
+}
+/* Container styling */
+#aplayer {
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: #121212;
+  padding-bottom: 10px !important;
+}
+
+/* Control bar styling */
+.aplayer .aplayer-controller {
+  background-color: #222;
+  border-top: 1px solid #333;
+}
+
+.aplayer .aplayer-bar {
+  background-color: #ff4500;
+}
+
+/* Button styling */
+.aplayer .aplayer-icon {
+  color: #ff4500;
+  font-size: 3em; /* Increase button size */
+}
+
+.aplayer .aplayer-icon:hover {
+  color: #ff6347;
+}
+
+/* Song info styling */
+.aplayer .aplayer-info {
+  color: #fff;
+}
+
+.aplayer .aplayer-title {
+  font-weight: bold;
+  font-size: 1em !important; /* Increase title size */
+}
+
+.aplayer .aplayer-author {
+  color: #bbb;
+  font-size: 1.5em; /* Increase author size */
+}
+
+/* Image styling */
+.aplayer .aplayer-pic {
+  width: 90px !important; /* Increase image size */
+  height: 80px !important; /* Increase image size */
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #aplayer {
+    max-width: 100%;
+  }
+
+  .aplayer .aplayer-pic {
+    width: 120px;
+    height: 120px;
+  }
+
+  .aplayer .aplayer-icon {
+    font-size: 2.5em;
+  }
+
+  .aplayer .aplayer-title {
+    font-size: 1.5em;
+  }
+
+  .aplayer .aplayer-author {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .aplayer .aplayer-pic {
+    width: 100px;
+    height: 100px;
+  }
+
+  .aplayer .aplayer-icon {
+    font-size: 2em;
+  }
+
+  .aplayer .aplayer-title {
+    font-size: 1.2em;
+  }
+
+  .aplayer .aplayer-author {
+    font-size: 1em;
+  }
+}
+
+.fa-heart-o {
+  cursor: pointer;
+}
+
+.fa-heart-o:hover {
+  color: red;
+}
+
+/* Filled heart */
+.fa-heart-o.filled {
+  color: red;
+  transition: color 0.3s ease;
+}
+
+/* Optional: Add animation when toggling filled */
+.fa-heart-o.filled {
+  transform: scale(1.2);
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+/* playlist img */
+/* Container của mỗi mục bài hát */
+.playlist-next-item-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
+  height: 80px; /* Đảm bảo chiều cao đồng nhất */
+  box-sizing: border-box;
+  gap: 10px;
+}
+
+/* Thông tin bài hát */
+.playlist-next-item-entry-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Khoảng cách giữa các phần tử */
+}
+
+/* Container ảnh */
+.playlist-next-item-entry-info-image {
+  width: 60px; /* Đảm bảo ảnh luôn hình vuông */
+  height: 60px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 8px; /* Tùy chọn: Bo góc ảnh */
+  background-color: #f0f0f0; /* Màu nền thay thế nếu không có ảnh */
+}
+
+/* Ảnh bài hát */
+.playlist-next-item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cắt ảnh để vừa với container mà vẫn giữ tỷ lệ */
+  display: block;
+}
+
+/* Tên và nghệ sĩ bài hát */
+.playlist-next-item-entry-info-name p {
+  margin: 0;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Hiển thị trên 1 dòng, thêm "..." nếu quá dài */
+}
+
+.playlist-next-item-entry-info-name b {
+  font-size: 14px;
+  color: #fff; /* Tùy chọn: Thay đổi màu chữ */
+}
+
+.playlist-next-item-entry-info-name-sub {
+  font-size: 12px;
+  color: #aaa; /* Màu chữ phụ */
+}
+
+/* Các icon (yêu thích, thêm vào playlist) */
+.playlist-next-item-entry-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.playlist-next-item-entry-icons i {
+  font-size: 18px;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.playlist-next-item-entry-icons i:hover {
+  color: #007bff; /* Tùy chọn: Màu khi hover */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .playlist-next-item-entry {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto; /* Chiều cao tự động */
+  }
+
+  .playlist-next-item-entry-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .playlist-next-item-entry-icons {
+    margin-top: 10px;
+  }
+}
+
+/* end playlist img */
+/* drop down menu song */
+/* Dropdown Menu */
+.action-menu {
+  position: absolute;
+  background: #1e1e1e; /* Dark Spotify-inspired background */
+  color: #fff; /* White text for readability */
+  border-radius: 8px;
+  border: 1px solid #333; /* Subtle border for better visibility */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  padding: 8px 0;
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px); /* Smooth slide-in effect */
+  transition: all 0.3s ease; /* Animation for visibility and position */
+  z-index: 1000;
+  width: 200px; /* Fixed width for consistent layout */
+}
+
+.action-menu.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0); /* Reset position for slide-in effect */
+}
+
+.action-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.action-menu ul li {
+  margin: 0;
+}
+
+.action-menu ul li a {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid #333; /* Divider for menu items */
+  transition: background-color 0.2s ease, color 0.2s ease; /* Hover effects */
+}
+
+.action-menu ul li a:hover {
+  background-color: #333; /* Highlight on hover */
+  color: #1db954; /* Spotify green for active state */
+}
+
+.action-menu ul li:last-child a {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+/* Ellipsis Icon */
+.action-icon i.fa.fa-ellipsis-h {
+  cursor: pointer;
+  color: #fff; /* White to match dark theme */
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.action-icon i.fa.fa-ellipsis-h:hover {
+  color: #1db954; /* Spotify green on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .action-menu {
+    width: 160px; /* Adjust width for smaller screens */
+  }
+
+  .action-menu ul li a {
+    font-size: 13px; /* Slightly smaller text on mobile */
+  }
+}
+
+/* end drop down menu song */
+body {
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* loading page */
+/* Hiển thị overlay khi trang đang tải */
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #121212, #282828);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+/* Spinner nâng cao */
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255, 255, 255, 0.2);
+  border-top: 6px solid #1ed760;
+  border-radius: 50%;
+  animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Loading text */
+.loading-text {
+  margin-top: 20px;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeInText 1.5s ease-in-out infinite;
+}
+
+/* Hiệu ứng quay spinner */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hiệu ứng chữ nhấp nháy */
+@keyframes fadeInText {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Ẩn overlay khi hoàn thành */
+#loading.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Spinner ngừng quay */
+.spinner.stopped {
+  animation: none;
+}
+
+/* Hiệu ứng thu nhỏ spinner khi kết thúc */
+.spinner.stopped {
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* end loading page */
+/*clicking user*/
+.user-menu {
+  position: relative;
+}
+
+.user-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #282828; /* Spotify dark background */
+  color: #b3b3b3; /* Spotify light gray text */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: none; /* Hidden by default */
+  z-index: 10;
+  min-width: 180px;
+}
+
+/* Dropdown items styling */
+.dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #b3b3b3; /* Default text color */
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: #1db954; /* Spotify green on hover */
+  color: #fff; /* White text on hover */
+}
+
+/* Utility class to toggle visibility */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+/* end drop down menu user */
+/* side bar */
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Sidebar bắt đầu từ ngoài khung nhìn */
+  width: 300px;
+  height: 100%;
+  background-color: #121212; /* Spotify-style dark background */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.sidebar.visible {
+  right: 0; /* Khi sidebar mở */
+}
+
+/* Nút toggle luôn hiển thị */
+.toggle-sidebar {
+  position: fixed; /* Để nút này luôn cố định */
+  top: 50%; /* Căn giữa theo chiều dọc */
+  right: 0; /* Nằm sát lề phải */
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #007bff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1001; /* Nằm trên sidebar */
+}
+
+.toggle-icon {
+  font-size: 20px;
+}
+
+.toggle-icon.hidden {
+  display: none;
+}
+/* Sidebar Container */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Ẩn ngoài khung nhìn */
+  width: 300px;
+  height: 100%;
+  background-color: #121212; /* Spotify dark background */
+  color: #ffffff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease-in-out;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Hiển thị sidebar */
+.sidebar.visible {
+  right: 0;
+}
+
+/* Toggle Sidebar Button */
+.toggle-sidebar {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #1db954; /* Spotify green */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.toggle-icon {
+  font-size: 20px;
+}
+
+.toggle-icon.hidden {
+  display: none;
+}
+
+/* Sidebar Title */
+.aside-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px;
+  border-bottom: 1px solid #282828;
+  margin: 0;
+  text-align: center;
+}
+
+/* Sidebar Entries */
+.latest-release-entry2 {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #282828;
+  transition: background-color 0.2s;
+}
+
+.latest-release-entry2:hover {
+  background-color: #1e1e1e;
+}
+
+/* Song Image */
+.latest-release-image2 img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+/* Song Info */
+.latest-release-info2 p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.latest-release-info2 a {
+  color: #1db954;
+  text-decoration: none;
+}
+
+.latest-release-info2 a:hover {
+  text-decoration: underline;
+}
+
+.latest-release-sub2 {
+  font-size: 12px;
+  color: #b3b3b3;
+}
+
+/* Action Icons */
+.action-icon {
+  margin-left: auto;
+  position: relative;
+  cursor: pointer;
+}
+
+.action-icon i {
+  font-size: 16px;
+  color: #b3b3b3;
+}
+
+.action-menu {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  background-color: #282828;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 10;
+}
+
+.action-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.action-menu ul li {
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.action-menu ul li:hover {
+  background-color: #1db954;
+  color: #fff;
+}
+
+.action-icon:hover .action-menu {
+  display: block;
+}
+
+/* end sidebar */
+
+/* popular artists */
+.artist-container.flex-space {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5em;
+  padding: 1em;
+}
+/* end popular artists */
+
+.button-follow-artist {
+  display: inline-block;
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.6); /* Viền trắng mờ */
+  border-radius: 50px; /* Bo tròn lớn */
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.button-follow-artist:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Thêm nền mờ khi hover */
+}
+
+.profile-type {
+  display: flex;
+  align-items: center;
+}
+
+.Svg-sc-ytk21e-0 {
+  width: 20px; /* Adjust icon size */
+  height: 20px;
+  margin-right: 4px; /* Add spacing between icon and text */
+}
+
+.Svg-sc-ytk21e-0 path {
+  fill: #4cb3ff; /* Replace with your desired color */
+  color: white;
+}
+
+
+.verified-artist {
+  font-size: 12px; /* Smaller text size */
+  color: white; /* Optional: lighter color */
+  display: inline-block; /* Ensures proper spacing */
+}
+/* suggestion finding  */
+
+/* ending suggestion finding */
