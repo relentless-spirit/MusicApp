@@ -7,9 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import User from "../../models/user.model";
+import User from "../../models/user.model.js";
 import bcryptjs from "bcryptjs";
-import { generateTokenAndSetToken } from "../../helpers/JWT.helper";
+import { generateTokenAndSetToken } from "../../helpers/JWT.helper.js";
 export function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         res.render("client/pages/auth/login.pug");

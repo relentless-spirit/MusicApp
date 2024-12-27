@@ -1,19 +1,29 @@
 import express from "express";
 const router = express.Router();
-import * as controller from "../../controllers/admin/music.controller";
-import { uploadFields } from "../../middlewares/admin/uploadCloud.middleware";
+import * as controller from "../../controllers/admin/music.controller.js";
+import { uploadFields } from "../../middlewares/admin/uploadCloud.middleware.js";
 import multer from "multer";
 const upload = multer();
 router.get("/", controller.index);
 router.get("/create", controller.create);
-router.post("/create", upload.fields([
+router.post(
+  "/create",
+  upload.fields([
     { name: "avatar", maxCount: 1 },
     { name: "audio", maxCount: 1 },
-]), uploadFields, controller.createPost);
+  ]),
+  uploadFields,
+  controller.createPost
+);
 router.get("/edit/:id", controller.edit);
-router.patch("/edit/:id", upload.fields([
+router.patch(
+  "/edit/:id",
+  upload.fields([
     { name: "avatar", maxCount: 1 },
     { name: "audio", maxCount: 1 },
-]), uploadFields, controller.editPatch);
+  ]),
+  uploadFields,
+  controller.editPatch
+);
 router.patch("/delete/:id", controller.deletePatch);
 export const musicRoute = router;

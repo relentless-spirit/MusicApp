@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Account from "../../models/account.model";
+import Account from "../../models/account.model.js";
 export const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const admins = yield Account.find({

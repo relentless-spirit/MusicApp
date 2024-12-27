@@ -7,8 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Playlist from "../../models/playlist.model";
-import User from "../../models/user.model";
+import Playlist from "../../models/playlist.model.js";
+import User from "../../models/user.model.js";
 export const getFullPlaylists = () => __awaiter(void 0, void 0, void 0, function* () {
     const playlists = yield Playlist.find({ status: "active", deleted: false });
     return playlists;

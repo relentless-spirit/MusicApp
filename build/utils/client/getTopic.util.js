@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Topic from "../../models/topic.model";
+import Topic from "../../models/topic.model.js";
 export const getFullTopics = () => __awaiter(void 0, void 0, void 0, function* () {
     const topics = yield Topic.find({
         deleted: false,
