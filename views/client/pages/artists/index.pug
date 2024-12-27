@@ -26,24 +26,51 @@ block main
                     ) Follow 
                     
 
-    //- .profile-content
-    //-     section.top-artists
-    //-         h2 Top artists this month
-    //-         p Only visible to you
-    //-         article.popular-artists
-    //-             .artist-container.flex-space
-    //-                 each artist in artists
-    //-                  .popular-artist-entry
-    //-                     img(src=artist.coverImage)
-    //-                     p #{artist.fullName}
-            
-            
+    .profile-content
+         section.top-tracks
+            h2 Top tracks this month
+                p Only visible to you
 
-    //-     section.top-tracks
-    //-         h2 Top tracks this month
-    //-         p Only visible to you
-    //-         ol.track-list
-    //-          each song in songs
-    //-                 li.track-item
-    //-                     span.track-title= song.title
-    //-                     span.track-duration 3:45
+                .playlist-next-item.flex-space
+                each song,idx  in songs 
+                    .playlist-next-item-entry.flex-space
+                        .playlist-next-item-entry-info.flex-space
+                        p.playlist-next-item-entry-number #{idx+1}
+                        .playlist-next-item-entry-info-image
+                            img.playlist-next-item-img(src=song.coverImage song-src=song.fileUrl
+                                song-name =song.title song-artist=song.artist
+                                song-cover=song.coverImage)
+                        .playlist-next-item-entry-info-name
+                            p
+                            b #{song.title}
+                            p.playlist-next-item-entry-info-name-sub #{song.artist}
+                        .action-icon
+                            i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
+                            .action-menu.hidden
+                                ul 
+                                 li 
+                                    a(
+                                        data-id=`${idx + 1}`
+                                        add-to-playlist-button
+                                        data-song-id=`${song._id}`
+                                    ) Add to Playlist
+                                    .dropdown-menu-playlist-container
+                                        .dropdown-menu-playlist(data-id=idx + 1)
+                                            ul
+                                                li
+                                                    a(
+                                                        data-title=`${song.title}`
+                                                        data-song=`${song.id}`
+                                                        data-coverImage=`${song.coverImage}`
+                                                        data-path=`/playlist/create-playlist`
+                                                        create-playlist 
+                                                    ) New Playlist
+                                                if individualPlaylists
+                                                    each individualPlaylist in individualPlaylists 
+                                                        li
+                                                            a(
+                                                                data-song=`${song.id}`
+                                                                data-playlist=`${individualPlaylist.id}`
+                                                                data-path=`/playlist/add-playlist`
+                                                                add-playlist
+                                                            ) #{individualPlaylist.title}
