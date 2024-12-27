@@ -59,6 +59,25 @@ export const home = async (req: Request, res: Response) => {
     });
   }
   //end finding logic
+
+//   const artists = await Artist.find({ status: "active", deleted: false });
+//   const songs = await Song.find({ status: "active", deleted: false });
+//   const playlists = await Playlist.find({ status: { $ne: "private" }, deleted: false });
+
+//   let individualPlaylists = null;
+//   if (res.locals.user) {
+//     individualPlaylists = await Playlist.find({
+//       user_id: userID,
+//       deleted: false
+//     });
+//     for (const playlist of individualPlaylists) {
+//       const user = await User.findOne({
+//         _id: playlist.user_id,
+//         deleted: false
+//       });
+//       playlist["username"] = user.username;
+//     }
+
   const artists = await getFullArtists();
   const songs = await getFullSongs();
   const playlists = await getFullPlaylists();
@@ -66,7 +85,7 @@ export const home = async (req: Request, res: Response) => {
   let individualPlaylists = null;
   if (res.locals.user) {
     individualPlaylists = await getPlaylistOfUser(userID);
-  }
+
   const favoriteSongs = await getFavoriteSongOfUser(userID);
   const favoriteIds = favoriteSongs.map((item) => item.song_id.toString());
   const topics = await getFullTopics();

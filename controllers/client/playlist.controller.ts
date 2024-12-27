@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import Song from "../../models/song.model";
 import Artist from "../../models/artist.model";
-import Topic from "../../models/topic.model";
 import Playlist from "../../models/playlist.model";
 export const index = async (req: Request, res: Response) => {
   const playlist = await Playlist.findOne({
@@ -34,6 +33,7 @@ export const createPlaylist = (req: Request, res: Response) => {
   try {
     if (res.locals.user) {
       req.body.user_id = res.locals.user.id;
+      req.body.createdBy = res.locals.user.username;
       const record = new Playlist(req.body);
       record.save();
       res.json({
@@ -68,6 +68,18 @@ export const addPlaylist = async (req: Request, res: Response) => {
       _id: req.body.playlist,
       deleted: false
     }, playlist);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const savePlaylist = async (req: Request, res: Response) => {
+  try {
+    await Playlist.updateOne({
+      _id: req.params.id,
+      deleted: false,
+    }, req.body);
+    res.redirect("back");
   } catch (error) {
     console.log(error);
   }

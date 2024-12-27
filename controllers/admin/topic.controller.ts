@@ -26,7 +26,6 @@ export const getCreateTopicPage = (req: Request, res: Response) => {
 
 export const createTopic = async (req: Request, res: Response) => {
     try {
-        console.log(req.body);
         const topicRecord = new Topic(req.body);
         topicRecord.save();
         res.redirect(`/${systemConfig.prefixAdmin}/topics`);
