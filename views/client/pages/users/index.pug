@@ -14,15 +14,15 @@ block main
                 p.profile-meta #{userInfo.playlist ? userInfo.playlist.length : 0} Playlists • #{userInfo.follow_artists ? userInfo.follow_artists.length : 0} Following
 
     .profile-content
+
         section.top-artists
-            h2 Top artists this month
-                p Only visible to you
+            h2 Following 
                 .artist-container.flex-space
                     each artist in artists
                         .popular-artist-entry
                             a(href=`/artist/${artist.id}`)
                                 img(src=artist.coverImage)
-                                p #{artist.fullName}
+                                p= artist.fullName
                                 p Artist
 
         section.top-tracks
@@ -46,19 +46,46 @@ block main
                             i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
                             .action-menu.hidden
                                 ul
-                                    li 
-                                        a(href=`/add-to-playlist/${song._id}`) Add to Playlist
-                                    li 
-                                        a(href=`/add-to-queue/${song._id}`) Add to Queue
-                                    li 
-                                        a(href=`#`) Go to the artist detail
-
-        section.top-artists
-            h2 Following 
-                .artist-container.flex-space
-                    each artist in artists
-                        .popular-artist-entry
-                            a(href=`/artist/${artist.id}`)
-                                img(src=artist.coverImage)
-                                p= artist.fullName
-                                p Artist
+                                 li
+                                    a(
+                                    data-id=`${index + 1}`
+                                    add-to-playlist-button
+                                    data-song-id=`${song._id}`
+                                    ) Add to Playlist
+                                    .dropdown-menu-playlist-container
+                                     .dropdown-menu-playlist(data-id=index + 1)
+                                        ul
+                                         li
+                                            a(
+                                            data-title=`${song.title}`
+                                            data-song=`${song.id}`
+                                            data-coverImage=`${song.coverImage}`
+                                            data-path=`/playlist/create-playlist`
+                                            create-playlist 
+                                            ) New Playlist
+                                         if individualPlaylists
+                                            each individualPlaylist in individualPlaylists 
+                                             li
+                                                a(
+                                                data-song=`${song.id}`
+                                                data-playlist=`${individualPlaylist.id}`
+                                                data-path=`/playlist/add-playlist`
+                                                add-playlist
+                                                ) #{individualPlaylist.title}
+                                         li
+                                            a(
+                                              data-path=`/favorite-songs/favorite-song/${song._id}`
+                                              favorite-song-button
+                                            ) #{favoriteSongIds.includes(song._id.toString()) ? 'Remove from your Favorite Songs' : 'Save to your Favorite Songs'}
+                                 li 
+                                    a(
+                                        path=`queue/add-to-queue/${song._id}`
+                                        queue-button
+                                        src-img-data=song.coverImage
+                                        song-src-data=song.fileUrl
+                                        song-name-data=song.title
+                                        song-artist-data=song.artistFullName
+                                        song-cover-data=song.coverImage
+                                        song-id=song._id
+                                        artist-id=song.artist
+                                    ) Add to Queue

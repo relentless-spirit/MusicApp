@@ -5,9 +5,15 @@ import { followArtist } from "./artist.js";
 import { search } from "./search.js";
 import { followTopic } from "./topic.js";
 import { addFavoriteSong } from "./song.js";
-import { addToQueue, getCurrentAudio, getFromStorage, restorePlayback, saveCurrentPlayback, setQueueFromStorage } from "./queue.js";
-
-
+import {
+  addToQueue,
+  getCurrentAudio,
+  getFromStorage,
+  restorePlayback,
+  saveCurrentPlayback,
+  setQueueFromStorage,
+  playNextSong,
+} from "./queue.js";
 
 // Assume user ID is stored in a global variable or obtained from the server
 const user = document.querySelector("[user-id]");
@@ -57,7 +63,7 @@ if (songImage.length > 0) {
 
 aplayer.on("ended", () => {
   aplayer.list.remove(aplayer.list.index);
-  playNextSong();
+  playNextSong(queueArray, aplayer);
 });
 
 setInterval(saveCurrentPlayback(aplayer), 1000);
