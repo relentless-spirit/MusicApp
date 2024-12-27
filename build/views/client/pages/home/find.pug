@@ -1,0 +1,71 @@
+extends ../../layouts/default.pug
+block main
+ .container.container-flex
+  main
+    h1.page-title Result: 
+     i "#{findingTitle}"
+    if(songs.length > 0)
+     article.latest-release
+     
+      .latest-release-body.flex-space
+       .latest-release-col
+         each song in songs
+          .latest-release-entry.flex-space
+            .latest-release-image
+              img(src=song.item.coverImage song-src=song.item.fileUrl
+                song-name =song.item.title song-artist=song.item.artistFullName 
+                song-cover=song.item.coverImage)  
+            .latest-release-info
+              p
+                a(href="#") 
+                  b #{song.item.title}
+              p.latest-release-sub MAR 29, 2019
+            .action-icon
+              i.fa.fa-ellipsis-h(action-menu-toggle aria-hidden="true")
+                     // Menu action
+              .action-menu.hidden
+                ul
+                  li
+                    a(
+                      data-id=`${index + 1}`
+                      add-to-playlist-button
+                      data-song-id=`${song.item._id}`
+                    ) Add to Playlist
+                    .dropdown-menu-playlist-container
+                      .dropdown-menu-playlist(data-id=index + 1)
+                        ul
+                          li
+                            a(
+                              data-title=`${song.item.title}`
+                              data-song=`${song.item.id}`
+                              data-coverImage=`${song.item.coverImage}`
+                              data-path=`/playlist/create-playlist`
+                              create-playlist 
+                            ) New Playlist
+                          if individualPlaylists
+                            each individualPlaylist in individualPlaylists 
+                              li
+                                a(
+                                  data-song=`${song.item.id}`
+                                  data-playlist=`${individualPlaylist.id}`
+                                  data-path=`/playlist/add-playlist`
+                                  add-playlist
+                                ) #{individualPlaylist.title}
+                  li
+                    a(
+                      data-path=`/favorite-songs/favorite-song/${song.item._id}`
+                      favorite-song-button
+                    ) #{favoriteSongIds.includes(song.item._id.toString()) ? 'Remove from your Favorited Songs' : 'Save to your Favorited Songs'}
+                  li 
+                    a(path=`queue/add-to-queue/${song.item._id}` queue-button
+                    src-img-data=song.item.coverImage song-src-data=song.item.fileUrl
+                    song-name-data =song.item.title song-artist-data=song.item.artistFullName
+                    song-cover-data=song.item.coverImage
+                    song-id =song.item._id artist-id= song.item.artist
+                    ) Add to Queue
+                  li 
+                    a(href=`/artist/${song.item.artist}`) Go to the artist detail
+    else 
+     h2.latest-release-title No songs found
+  include ../../partials/queue.pug
+ 

@@ -1,0 +1,53 @@
+extends ../../layouts/default.pug
+
+block main
+  h1(class="mb-4") #{pageTitle}
+
+  form(
+      action=`/${prefixAdmin}/topics/edit/${topic.id}?_method=PATCH`
+      method="POST"
+      enctype="multipart/form-data"
+    )
+      div(class="form-group")
+        label(for="title") Tiêu đề
+        input(
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          required
+          value=topic.title
+        )
+      div(class="form-group")
+        label(for="content") Nội dung 
+        input(
+          type="text"
+          class="form-control"
+          id="content"
+          name="content"
+          required
+          value=topic.content
+        )
+      div(
+        class="form-group"
+        upload-image
+      )
+        label(for="imgTopic") Ảnh
+        input(
+          type="file"
+          class="form-control-file"
+          id="imgTopic"
+          name="imgTopic"
+          accept="image/*"
+          upload-image-input
+        )
+        img(
+          src=topic.imgTopic
+          class="image-preview"
+          upload-image-preview
+        )
+      div(class="form-group")
+        button(
+          type="submit"
+          class="btn btn-primary"
+        ) Cập nhật

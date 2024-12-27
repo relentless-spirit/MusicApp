@@ -1,0 +1,204 @@
+/* General Styles */
+body {
+  font-family: "Circular", "Arial", sans-serif;
+  background: #121212;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #858484, #121212);
+}
+
+.profile-avatar {
+  width: 300px; /* Kích thước tối đa cho ảnh */
+  height: 300px; /* Kích thước tối đa cho ảnh */
+  max-width: 100%; /* Giữ ảnh co lại nếu màn hình nhỏ */
+  max-height: 100%; /* Giữ ảnh co lại nếu màn hình nhỏ */
+  border-radius: 50%; /* Bo góc tròn */
+  margin-right: 2rem; /* Khoảng cách giữa avatar và nội dung */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo khi co lại */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-avatar {
+    width: 150px; /* Giảm kích thước ảnh cho màn hình nhỏ */
+    height: 150px;
+    margin-right: 0; /* Xóa khoảng cách cho giao diện mobile */
+    margin-bottom: 1rem; /* Thêm khoảng cách bên dưới ảnh */
+  }
+}
+
+.profile-details {
+  margin-left: 1rem;
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 5rem; /* Tăng kích thước chữ lớn nhất */
+  font-weight: 800; /* Tăng độ đậm tối đa */
+
+  color: #fff; /* Đặt màu trắng nổi bật (tuỳ thuộc vào nền) */
+  text-transform: uppercase; /* Tùy chọn: Hiển thị chữ in hoa */
+  line-height: 1.2; /* Điều chỉnh khoảng cách dòng */
+}
+
+/* Responsive: Giảm kích thước trên màn hình nhỏ */
+@media (max-width: 768px) {
+  .profile-name {
+    font-size: 3.5rem; /* Giảm kích thước trên thiết bị nhỏ */
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-name {
+    font-size: 2.8rem; /* Giảm thêm nữa trên màn hình rất nhỏ */
+  }
+}
+
+.profile-meta {
+  font-size: 1.2rem;
+  color: #b3b3b3;
+}
+
+/* Profile Content */
+.profile-content {
+  padding: 2rem;
+}
+.profile-info {
+  display: flex;
+}
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1rem;
+  color: #b3b3b3;
+}
+
+.artist-list {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.artist-item {
+  text-align: center;
+  max-width: 150px;
+}
+
+.artist-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.artist-name {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.artist-role {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+}
+
+/* Tracks List */
+.track-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.track-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #333;
+}
+
+.track-title {
+  font-size: 1rem;
+}
+
+.track-duration {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-avatar {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1rem;
+  }
+
+  .profile-details {
+    margin-left: 0;
+  }
+
+  .profile-name {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .artist-item img {
+    width: 100px;
+  }
+}
+
+/* Container for popular artists */
+.artist-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px; /* Adjust the gap between items as needed */
+}
+
+/* Popular Artists */
+.popular-artist-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.popular-artist-entry img {
+  width: 100%;
+  max-width: 150px; /* Set the desired max width */
+  height: auto;
+  aspect-ratio: 1 / 1; /* Ensure the image is square */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+  border-radius: 50%; /* Optional: make the image circular */
+}
+
+.popular-artist-entry p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1032px) {
+  .artist-container {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}

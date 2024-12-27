@@ -1,0 +1,44 @@
+extends ../../layouts/default.pug
+block main
+ //  MAIN BODY 
+ .container.container-flex
+   main
+    .featured-playlist.flex-space
+      .featured-playlist-image
+        img.featured-playlist-img(src=playlist.coverImage)
+      .featured-playlist-details
+        .featured-playlist-info
+          .flex-space.featured-playlist-info-top
+            .featured-playlist-info-name
+              h2 #{playlist.title}
+              p Vietnamese  Singer
+            .followers
+              p.followers 851 followers
+        .featured-playlist-writeup
+          p.
+            
+            #{playlist.description}
+            
+        .featured-playlist-buttons
+          .play-all-button
+            button(class="playAllButton") Play All
+            p 247 tracks | 128 followers
+          a(href) Follow
+    .playlist-next-item.flex-space
+     each song,idx  in songsInPlaylist
+      .playlist-next-item-entry.flex-space
+        .playlist-next-item-entry-info.flex-space
+          p.playlist-next-item-entry-number #{idx+1}
+          .playlist-next-item-entry-info-image
+            img.playlist-next-item-img(src=song.coverImage song-src=song.fileUrl
+                song-name =song.title song-artist=song.artist
+                song-cover=song.coverImage)
+          .playlist-next-item-entry-info-name
+            p
+              b #{song.title}
+            p.playlist-next-item-entry-info-name-sub #{song.artist}
+        .playlist-next-item-entry-icons.flex-space
+          a(href)
+            i.fa.fa-heart-o(aria-hidden="true")
+          a(href)
+            i.fa.fa-plus(aria-hidden="true")

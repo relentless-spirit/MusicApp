@@ -1,0 +1,28 @@
+extends ../../layouts/auth.pug
+block main  
+    .login-container
+      .login-card
+        img.logo(src="/src/spotify-logo-1024x651.webp" alt="Spotify Logo")
+        h2 Đăng nhập vào Spotify
+        form(action="/auth/login" method="POST")
+          .form-group
+            label(for="username") Tên người dùng hoặc Email
+            input#username(type="text" name="username" placeholder="Nhập tên người dùng hoặc email" required)
+          .form-group
+            label(for="password") Mật khẩu
+            input#password(type="password" name="password" placeholder="Nhập mật khẩu" required)
+          .form-options
+            .remember-me
+              input#remember(type="checkbox" name="remember")
+              label(for="remember") Ghi nhớ tôi
+            a.forgot-password(href="/forgot-password") Quên mật khẩu?
+          button.login-btn(type="submit") Đăng nhập
+        .divider
+          span Hoặc
+        .social-login
+          button.google-login
+           a(href="/auth/google") Đăng nhập bằng Google
+          button.facebook-login Đăng nhập bằng Facebook
+      .register-link
+        p Chưa có tài khoản? 
+          a(href="/auth/sign-up") Đăng ký ngay
