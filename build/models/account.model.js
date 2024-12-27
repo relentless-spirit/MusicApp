@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-const accountSchema = new mongoose.Schema({
+const accountSchema = new mongoose.Schema(
+  {
     fullName: String,
     email: String,
     password: String,
@@ -9,12 +10,14 @@ const accountSchema = new mongoose.Schema({
     favorite_song: Array,
     status: String,
     deleted: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
-    deletedAt: Date
-}, {
-    timestamps: true
-});
+    deletedAt: Date,
+  },
+  {
+    timestamps: true,
+  }
+);
 const Account = mongoose.model("Account", accountSchema, "accounts");
-module.exports = Account;
+export default Account;
