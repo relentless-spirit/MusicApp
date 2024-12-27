@@ -35,7 +35,7 @@ export const home = async (req: Request, res: Response) => {
 
   const artists = await Artist.find({ status: "active", deleted: false });
   const songs = await Song.find({ status: "active", deleted: false });
-  const playlists = await Playlist.find({ status: "active", deleted: false });
+  const playlists = await Playlist.find({ status: { $ne: "private" }, deleted: false });
 
   let individualPlaylists = null;
   if (res.locals.user) {
@@ -49,7 +49,6 @@ export const home = async (req: Request, res: Response) => {
         deleted: false
       });
       playlist["username"] = user.username;
-      // console.log(individualPlaylists);
     }
   }
   for (const song of songs) {

@@ -1,5 +1,5 @@
 import { playAllButton, createPlaylistButton, addPlaylistButton } from "./playlist.js";
-import { dropdownPlaylist } from "./dropdown.js";
+import { dropdownPlaylist, modalEditDetail } from "./dropdown.js";
 import { logout } from "./auth.js";
 import { followArtist } from "./artist.js";
 import { search } from "./search.js";
@@ -160,3 +160,26 @@ createPlaylistButton();
 addPlaylistButton();
 //End add playlist
 
+//Modal Edit Detail
+modalEditDetail(userId);
+//End Modal Edit Detail
+
+document.addEventListener("DOMContentLoaded", () => {
+  const imageElement = document.getElementById("playlistImage");
+  const imageInput = document.getElementById("imageUploadInput");
+
+  // Khi click vào ảnh, tự động click vào input file
+  imageElement.addEventListener("click", () => {
+    imageInput.click();
+  });
+
+  // Khi người dùng chọn ảnh mới
+  imageInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Tạo URL tạm thời để hiển thị ảnh mới
+      const fileURL = URL.createObjectURL(file);
+      imageElement.src = fileURL; // Cập nhật ảnh hiển thị
+    }
+  });
+});

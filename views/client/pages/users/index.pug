@@ -10,7 +10,7 @@ block main
             img.profile-avatar(src=userInfo.avatar, alt="User Avatar")
             .profile-details
                 p.profile-type Profile
-                h1.profile-name #{userInfo.username}
+                h1.profile-name(username=`${userInfo.username}`) #{userInfo.username}
                 p.profile-meta #{userInfo.playlist ? userInfo.playlist.length : 0} Playlists • #{userInfo.follow_artists ? userInfo.follow_artists.length : 0} Following
 
     .profile-content

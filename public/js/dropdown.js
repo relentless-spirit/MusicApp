@@ -22,3 +22,21 @@ export const dropdownPlaylist = () => {
         });
     }
 }
+
+export const modalEditDetail = (userId) => {
+    const editDetailCondition = document.querySelector(".featured-playlist-details h3").getAttribute("userID");
+    console.log(editDetailCondition);
+    if (editDetailCondition == userId) {
+        document.querySelector(".featured-playlist-info-name h2").addEventListener("click", () => {
+            document.querySelector(".modal").style.display = "flex";
+        });
+
+        document.querySelector(".featured-playlist-image").addEventListener("click", () => {
+            document.querySelector(".modal").style.display = "flex";
+        });
+
+        document.querySelector(".close").addEventListener("click", () => {
+            document.querySelector(".modal").style.display = "none";
+        });
+    }
+}
