@@ -44,7 +44,7 @@ export const googleConfig = () => {
       {
         clientID: GOOGLE_CLIENT_ID,
         clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/google/callback",
+        callbackURL: "https://musicapp-fhfy.onrender.com/auth/google/callback",
       },
       (_accessToken, _refreshToken, profile, done) =>
         __awaiter(void 0, void 0, void 0, function* () {
