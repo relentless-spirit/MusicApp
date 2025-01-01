@@ -14,7 +14,7 @@ export const googleConfig = () => {
       {
         clientID: GOOGLE_CLIENT_ID,
         clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://musicapp-fhfy.onrender.com/auth/google/callback",
+        callbackURL: "http://musicapp-fhfy.onrender.com/auth/google/callback",
       },
       async (_accessToken, _refreshToken, profile, done) => {
         try {
